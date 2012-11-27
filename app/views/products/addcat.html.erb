@@ -1,0 +1,25 @@
+<%= p(@categories) %>
+---------------------
+<%= p(@product) %>
+---------------------
+
+<h1>Product <%= @product[:name].to_s %> veranderen</h1>
+<%= form_tag do %>
+    <% @product.each do |t| %>
+		<% t.each do |option| %>
+			 
+			<% if option[category] %>
+			<%= label_tag :option, option %>
+			<%= select_tag :option, options_from_collection_for_select(@categories, "id", "name") %>
+			<br />
+			<% else %>
+			<%= label_tag :option, option %>
+			<%= text_field_tag option, option %>
+			<br />
+			<% end %>
+		<% end %>
+
+		
+		
+	<% end %>
+<% end %>

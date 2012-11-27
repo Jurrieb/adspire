@@ -1,0 +1,19 @@
+<%= form_tag :controller => :products, :action => :export, :format => :xml do %>
+	<h1>Sorteer op Categorien</h1>
+	<% @categories.each do |category| %>
+		<div>
+			<%= check_box_tag "categories["+category+"]", nil, true %>
+			<%= category %>
+		</div>
+	<% end %>
+
+	<h1>Sellecteer velden</h1>
+	<% @fields.each do |field| %>
+	  	<div>
+			<%= check_box_tag "fields["+field.name+"]", nil, true %>
+			<%= field.name %>
+		</div>
+	<% end %>
+	<%= hidden_field_tag(:feed_id, @feed_id)%>
+    <%= submit_tag "filtreren" %>
+<% end %>

@@ -1,0 +1,16 @@
+.head
+  %h1 Eigen datafeed inlezen
+
+= form_for @upload, :html => {:multipart => true} do |f|
+
+  .form-item
+    .item
+      %span.file
+        %span.value
+        %button
+      
+        = f.file_field :file
+
+    = f.submit "Inlezen"
+
+    = link_to 'Back', uploads_path

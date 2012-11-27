@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  filter_id: 1
+  type: 
+  value: MyString
+
+two:
+  filter_id: 1
+  type: 
+  value: MyString

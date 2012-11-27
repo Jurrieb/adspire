@@ -1,0 +1,61 @@
+<magento_api>
+<data_item>
+<entity_id>1</entity_id>
+<type_id>simple</type_id>
+<sku>1</sku>
+<description>
+<p>Nathan is een hele mooie man, dat kan je zo wel zijn, zijn appearance is ongeloofelijk en zijn appeal niet te weerstaan.</p> <p>Hmm, heerlijk.</p>
+</description>
+<short_description>Lekkere man</short_description>
+<meta_keyword/>
+<name>Nathan Jansen</name>
+<meta_title/>
+<meta_description/>
+<regular_price_with_tax>20</regular_price_with_tax>
+<regular_price_without_tax>20</regular_price_without_tax>
+<final_price_with_tax>20</final_price_with_tax>
+<final_price_without_tax>20</final_price_without_tax>
+<is_saleable>1</is_saleable>
+<image_url>
+http://www.magboard.nl/media/catalog/product/cache/0/image/9df78eab33525d08d6e5fb8d27136e95/images/catalog/product/placeholder/image.jpg
+</image_url>
+</data_item>
+<data_item>
+<entity_id>2</entity_id>
+<type_id>simple</type_id>
+<sku>2</sku>
+<description>Ik ben Leo Flapper</description>
+<short_description>Leo Flapper</short_description>
+<meta_keyword/>
+<name>Leo Flapper</name>
+<meta_title/>
+<meta_description/>
+<regular_price_with_tax>10</regular_price_with_tax>
+<regular_price_without_tax>10</regular_price_without_tax>
+<final_price_with_tax>10</final_price_with_tax>
+<final_price_without_tax>10</final_price_without_tax>
+<is_saleable>1</is_saleable>
+<image_url>
+http://www.magboard.nl/media/catalog/product/cache/0/image/9df78eab33525d08d6e5fb8d27136e95/images/catalog/product/placeholder/image.jpg
+</image_url>
+</data_item>
+<data_item>
+<entity_id>3</entity_id>
+<type_id>simple</type_id>
+<sku>1940-1945</sku>
+<description>Ik ben nat.</description>
+<short_description>Nog natter</short_description>
+<meta_keyword/>
+<name>Dennis de Jong</name>
+<meta_title/>
+<meta_description/>
+<regular_price_with_tax>25</regular_price_with_tax>
+<regular_price_without_tax>25</regular_price_without_tax>
+<final_price_with_tax>6.5</final_price_with_tax>
+<final_price_without_tax>6.5</final_price_without_tax>
+<is_saleable>1</is_saleable>
+<image_url>
+http://www.magboard.nl/media/catalog/product/cache/0/image/9df78eab33525d08d6e5fb8d27136e95/s/c/schermafbeelding_2012-09-24_om_11.59.44.png
+</image_url>
+</data_item>
+</magento_api>

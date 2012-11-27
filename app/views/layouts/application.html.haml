@@ -1,0 +1,38 @@
+!!!
+%html
+  %head
+    %title Adspire
+    = stylesheet_link_tag "application"  
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  %body
+    .container
+      #top.row
+        #branding.span2
+          = link_to image_tag( 'logo.png'), 'http://www.adspire.nl'
+        .span10
+          %ul.table-actions
+            %li
+              = link_to 'Nieuw', {:controller => 'uploads', :action => 'new'}
+            %li
+              = link_to 'Bewerken', 'http://www.google.nl'
+            %li
+              = link_to 'Updaten', 'http://www.google.nl'
+            %li
+              = link_to 'Downloaden', 'http://www.google.nl'
+            %li
+              = link_to 'Importeren', 'http://www.google.nl'
+      
+      .row
+        #sidebar.span2
+          %ul.nav
+            %li 
+              =link_to 'Dashboard', { :controller => 'uploads'}
+            %li
+              =link_to 'Feeds', '#'
+            %li
+              =link_to 'Aanbieders', '#'
+      
+        #content.span10
+          = yield
+

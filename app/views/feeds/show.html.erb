@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @feed.name %>
+</p>
+
+<% if @products.present? %>
+	<% @products.each do |p| %>
+	    <%= p.name %><%= link_to "show", product_path(p) %><br />
+	<% end %>	
+<% end %>
+
+
+<%= link_to 'Edit', edit_feed_path(@feed) %> |
+<%= link_to 'Back', feeds_path %>
