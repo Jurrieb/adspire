@@ -1,0 +1,16 @@
+.head
+  %h1 Eigen datafeed inlezen
+
+= form_tag({:action => :fetch_data}, {:multipart => true} ) do
+  .form-item
+    .item
+      = label_tag :name
+      = text_field_tag :name
+      = label_tag :url
+      = text_field_tag :url
+      = label_tag :file
+      = file_field_tag :file
+
+    = submit_tag "Inlezen"
+
+    = link_to 'Back', feeds_path

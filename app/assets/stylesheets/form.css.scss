@@ -84,9 +84,7 @@ input[type="reset"],
 button {
 	@include buttons;
 }
-input[type="file"] {
-	opacity: 0;
-}
+
 /*
 body:not(#foo) {
 	input[type="checkbox"] {

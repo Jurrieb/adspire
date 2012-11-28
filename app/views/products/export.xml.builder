@@ -3,14 +3,11 @@ xml.products do
   @products.each do |product|
     xml.product do
       @fields.each do |field|
-        if field[0].blank?
-          row = field.name
-        else
-          row = field[0]
-        end
-        case row 
+        case field 
         when 'name'
           xml.name product[:name]
+        when 'description'
+          xml.description product[:description]
         when 'url'
           xml.url 'http://adspire.nl/clicks/'+@user_hash+'/'+product.id.to_s
         when 'price'

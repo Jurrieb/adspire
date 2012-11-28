@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121128105633) do
+ActiveRecord::Schema.define(:version => 20121128121514) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -24,7 +24,6 @@ ActiveRecord::Schema.define(:version => 20121128105633) do
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
     t.integer  "field_id"
-    t.string   "name"
   end
 
   create_table "feeds", :force => true do |t|
@@ -33,6 +32,7 @@ ActiveRecord::Schema.define(:version => 20121128105633) do
     t.datetime "updated_at", :null => false
     t.string   "xml_path"
     t.string   "feed_path"
+    t.string   "url"
   end
 
   create_table "fields", :force => true do |t|
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(:version => 20121128105633) do
     t.string   "value"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "name"
   end
 
   create_table "filters", :force => true do |t|
