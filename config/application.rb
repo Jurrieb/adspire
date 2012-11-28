@@ -11,6 +11,10 @@ end
 
 module Datafeeds
   class Application < Rails::Application
+    #  On config/application.rb forcing your application to not access the DB
+    #  or load models when precompiling your assets.
+    config.assets.initialize_on_precompile = false
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

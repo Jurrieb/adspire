@@ -1,5 +1,7 @@
 Datafeeds::Application.routes.draw do
 
+root :to => "uploads#index"
+
 resources :uploads do
   collection do
     post 'category'
