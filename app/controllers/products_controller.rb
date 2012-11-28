@@ -81,9 +81,14 @@ class ProductsController < ApplicationController
   end
 
   def export
-    puts params[:id]
-    if params[:fields].blank?
+    if params[:filter].blank?
       @fields = Field.all
+      @products = Product.where({:feed_id => params[:id]})
+    else
+      filter = Filter.find(params[:filter])
+      puts filter.filteroptions
+    end
+=begin   
     else
       @fields = params[:fields]
     end
@@ -96,6 +101,7 @@ class ProductsController < ApplicationController
       end
       @products = Product.where({:feed_id => params[:id],:category_id => category_ids})
     end
+=end
     @user_hash = 'SAdh93sda812kd'
     respond_to do |format|
       format.xml 

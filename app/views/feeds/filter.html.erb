@@ -1,4 +1,4 @@
-<%= form_tag :controller => :products, :action => :export, :id => @feed_id, :format => :xml do %>
+<%= form_tag :id => @feed_id do %>
 	<h1>Sorteer op Categorien</h1>
 	<% @categories.each do |category| %>
 		<div>

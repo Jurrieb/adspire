@@ -13,13 +13,13 @@ resources :categories
 
 resources :feeds do
   collection do
+    post 'filter'
     get 'filter'
   end
 end 
 
 resources :products do
   collection do
-    post 'export'
     get 'export'
   end
 end

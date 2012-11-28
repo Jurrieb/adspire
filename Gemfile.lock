@@ -131,14 +131,14 @@ PLATFORMS
 
 DEPENDENCIES
   builder
-  coffee-rails (~> 3.2.1)
+  coffee-rails
   compass-rails
   devise
   haml-rails
   jquery-rails
   json
   nokogiri
-  rails (= 3.2.8)
-  sass-rails (~> 3.2.3)
+  rails
+  sass-rails
   sqlite3
-  uglifier (>= 1.0.3)
+  uglifier
