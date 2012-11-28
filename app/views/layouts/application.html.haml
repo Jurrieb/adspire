@@ -23,9 +23,22 @@
             %li
               = link_to 'Importeren', 'http://www.google.nl'
             
-            <p class="notice"><%= notice %></p>
-            <p class="alert"><%= alert %></p>
+            .notice
+              = notice
 
+            .alert
+              = alert
+
+            .loginform
+              - if user_signed_in?
+                Ingelogd als
+                %strong
+                  = current_user.email
+                = link_to 'Profiel wijzigen', edit_user_registration_path
+                = link_to 'Uitloggen', destroy_user_session_path, method: :delete
+              - else
+                = link_to 'Registreren', new_user_registration_path
+                = link_to 'Login', new_user_session_path
       .row
         #sidebar.span2
           %ul.nav
