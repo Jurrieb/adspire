@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121128090310) do
+ActiveRecord::Schema.define(:version => 20121128105633) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20121128090310) do
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
     t.integer  "field_id"
+    t.string   "name"
   end
 
   create_table "feeds", :force => true do |t|
@@ -43,7 +44,6 @@ ActiveRecord::Schema.define(:version => 20121128090310) do
 
   create_table "filteroptions", :force => true do |t|
     t.integer  "filter_id"
-    t.string   "type"
     t.string   "value"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
