@@ -24,7 +24,6 @@ ActiveRecord::Schema.define(:version => 20121128105633) do
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
     t.integer  "field_id"
-    t.string   "name"
   end
 
   create_table "feeds", :force => true do |t|
@@ -47,6 +46,7 @@ ActiveRecord::Schema.define(:version => 20121128105633) do
     t.string   "value"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "name"
   end
 
   create_table "filters", :force => true do |t|
