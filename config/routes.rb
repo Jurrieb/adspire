@@ -24,6 +24,8 @@ end
 resources :products do
   collection do
     get 'export'
+  end
+end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
