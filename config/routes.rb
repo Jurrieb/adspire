@@ -8,7 +8,6 @@ Datafeeds::Application.routes.draw do
     collection do
       post 'category'
       post 'parse'
-      post 'new'
     end
   end
 
@@ -26,7 +25,6 @@ resources :products do
     get 'export'
   end
 end
-
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
