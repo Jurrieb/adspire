@@ -13,7 +13,7 @@
         .span10
           %ul.table-actions
             %li
-              = link_to 'Nieuw', {:controller => 'uploads', :action => 'new'}
+              = link_to 'Nieuw', new_upload_path
             %li
               = link_to 'Bewerken', 'http://www.google.nl'
             %li
@@ -42,8 +42,9 @@
       .row
         #sidebar.span2
           %ul.nav
-            %li 
-              =link_to 'Dashboard', { :controller => 'uploads'}
+            %li
+              -# Moet nog juisten worden gelinkt! 
+              =link_to 'wachtwoord wijzigen', edit_user_password_path   
             %li
               =link_to 'Feeds', '#'
             %li

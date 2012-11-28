@@ -1,17 +1,18 @@
 Datafeeds::Application.routes.draw do
 
+  root :to => "uploads#index"
+
   devise_for :users
 
-root :to => "uploads#index"
-
-resources :uploads do
-  collection do
-    post 'category'
-    post 'parse'
+  resources :uploads do
+    collection do
+      post 'category'
+      post 'parse'
+      post 'new'
+    end
   end
-end
 
-resources :categories
+  resources :categories
 
 resources :feeds do
   collection do
@@ -23,8 +24,6 @@ end
 resources :products do
   collection do
     get 'export'
-  end
-end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
