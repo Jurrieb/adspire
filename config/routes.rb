@@ -20,6 +20,7 @@ end
 resources :products do
   collection do
     post 'export'
+    get 'export'
   end
 end
 

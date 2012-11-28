@@ -81,17 +81,24 @@ class ProductsController < ApplicationController
   end
 
   def export
-    @fields = params[:fields];
-    category_ids = Array.new
-    params[:categories].each do |category|
-      category_ids << Category.find_by_name(category).id
+    puts params[:id]
+    if params[:fields].blank?
+      @fields = Field.all
+    else
+      @fields = params[:fields]
+    end
+    if params[:categories].blank?
+      @products = Product.where({:feed_id => params[:id]})
+    else
+      category_ids = Array.new
+      params[:categories].each do |category|
+        category_ids << Category.find_by_name(category).id
+      end
+      @products = Product.where({:feed_id => params[:id],:category_id => category_ids})
     end
     @user_hash = 'SAdh93sda812kd'
-    @products = Product.where({:category_id => category_ids})
     respond_to do |format|
       format.xml 
     end 
   end
-
-
 end

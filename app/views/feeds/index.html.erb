@@ -6,12 +6,15 @@
     <th></th>
     <th></th>
     <th></th>
+    <th></th>
+    <th></th>
   </tr>
 
 <% @feeds.each do |feed| %>
   <tr>
-    <td><%= feed.name %></td>
-    <td><%= link_to 'Filter', :action => 'filter', :id => feed %></td>
+    <td><%= feed.name %></td><td><%= link_to 'Downloaden', :controller => 'products', :action => 'export', :id => feed, :format => :xml %></td>
+    
+    <td><%= link_to 'Segmenteren', :action => 'filter', :id => feed %></td>
     <td><%= link_to 'Show', feed %></td>
     <td><%= link_to 'Edit', edit_feed_path(feed) %></td>
     <td><%= link_to 'Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' } %></td>

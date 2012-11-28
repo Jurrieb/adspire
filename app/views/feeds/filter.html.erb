@@ -1,4 +1,4 @@
-<%= form_tag :controller => :products, :action => :export, :format => :xml do %>
+<%= form_tag :controller => :products, :action => :export, :id => @feed_id, :format => :xml do %>
 	<h1>Sorteer op Categorien</h1>
 	<% @categories.each do |category| %>
 		<div>
@@ -14,6 +14,5 @@
 			<%= field.name %>
 		</div>
 	<% end %>
-	<%= hidden_field_tag(:feed_id, @feed_id)%>
     <%= submit_tag "filtreren" %>
 <% end %>
