@@ -23,7 +23,6 @@ end
 
 # Haml, sass
 gem 'haml-rails'
-gem 'compass-rails'
 
 # Jquery
 gem 'jquery-rails'

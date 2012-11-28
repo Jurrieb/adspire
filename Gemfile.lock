@@ -32,7 +32,6 @@ GEM
     bcrypt-ruby (3.0.1-x86-mingw32)
     builder (3.0.4)
     cancan (1.6.8)
-    chunky_png (1.2.6)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -40,12 +39,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.4.0)
-    compass (0.12.2)
-      chunky_png (~> 1.2)
-      fssm (>= 0.2.7)
-      sass (~> 3.1)
-    compass-rails (1.0.3)
-      compass (>= 0.12.2, < 0.14)
     daemons (1.1.9)
     devise (2.1.2)
       bcrypt-ruby (~> 3.0)
@@ -56,7 +49,6 @@ GEM
     eventmachine (1.0.0-x86-mingw32)
     execjs (1.4.0)
       multi_json (~> 1.0)
-    fssm (0.2.9)
     haml (3.1.7)
     haml-rails (0.3.5)
       actionpack (>= 3.1, < 4.1)
@@ -138,7 +130,6 @@ DEPENDENCIES
   builder
   cancan
   coffee-rails
-  compass-rails
   devise
   haml-rails
   jquery-rails
