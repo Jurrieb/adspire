@@ -20,3 +20,5 @@ Field.create(name: "category", visible: true)
 Field.create(name: "image", visible: true)
 Field.create(name: "url", visible: true)
 Field.create(name: "price", visible: true)
+
+User.create(:email => 'info@adspire.nl', :password => 'test12', :password_confirmation => 'test12' )
