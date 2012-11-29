@@ -16,6 +16,10 @@ class FeedsController < ApplicationController
     @feed = Feed.new
   end
 
+  def create
+    @feed = Feed.new(params[:feed])
+  end
+
   def fetch_data
     file = params[:file]
     directory = "public/uploads/"
