@@ -1,6 +1,6 @@
 Datafeeds::Application.routes.draw do
 
-  root :to => "uploads#index"
+  root :to => "feeds#index"
 
   devise_for :users
 

@@ -22,6 +22,12 @@
               = link_to 'Importeren', 'http://www.google.nl'
             
             .notice
+              -if current_user
+                Huidige gebruiker heeft ID: 
+                = current_user.id 
+                met emailadres 
+                = current_user.email
+            .notice
               = notice
 
             .alert
