@@ -6,7 +6,8 @@ class FeedsController < ApplicationController
   # Authorisation
   load_and_authorize_resource
 
-  # before_filter :authenticate_user!
+
+  before_filter :authenticate_user!
 
   RECORDS = Hash.new
   KEYS = Array.new

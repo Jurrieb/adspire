@@ -16,11 +16,17 @@
     
     <td><%= link_to 'Segmenteren', :action => 'filter', :id => feed %></td>
     <td><%= link_to 'Show', feed %></td>
-    <td><%= link_to 'Edit', edit_feed_path(feed) %></td>
+    <% if can? :read, @feeds %>
+		<td><%= link_to 'Edit', edit_feed_path(feed) %></td>
+	<% end %>
+    
     <td><%= link_to 'Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
+
+
+
 
 <br />
 
