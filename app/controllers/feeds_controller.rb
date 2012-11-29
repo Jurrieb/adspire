@@ -3,6 +3,10 @@ class FeedsController < ApplicationController
   require 'rubygems'
   require 'nokogiri'
 
+  # Authorisation
+  load_and_authorize_resource
+
+
   before_filter :authenticate_user!
 
   RECORDS = Hash.new
