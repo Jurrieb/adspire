@@ -39,3 +39,6 @@ gem 'devise'
 
 # Authorisation
 gem 'cancan'
+
+# Cronjob
+gem "clockwork", "~> 0.4.1"

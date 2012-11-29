@@ -194,7 +194,6 @@ class FeedsController < ApplicationController
   end
 
   def display_node_name(node, depth = 0)
-   
     sub_nodes = node.xpath("./*")
     if sub_nodes.length < 1
       KEYS << node.name
@@ -218,8 +217,6 @@ class FeedsController < ApplicationController
 
             @listofitems[l.name] = l.text 
           end
-
-          @categories = Category.new
         end
     end
     sub_nodes.map { |n| display_node_name(n, depth+1) } if sub_nodes.length > 0
