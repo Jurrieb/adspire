@@ -9,115 +9,69 @@ class FeedsController < ApplicationController
 
   before_filter :authenticate_user!
 
-  RECORDS = Hash.new
-  KEYS = Array.new
-
   def new
     @feed = Feed.new
   end
 
   def create
     @feed = Feed.new(params[:feed])
-  end
-
-  def fetch_data
-    file = params[:file]
     directory = "public/uploads/"
-    tmp = params[:file].tempfile
-    file = File.join(directory, params[:file].original_filename)
+    tmp = params[:feed][:feed_path].tempfile
+    file = File.join(directory, params[:feed][:feed_path].original_filename)
     FileUtils.cp tmp.path, file
-    
-    f = File.open(file)
-      doc = Nokogiri::XML(f)
-    f.close
-
-    display_node_name(doc.xpath("./*").first)
-
-    product_value = 0
-    product_path = nil
-
-    RECORDS.each do |record|
-      if product_value < record[1]['count']
-        product_value = record[1]['count']
-        product_path  = record[1]['path']+'/'+record[0]
+    @feed.feed_path = file
+    @feed.user_id = current_user.id
+    @feed.status = 'active'
+    respond_to do |format|
+      if @feed.save
+        format.html { redirect_to @feed, notice: 'Feed was successfully created.' }
+        format.json { render json: @feed, status: :created, location: @feed }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @feed.errors, status: :unprocessable_entity }
       end
     end
+  end
 
-    feed = Feed.create(:name => params[:name],:url => params[:url],:xml_path => product_path  ,:feed_path => file)
-    @feed_id = feed.id
+  def fields
     @fields = Field.all
+    @DatafeedKeys = DatafeedKey.find_all_by_user_id(current_user.id)
   end
 
-  def fetch_categories
-    @feed_id = params[:feed_id]
-    feed = Feed.find(@feed_id)
-
-    categories = Array.new
-    category_field = Field.where('name' => 'category').first
-    category_key = nil
+  def update_fields
+    @fields = Field.all
+    @DatafeedKeys = DatafeedKey.find_all_by_user_id(current_user.id)
     params[:keys].each do |key, value|
-      existingCategory = DatafeedKey.find(:first, :conditions => {:field_id => value})
-       if existingCategory
-          existingCategory.foreign_key_name = key;
-          existingCategory.save
-       else
-         DatafeedKey.create(:field_id => value  ,:foreign_key_name => key)
-       end
-       if value.to_i == category_field.id
-         category_key = key
-       end
+      newkey = DatafeedKey.find_by_foreign_key_name(key)
+      newkey.field_id = value
+      newkey.save
     end
-
-    f = File.open(feed.feed_path)
-      doc = Nokogiri::XML(f)
-    f.close
-
-    doc.xpath(feed.xml_path+'/*').each do |product|
-      
-      if product.name == category_key
-        categories << product.text
-      end
-
+    feeds = Feed.find(:all, :conditions => {:user_id => current_user.id, :status => 'pending'})
+    feeds.each do |feed|
+      feed.status = 'active'
+      feed.save
     end
-
-    @selfCategories = Category.all
-    @feedCategories = categories.uniq
+    respond_to do |format|
+      format.html { redirect_to feeds_path, notice: 'Fields where successfully saved.' }
+    end
   end
 
-  def parse_data
-    @feed_id = params[:feed_id]
-    feed = Feed.find(@feed_id)
+  def categories
+    @categories = Category.all
+    @feedCategories = ForeignCategory.find_all_by_user_id(current_user.id)
+  end
 
-    params['keys'].each do |key, value|
-      existingCategory = ForeignCategory.find(:first, :conditions => {:name => key})
-       if existingCategory
-          existingCategory.category_id = value;
-          existingCategory.save
-       else
-         ForeignCategory.create(:category_id => value  ,:name => key)
-       end
+  def update_categories
+    @categories = Category.all
+    @feedCategories = ForeignCategory.find_all_by_user_id(current_user.id)
+    params[:categories].each do |key, value|
+      newkey = ForeignCategory.find_by_name(key)
+      newkey.category_id = value
+      newkey.save
     end
-
-    f = File.open(feed.feed_path)
-      doc = Nokogiri::XML(f)
-    f.close
-
-    dont_use_field_id = Field.where('name' => 'Dont use').first
-    records = DatafeedKey.where('field_id <> ?', dont_use_field_id.id)
-    doc.xpath(feed.xml_path).each  do |product|
-      products = Hash.new
-      records.each do |record|
-        if record.field.name == 'category'
-          category = ForeignCategory.find_by_name(product.xpath(record.foreign_key_name).text)
-          products['category_id'] = category.category_id
-          products['feed_id'] = params[:feed_id]
-        else
-          products[record.field.name] = product.xpath(record.field.name).text
-        end
-      end
-      Product.create(products)
+    respond_to do |format|
+      format.html { redirect_to feeds_path, notice: 'Fields where successfully saved.' }
     end
-    redirect_to feeds_path
   end
 
   def index
