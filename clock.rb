@@ -43,8 +43,8 @@ every(60.seconds, 'Parse Feeds') {
 	    if DatafeedKey.find(:first, :conditions => {:field_id => category_field_id})
 	    	
 	    else
-	    	#feed.status = 'pending'
-	    	#feed.save
+	    	feed.status = 'pending'
+	    	feed.save
 	    end
 	end
  }	
