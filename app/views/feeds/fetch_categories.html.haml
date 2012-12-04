@@ -1,0 +1,7 @@
+= form_tag :action => :parse_data do
+  - @feedCategories.each do |t|
+    %div
+      = label_tag t
+      = select_tag 'keys['+t+']', options_from_collection_for_select(@selfCategories, "id", "name")
+  = hidden_field_tag(:feed_id, @feed_id)
+  = submit_tag "Aanpassen"
