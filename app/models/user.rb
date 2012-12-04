@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :roles
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :roles, :name, :lastname, :phone, :country, :organisation, :url, :category_id, :website, :comment
 
   has_and_belongs_to_many :roles, :join_table => :users_roles
   
@@ -15,6 +15,5 @@ class User < ActiveRecord::Base
         return true
     end
 
-  end  
-  
+  end 
 end

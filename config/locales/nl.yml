@@ -1,16 +1,41 @@
 nl:
   # Labels
   labels:
-    email: "Post Title"
-    body: "Post Content"
+    # Persoonlijke labels
+    forname: "Voornaam"
+    lastname: "Achternaam"
 
-  # Veel voorkomende vertalingen
-  
+    # Communicatie
+    email: "E-mailadres"
+    phone: "Telefoon"
 
+    # Adres
+    street: "Straat"
+    zip: "Postcode"
+    housenr: "Huisnummer"
+    place: "Plaats"
+    country: "Land"
 
+    # Registreren
+    signup: "Registreren"
 
-  # Registratie formulier
-  signup: "Registreren"
+    # Profiel
+    profile: "Profiel"
+    password: "Wachtwoord"
+    passwordconfirmation: "Wachtwoord herhalen"
+    business: "Bedrijfsvorm"
+    organisation_person: "Persoon"
+    organisation_business: "Bedrijf"
+
+    # Site
+    site: "Website toevoegen"
+    url: "Link"
+    websitecategory: "Categorie van website"
+
+    # Opmerkingen
+    comment: "Opmerking" 
+    commentsub: "Overige opmerkingen over registratie"
+
 
   errors:
     messages:

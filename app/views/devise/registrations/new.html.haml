@@ -1,24 +1,62 @@
-%h2= t :signup
+-# Moet verwezen worden naar de hoofdcategorieen van Adspire
+
+%h2= t('labels.signup')
 
 = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
-  = devise_error_messages! 
+  = devise_error_messages!
+
+  %div
+    = f.label :name, t('labels.forname')
+    = f.text_field :name
+
+    = f.label :lastname, t('labels.lastname')
+    = f.text_field :lastname
+
+  %div
+    = f.label :phone, t('labels.phone')
+    = f.telephone_field :phone
+
+    = f.label :country, t('labels.country')
+    = f.text_field :country
+
+  %h2= t('labels.profile')
 
   %div
     = f.label :email, t('labels.email')
-    %br
     = f.email_field :email
 
   %div
-    = f.label :password
-    %br
-    = f.password_field :password
+    = f.label :password, t('labels.password')
+    = f.password_field :password, :value => ''
 
-  %div
-    = f.label :password_confirmation
-    %br
+    = f.label :password_confirmation, t('labels.passwordconfirmation')
     = f.password_field :password_confirmation
 
+  %h2= t('labels.organisation')
+
   %div
-    = f.submit #{= t(:signup)}
+    = f.radio_button(:organisation, "person")
+    = f.label :organisation_person, t('labels.organisation_person')
+    = f.radio_button(:organisation, "business")
+    = f.label :organisation_business, t('labels.organisation_business')
+
+  %h2= t('labels.site')
+
+  %div
+    = f.label :url, t('labels.url')
+    = f.url_field :url
+    = f.label :website, t('labels.websitecategory')
+    = collection_select(:users, :website, Category.all, :id, :name)
+
+  %h2= t('labels.comment')
+
+  %div
+    = f.label :comment, t('labels.commentsub')
+    %br
+    = f.text_area :comment, :size => "60x10"
+
+
+  %div
+    = f.submit t('labels.signup')
 
 = render "devise/shared/links"
