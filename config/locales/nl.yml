@@ -1,4 +1,17 @@
 nl:
+  # Labels
+  labels:
+    email: "Post Title"
+    body: "Post Content"
+
+  # Veel voorkomende vertalingen
+  
+
+
+
+  # Registratie formulier
+  signup: "Registreren"
+
   errors:
     messages:
       current_password:
