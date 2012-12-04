@@ -1,6 +1,0 @@
-= form_tag :action => :update_categories do
-  - @feedCategories.each do |category|
-    .key
-      = label_tag category.name
-      =	select_tag('categories['+category.name+']', options_from_collection_for_select(@categories, "id", "name"))
-  = submit_tag "submit"

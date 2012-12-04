@@ -1,6 +1,0 @@
-= form_tag :action => :update_fields do
-  - @DatafeedKeys.each do |feed_key|
-    .key
-      = label_tag feed_key.foreign_key_name
-      =	select_tag('keys['+feed_key.foreign_key_name+']', options_from_collection_for_select(@fields, "id", "name"))
-  = submit_tag "submit"

@@ -8,10 +8,9 @@ Datafeeds::Application.routes.draw do
 
   resources :feeds do
     collection do
-      get 'fields'
-      post 'update_fields'
-      get 'categories'
-      post 'update_categories'
+      post 'fetch_data'
+      post 'fetch_categories'
+      post 'parse_data'
       post 'filter'
       get 'filter'
     end
