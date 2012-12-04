@@ -1,0 +1,6 @@
+= form_tag do
+  - @foreign_fields.each do |feed_key| 
+    .item
+      = label_tag feed_key.name
+      = select_tag('keys['+feed_key.name+']', options_from_collection_for_select(@fields, "id", "name"))
+  = submit_tag "submit"

@@ -14,6 +14,7 @@ Category.create(name: "laptop")
 Category.create(name: "gsm")
 
 Field.create(name: "Dont use", visible: false)
+Field.create(name: "Product hash", visible: true)
 Field.create(name: "name", visible: true)
 Field.create(name: "description", visible: true)
 Field.create(name: "category", visible: true)

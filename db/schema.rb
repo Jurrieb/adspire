@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121204093507) do
+ActiveRecord::Schema.define(:version => 20121204131417) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -20,11 +20,11 @@ ActiveRecord::Schema.define(:version => 20121204093507) do
   end
 
   create_table "datafeed_keys", :force => true do |t|
-    t.string   "foreign_key_name"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "field_id"
-    t.integer  "user_id"
+    t.integer  "feed_id"
   end
 
   create_table "feeds", :force => true do |t|
