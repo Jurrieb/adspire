@@ -30,14 +30,11 @@
                 met de volgende rol:
                 -if current_user.role? :admin
                   Admin
-                - elsif current_user.role? :affiliate
+                -if current_user.role? :affiliate
                   Affiliate
-                - elsif current_user.role? :merchant
+                -if current_user.role? :merchant
                   Merchant
-                - else
-                  Geen rol opgegeven
-
-
+                  
             .notice
               = notice
 

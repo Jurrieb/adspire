@@ -21,11 +21,14 @@ Field.create(name: "image", visible: true)
 Field.create(name: "url", visible: true)
 Field.create(name: "price", visible: true)
 
-Role.create([
-  { :name => 'admin' }, 
-  { :name => 'merchant' }, 
-  { :name => 'affiliate' }
-], :without_protection => true)
+Role.create(name: 'admin')
+Role.create(name: 'affiliate')
+Role.create(name: 'merchant')
 
+User.create(
+	:email => 'info@adspire.nl', 
+	:password => 'test12', 
+	:password_confirmation => 'test12'
+)
 
-User.create(:email => 'info@adspire.nl', :password => 'test12', :password_confirmation => 'test12' )
+User.find_by_email('info@adspire.nl').roles << Role.find_by_name('admin')
