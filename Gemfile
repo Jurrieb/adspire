@@ -37,7 +37,7 @@ gem 'builder'
 # Authentication
 gem 'devise'
 gem 'cancan'
-gem "rolify"
+gem 'rolify'
 
 # Cronjob
 gem "clockwork", "~> 0.4.1"
