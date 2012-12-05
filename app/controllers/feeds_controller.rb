@@ -38,17 +38,35 @@ class FeedsController < ApplicationController
 
   def fields
     @feed = Feed.where({:status => 'user_fields', :id => params[:id]}).last
-    @foreign_fields = DatafeedKey.where(:feed_id => @feed.id)
-    @fields = Field.all
+    if@feed 
+        @foreign_fields = DatafeedKey.where(:feed_id => @feed.id)
+        @fields = Field.all
+        if params[:commit]
+          params[:keys].each do |key, value|
+            newkey = DatafeedKey.where({:name => key, :feed_id => @feed.id}).last
+            newkey.field_id = value
+            newkey.save
+          end
+          @feed.status = 'active'
+          @feed.save
+          redirect_to feeds_path, notice: 'Fields where successfully saved.' 
+        end
+    else
+      redirect_to feeds_path, notice: 'Feed does not exist.' 
+    end
+  end
+
+  def categories
+    @feed = Feed.where({:status => 'active', :id => params[:id]}).last
+    @foreign_categories = ForeignCategory.where(:feed_id => @feed.id)
+    @categories = Category.all
     if params[:commit]
-      params[:keys].each do |key, value|
-        newkey = DatafeedKey.where({:name => key, :feed_id => @feed.id}).last
-        newkey.field_id = value
+      params[:categories].each do |key, value|
+        newkey = ForeignCategory.where({:name => key, :feed_id => @feed.id}).last
+        newkey.category_id = value
         newkey.save
       end
-      @feed.status = 'active'
-      @feed.save
-      redirect_to feeds_path, notice: 'Feed was successfully created.' 
+      redirect_to feeds_path, notice: 'Categories where successfully saved.' 
     end
   end
 

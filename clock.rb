@@ -5,45 +5,8 @@ include Clockwork
 require 'nokogiri'
 
 RECORDS = Hash.new
-KEYS = Array.new
 
-every(120.seconds, 'parse products'){
-	
-	feed = Feed.find(:first, :conditions => {:status => 'active'}, :order => "created_at") 
-	categorie_key =  DatafeedKey.find(:first, :conditions => {:feed_id => feed.id, :field_id => Field.find_by_name('Category')})
-	producthash_key = DatafeedKey.find(:first, :conditions => {:feed_id => feed.id, :field_id => Field.find_by_name('Product hash')})
-
-	if categorie_key && producthash_key
-
-		f = File.open(feed.feed_path)
-			doc = Nokogiri::XML(f)
-		f.close
-
-		foreign_categories = Array.new
-		doc.xpath(feed.xml_path+'/*').each do |node|        
-		  if node.name == category_key.name
-		    foreign_categories << node.text
-		  end
-		end
-
-		foreign_categories.uniq.each do |category|
-			if !ForeignCategory.find(:first, :conditions => {:feed_id => feed.id,:name => category})	
-			  newkey = ForeignCategory.new
-			  newkey.feed_id = feed.feed_id
-			  newkey.name = category
-			  newkey.save
-			end
-		end
-
-	else
-		feed.status = 'user_fields'
-		feed.save
-	end
-
-}
-
-
-every(30.seconds, 'Startup Feeds') {
+every(10.seconds, 'Startup Feeds') {
 
 	feed = Feed.find(:first, :conditions => {:status => 'created'}, :order => "created_at") 
 
@@ -68,7 +31,12 @@ every(30.seconds, 'Startup Feeds') {
 	    feed.xml_path = product_path
 	    feed.save
 
-		KEYS.uniq.each do |key|
+		foreign_keys = Array.new
+			doc.xpath(feed.xml_path+"/*").each do |node|
+		    foreign_keys << node.name
+		end
+
+		foreign_keys.uniq.each do |key|
 			if !DatafeedKey.find(:first, :conditions => {:feed_id => feed.id,:name => key})
 				newkey = DatafeedKey.new
 				newkey.feed_id = feed.id
@@ -81,11 +49,62 @@ every(30.seconds, 'Startup Feeds') {
 	end
 }
 
+every(300.seconds, 'parse products'){
+	
+	feed = Feed.find(:first, :conditions => {:status => 'active'}, :order => "created_at") 
+	if feed 
+		category_key =  DatafeedKey.find(:first, :conditions => {:feed_id => feed.id, :field_id => Field.find_by_name('category')})
+		producthash_key = DatafeedKey.find(:first, :conditions => {:feed_id => feed.id, :field_id => Field.find_by_name('unique hash')})
+
+		if producthash_key
+			f = File.open(feed.feed_path)
+				doc = Nokogiri::XML(f)
+			f.close
+
+			if category_key 
+
+				foreign_categories = Array.new
+				doc.xpath(feed.xml_path+'/'+category_key.name).each do |node|
+				    foreign_categories << node.text
+				end
+
+				if foreign_categories.count > 0
+					foreign_categories.uniq.each do |category|
+						if !ForeignCategory.find(:first, :conditions => {:feed_id => feed.id, :name => category})	
+						  newkey = ForeignCategory.new
+						  newkey.feed_id = feed.id
+						  newkey.name = category
+						  newkey.save
+						end
+					end
+				end
+
+			end	
+
+			doc.xpath(feed.xml_path).each do |product|
+			    records = DatafeedKey.where('field_id <> ?', Field.where('name' => 'dont use').first)
+		       	productdata = Hash.new
+				records.each do |record|
+					if record.field.name == 'category'
+						productdata['category_id'] = ForeignCategory.find_by_name(product.xpath(record.name).text).id
+					else
+						productdata[record.field.product_column_name] = product.xpath(record.name).text
+					end
+				end
+				productdata['feed_id'] = feed.id
+				puts productdata
+			end
+
+		else
+			feed.status = 'user_fields'
+			feed.save
+		end
+	end
+}
+
 def fetch_node_name(node, depth = 0)
 	sub_nodes = node.xpath("./*")
-	if sub_nodes.length < 1
-	   KEYS << node.name
-	else
+	if sub_nodes.length > 1
 		if RECORDS[node.name].blank?
 		  RECORDS[node.name] = Hash.new
 		  RECORDS[node.name]['count'] = 1

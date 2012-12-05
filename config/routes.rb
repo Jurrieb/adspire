@@ -9,6 +9,7 @@ Datafeeds::Application.routes.draw do
   resources :feeds do
     collection do
       match "/fields/:id" => 'feeds#fields'
+      match "/categories/:id" => 'feeds#categories'
       post 'update_fields'
       post 'filter'
       get 'filter'
