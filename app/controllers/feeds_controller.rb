@@ -18,106 +18,56 @@ class FeedsController < ApplicationController
 
   def create
     @feed = Feed.new(params[:feed])
-  end
-
-  def fetch_data
     file = params[:file]
     directory = "public/uploads/"
     tmp = params[:file].tempfile
     file = File.join(directory, params[:file].original_filename)
     FileUtils.cp tmp.path, file
-    
-    f = File.open(file)
-      doc = Nokogiri::XML(f)
-    f.close
-
-    display_node_name(doc.xpath("./*").first)
-
-    product_value = 0
-    product_path = nil
-
-    RECORDS.each do |record|
-      if product_value < record[1]['count']
-        product_value = record[1]['count']
-        product_path  = record[1]['path']+'/'+record[0]
+    @feed.feed_path = file
+    @feed.status = 'created'
+    respond_to do |format|
+      if @feed.save
+        format.html { redirect_to feeds_path, notice: 'Feed was successfully created.' }
+        format.json { render json: @feed, status: :created, location: @feed }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @feed.errors, status: :unprocessable_entity }
       end
     end
-
-    feed = Feed.create(:name => params[:name],:url => params[:url],:xml_path => product_path  ,:feed_path => file)
-    @feed_id = feed.id
-    @fields = Field.all
   end
 
-  def fetch_categories
-    @feed_id = params[:feed_id]
-    feed = Feed.find(@feed_id)
-
-    categories = Array.new
-    category_field = Field.where('name' => 'category').first
-    category_key = nil
-    params[:keys].each do |key, value|
-      existingCategory = DatafeedKey.find(:first, :conditions => {:field_id => value})
-       if existingCategory
-          existingCategory.foreign_key_name = key;
-          existingCategory.save
-       else
-         DatafeedKey.create(:field_id => value  ,:foreign_key_name => key)
-       end
-       if value.to_i == category_field.id
-         category_key = key
-       end
-    end
-
-    f = File.open(feed.feed_path)
-      doc = Nokogiri::XML(f)
-    f.close
-
-    doc.xpath(feed.xml_path+'/*').each do |product|
-      
-      if product.name == category_key
-        categories << product.text
-      end
-
-    end
-
-    @selfCategories = Category.all
-    @feedCategories = categories.uniq
-  end
-
-  def parse_data
-    @feed_id = params[:feed_id]
-    feed = Feed.find(@feed_id)
-
-    params['keys'].each do |key, value|
-      existingCategory = ForeignCategory.find(:first, :conditions => {:name => key})
-       if existingCategory
-          existingCategory.category_id = value;
-          existingCategory.save
-       else
-         ForeignCategory.create(:category_id => value  ,:name => key)
-       end
-    end
-
-    f = File.open(feed.feed_path)
-      doc = Nokogiri::XML(f)
-    f.close
-
-    dont_use_field_id = Field.where('name' => 'Dont use').first
-    records = DatafeedKey.where('field_id <> ?', dont_use_field_id.id)
-    doc.xpath(feed.xml_path).each  do |product|
-      products = Hash.new
-      records.each do |record|
-        if record.field.name == 'category'
-          category = ForeignCategory.find_by_name(product.xpath(record.foreign_key_name).text)
-          products['category_id'] = category.category_id
-          products['feed_id'] = params[:feed_id]
-        else
-          products[record.field.name] = product.xpath(record.field.name).text
+  def fields
+    @feed = Feed.where({:status => 'user_fields', :id => params[:id]}).last
+    if@feed 
+        @foreign_fields = DatafeedKey.where(:feed_id => @feed.id)
+        @fields = Field.all
+        if params[:commit]
+          params[:keys].each do |key, value|
+            newkey = DatafeedKey.where({:name => key, :feed_id => @feed.id}).last
+            newkey.field_id = value
+            newkey.save
+          end
+          @feed.status = 'active'
+          @feed.save
+          redirect_to feeds_path, notice: 'Fields where successfully saved.' 
         end
-      end
-      Product.create(products)
+    else
+      redirect_to feeds_path, notice: 'Feed does not exist.' 
     end
-    redirect_to feeds_path
+  end
+
+  def categories
+    @feed = Feed.where({:status => 'active', :id => params[:id]}).last
+    @foreign_categories = ForeignCategory.where(:feed_id => @feed.id)
+    @categories = Category.all
+    if params[:commit]
+      params[:categories].each do |key, value|
+        newkey = ForeignCategory.where({:name => key, :feed_id => @feed.id}).last
+        newkey.category_id = value
+        newkey.save
+      end
+      redirect_to feeds_path, notice: 'Categories where successfully saved.' 
+    end
   end
 
   def index

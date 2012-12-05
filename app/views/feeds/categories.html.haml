@@ -1,0 +1,6 @@
+= form_tag do
+  - @foreign_categories.each do |feed_key| 
+    .item
+      = label_tag feed_key.name
+      = select_tag('categories['+feed_key.name+']', options_from_collection_for_select(@categories, "id", "name"))
+  = submit_tag "submit"

@@ -13,6 +13,7 @@
 
 ActiveRecord::Schema.define(:version => 20121205093943) do
 
+
   create_table "categories", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -20,11 +21,11 @@ ActiveRecord::Schema.define(:version => 20121205093943) do
   end
 
   create_table "datafeed_keys", :force => true do |t|
-    t.string   "foreign_key_name"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "field_id"
-    t.integer  "user_id"
+    t.integer  "feed_id"
   end
 
   create_table "feeds", :force => true do |t|
@@ -40,9 +41,10 @@ ActiveRecord::Schema.define(:version => 20121205093943) do
 
   create_table "fields", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
     t.boolean  "visible"
+    t.string   "product_column_name"
   end
 
   create_table "filteroptions", :force => true do |t|
@@ -64,6 +66,7 @@ ActiveRecord::Schema.define(:version => 20121205093943) do
     t.string   "name"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "feed_id"
   end
 
   create_table "products", :force => true do |t|
@@ -76,6 +79,8 @@ ActiveRecord::Schema.define(:version => 20121205093943) do
     t.string   "description"
     t.string   "image"
     t.decimal  "price"
+    t.integer  "unique_hash"
+    t.integer  "status"
   end
 
   create_table "roles", :force => true do |t|
