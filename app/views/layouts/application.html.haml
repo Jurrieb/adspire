@@ -34,6 +34,8 @@
                   Affiliate
                 -if current_user.role? :merchant
                   Merchant
+                -if current_user.role? :user
+                  Gebruiker
                   
             .notice
               = notice

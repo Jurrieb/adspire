@@ -35,6 +35,15 @@ nl:
     organisation_business: "Bedrijf"
     cancel: "Opzeggen"
     terminate: "Weet je zeker dat je wilt opzeggen? Klik dan op onderstaande link"
+    notification: "Notificaties"
+    notification_explain: "Waar wil je berichtgeving van krijgen? Je krijgt van elke notificatie een e-mailbericht"
+    notification_lead: "Voor elke lead"
+    notification_sale: "Voor elke sale"
+    notification_feed: "Voor elke nieuwe feed"
+    notification_result: "Elke dag een resultaat overzicht"
+    notification_status: "Status veraderingen"
+    notification_merchant: "Voor elke nieuwe publisher"
+
 
     # Site
     sitename: "Naam van website"

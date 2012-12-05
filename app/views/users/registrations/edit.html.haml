@@ -85,6 +85,35 @@
 			= s.link_to_remove "Site verwijderen"
 
 	=f.link_to_add "Voeg een site toe", :sites
+	
+	%h2= t('labels.notification')
+ 
+	%div
+		%p= t('labels.notification_explain')
+
+		%div
+			= f.label :notification_lead, t('labels.notification_lead')
+			= f.check_box :notification_lead
+
+		%div
+			= f.label :notification_sale, t('labels.notification_sale')
+			= f.check_box :notification_sale
+		
+		%div
+			= f.label :notification_feed, t('labels.notification_feed')
+			= f.check_box :notification_feed
+		
+		%div
+			= f.label :notification_result, t('labels.notification_result')
+			= f.check_box :notification_result
+		
+		%div
+			= f.label :notification_status, t('labels.notification_status')
+			= f.check_box :notification_status
+		
+		%div
+			= f.label :notification_merchant, t('labels.notification_merchant')
+			= f.check_box :notification_merchant
 
 	%div
 		%p= t('labels.permission')

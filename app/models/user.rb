@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
 
+  before_save :edit_role
+
   has_and_belongs_to_many :roles, :join_table => :users_roles
   has_many :sites
 
@@ -11,7 +13,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :roles, :name, :lastname, :phone, :country, :organisation, :comment, :street, :housenumber, :zip, :place, :btw, :kvk, :company_name, :sites_attributes
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :roles, :name, :lastname, :phone, :country, :organisation, :comment, :street, :housenumber, :zip, :place, :btw, :kvk, :company_name, :notification_lead, :notification_sale, :notification_feed, :notification_result, :notification_status, :notification_merchant, :sites_attributes
   
   def role?(role) 
 
@@ -19,5 +21,13 @@ class User < ActiveRecord::Base
         return true
     end
 
-  end 
+  end
+
+  # Default role = user
+  def edit_role 
+    if self.roles.blank?
+      self.roles << Role.find_by_name('user') 
+    end
+  end
+
 end

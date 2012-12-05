@@ -24,6 +24,7 @@ Field.create(name: "price", product_column_name: 'price', visible: true)
 Field.create(name: "price old", product_column_name: 'price_old', visible: true)
 
 Role.create(name: 'admin')
+Role.create(name: 'user')
 Role.create(name: 'affiliate')
 Role.create(name: 'merchant')
 
