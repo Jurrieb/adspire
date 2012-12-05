@@ -11,8 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121205093943) do
-
+ActiveRecord::Schema.define(:version => 20121205191521) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -25,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20121205093943) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "field_id"
+    t.integer  "user_id"
     t.integer  "feed_id"
   end
 
@@ -126,6 +126,13 @@ ActiveRecord::Schema.define(:version => 20121205093943) do
     t.string   "organisation"
     t.text     "website"
     t.text     "comment"
+    t.string   "street"
+    t.integer  "housenumber"
+    t.string   "zip"
+    t.string   "place"
+    t.string   "btw"
+    t.string   "kvk"
+    t.string   "company_name"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

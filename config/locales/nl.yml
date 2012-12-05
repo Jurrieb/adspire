@@ -1,4 +1,6 @@
 nl:
+  common:
+    back: "Terug"
   # Labels
   labels:
     # Persoonlijke labels
@@ -21,11 +23,18 @@ nl:
 
     # Profiel
     profile: "Profiel"
+    editprofile: "Profiel wijzigen"
+    editlogin: "Login gegevens wijzigen"
+    leaveblank: "Laat dit veld leeg als je dit niet wilt veranderen"
+    permission: "Bevestig je wijgigingen door middel van het wachtwoord"
     password: "Wachtwoord"
     passwordconfirmation: "Wachtwoord herhalen"
     business: "Bedrijfsvorm"
+    company_name: "bedrijfsnaam"
     organisation_person: "Persoon"
     organisation_business: "Bedrijf"
+    cancel: "Opzeggen"
+    terminate: "Weet je zeker dat je wilt opzeggen? Klik dan op onderstaande link"
 
     # Site
     sitename: "Naam van website"

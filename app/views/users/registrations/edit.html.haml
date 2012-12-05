@@ -1,0 +1,110 @@
+%h2= t('labels.editprofile')
+
+= nested_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
+	= devise_error_messages!
+
+	%h2= t('labels.editlogin')
+
+	%div
+		= f.label :email, t('labels.email')
+		= f.email_field :email
+
+	%div
+		%p= t('labels.leaveblank')
+		= f.label :password, t('labels.password')
+		= f.password_field :password, :value => ''
+
+	%div
+		= f.label :password_confirmation, t('labels.passwordconfirmation')
+		= f.password_field :password_confirmation
+
+	%h2= t('labels.editprofile')
+
+	%div
+		= f.label :name, t('labels.forname')
+		= f.text_field :name
+
+	%div
+		= f.label :lastname, t('labels.lastname')
+		= f.text_field :lastname
+
+	%div
+		= f.label :street, t('labels.street')
+		= f.text_field :street
+
+	%div
+		= f.label :housenumber, t('labels.housenumber')
+		= f.number_field :housenumber
+
+	%div
+		= f.label :zip, t('labels.zip')
+		= f.text_field :zip
+
+	%div
+		= f.label :place, t('labels.place')
+		= f.text_field :place
+
+	%div
+		= f.label :phone, t('labels.phone')
+		= f.telephone_field :phone
+
+	%div
+		= f.label :country, t('labels.country')
+		= f.text_field :country
+
+	%h2= t('labels.organisation')
+
+	%div
+		= f.radio_button(:organisation, "person")
+		= f.label :organisation_person, t('labels.organisation_person')
+		= f.radio_button(:organisation, "business")
+		= f.label :organisation_business, t('labels.organisation_business')
+
+	%div
+		= f.label :company_name, t('labels.company_name')
+		= f.text_field :company_name
+
+	%div
+		= f.label :btw, t('labels.btw')
+		= f.text_field :btw
+
+	%div
+		= f.label :kvk, t('labels.kvk')
+		= f.text_field :kvk
+
+	%h2= t('labels.site')
+
+	= f.fields_for :sites do |s|
+		%div
+			= s.label :name, t('labels.sitename')
+			= s.text_field :name
+			= s.label :url, t('labels.url')
+			= s.url_field :url
+			= s.label :website, t('labels.websitecategory')
+			= collection_select(:sites, :category_id, Category.all, :id, :name)
+			= s.link_to_remove "Site verwijderen"
+
+	=f.link_to_add "Voeg een site toe", :sites
+
+	%div
+		%p= t('labels.permission')
+		= f.label :current_password, t('labels.passwordconfirmation')
+		= f.password_field :current_password
+
+	%div
+		= f.submit t('labels.editprofile')
+
+
+
+
+
+%h3= t('labels.cancel')
+
+%p= t('labels.terminate')
+= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete
+
+%br
+%br
+
+%div
+	= link_to t('common.back'), :back
