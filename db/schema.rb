@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121204143746) do
+ActiveRecord::Schema.define(:version => 20121205093943) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -84,6 +84,18 @@ ActiveRecord::Schema.define(:version => 20121204143746) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "sites", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "name"
+    t.text     "url"
+    t.text     "description"
+    t.integer  "category_id"
+    t.boolean  "active"
+    t.integer  "status"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "uploads", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -107,8 +119,6 @@ ActiveRecord::Schema.define(:version => 20121204143746) do
     t.string   "phone"
     t.string   "country"
     t.string   "organisation"
-    t.text     "url"
-    t.integer  "category_id"
     t.text     "website"
     t.text     "comment"
   end

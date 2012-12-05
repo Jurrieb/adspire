@@ -28,6 +28,7 @@ nl:
     organisation_business: "Bedrijf"
 
     # Site
+    sitename: "Naam van website"
     site: "Website toevoegen"
     url: "Link"
     websitecategory: "Categorie van website"

@@ -19,7 +19,10 @@ group :assets do
   gem 'sass-rails'
   gem 'coffee-rails'
   gem 'uglifier'
-end 
+end
+
+# Nested form
+gem "nested_form"
 
 # Haml, sass
 gem 'haml-rails'
