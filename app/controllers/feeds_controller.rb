@@ -9,9 +9,6 @@ class FeedsController < ApplicationController
 
   before_filter :authenticate_user!
 
-  RECORDS = Hash.new
-  KEYS = Array.new
-
   def new
     @feed = Feed.new
   end
@@ -38,35 +35,17 @@ class FeedsController < ApplicationController
 
   def fields
     @feed = Feed.where({:status => 'user_fields', :id => params[:id]}).last
-    if@feed 
-        @foreign_fields = DatafeedKey.where(:feed_id => @feed.id)
-        @fields = Field.all
-        if params[:commit]
-          params[:keys].each do |key, value|
-            newkey = DatafeedKey.where({:name => key, :feed_id => @feed.id}).last
-            newkey.field_id = value
-            newkey.save
-          end
-          @feed.status = 'active'
-          @feed.save
-          redirect_to feeds_path, notice: 'Fields where successfully saved.' 
-        end
-    else
-      redirect_to feeds_path, notice: 'Feed does not exist.' 
-    end
-  end
-
-  def categories
-    @feed = Feed.where({:status => 'active', :id => params[:id]}).last
-    @foreign_categories = ForeignCategory.where(:feed_id => @feed.id)
-    @categories = Category.all
+    @foreign_fields = DatafeedKey.where(:feed_id => @feed.id)
+    @fields = Field.all
     if params[:commit]
-      params[:categories].each do |key, value|
-        newkey = ForeignCategory.where({:name => key, :feed_id => @feed.id}).last
-        newkey.category_id = value
+      params[:keys].each do |key, value|
+        newkey = DatafeedKey.where({:name => key, :feed_id => @feed.id}).last
+        newkey.field_id = value
         newkey.save
       end
-      redirect_to feeds_path, notice: 'Categories where successfully saved.' 
+      @feed.status = 'active'
+      @feed.save
+      redirect_to feeds_path, notice: 'Feed was successfully created.' 
     end
   end
 
@@ -150,34 +129,4 @@ class FeedsController < ApplicationController
       @fields = Field.all
     end
   end
-
-  def display_node_name(node, depth = 0)
-    sub_nodes = node.xpath("./*")
-    if sub_nodes.length < 1
-      KEYS << node.name
-    else  
-        if RECORDS[node.name].blank?
-          RECORDS[node.name] = Hash.new
-          RECORDS[node.name]['count'] = 1
-          RECORDS[node.name]['path'] = node.parent.path()
-        else 
-          RECORDS[node.name]['count'] += 1
-        end
-        if sub_nodes.length > 1
-          @listofitems = Hash.new
-          @firstitem = Array.new
-         
-          sub_nodes.each do |l|
-            # Values from array
-
-            # Key names
-            @firstitem << l.name
-
-            @listofitems[l.name] = l.text 
-          end
-        end
-    end
-    sub_nodes.map { |n| display_node_name(n, depth+1) } if sub_nodes.length > 0
-  end
-
 end
