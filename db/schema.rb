@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121205200440) do
+ActiveRecord::Schema.define(:version => 20121206140508) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20121205200440) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "field_id"
+    t.integer  "user_id"
     t.integer  "feed_id"
   end
 
@@ -68,6 +69,19 @@ ActiveRecord::Schema.define(:version => 20121205200440) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.integer  "feed_id"
+  end
+
+  create_table "notices", :force => true do |t|
+    t.boolean  "lead"
+    t.boolean  "sale"
+    t.boolean  "feed"
+    t.boolean  "result"
+    t.boolean  "status"
+    t.boolean  "merchant"
+    t.boolean  "action"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "user_id"
   end
 
   create_table "products", :force => true do |t|
@@ -134,12 +148,6 @@ ActiveRecord::Schema.define(:version => 20121205200440) do
     t.string   "btw"
     t.string   "kvk"
     t.string   "company_name"
-    t.boolean  "notification_lead"
-    t.boolean  "notification_sale"
-    t.boolean  "notification_feed"
-    t.boolean  "notification_result"
-    t.boolean  "notification_status"
-    t.boolean  "notification_merchant"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

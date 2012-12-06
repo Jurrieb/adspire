@@ -4,5 +4,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     resource = build_resource({})
     respond_with resource
     #resource.sites.build
+    resource.notice.build
   end
 end

@@ -91,34 +91,42 @@
 	%div
 		%p= t('labels.notification_explain')
 
-		%div
-			= f.label :notification_lead, t('labels.notification_lead')
-			= f.check_box :notification_lead
+	= f.fields_for :notice do |n|
 
 		%div
-			= f.label :notification_sale, t('labels.notification_sale')
-			= f.check_box :notification_sale
+			= n.label :lead, t('labels.notification_lead')
+			= n.check_box :lead
+
+		%div
+			= n.label :sale, t('labels.notification_sale')
+			= n.check_box :sale
 		
 		%div
-			= f.label :notification_feed, t('labels.notification_feed')
-			= f.check_box :notification_feed
+			= n.label :feed, t('labels.notification_feed')
+			= n.check_box :feed
 		
 		%div
-			= f.label :notification_result, t('labels.notification_result')
-			= f.check_box :notification_result
+			= n.label :result, t('labels.notification_result')
+			= n.check_box :result
 		
 		%div
-			= f.label :notification_status, t('labels.notification_status')
-			= f.check_box :notification_status
+			= n.label :status, t('labels.notification_status')
+			= n.check_box :status
 		
 		%div
-			= f.label :notification_merchant, t('labels.notification_merchant')
-			= f.check_box :notification_merchant
+			= n.label :merchant, t('labels.notification_merchant')
+			= n.check_box :merchant
+		
+		%div
+			= n.label :action, t('labels.notification_action')
+			= n.check_box :action
 
 	%div
 		%p= t('labels.permission')
 		= f.label :current_password, t('labels.passwordconfirmation')
 		= f.password_field :current_password
+
+
 
 	%div
 		= f.submit t('labels.editprofile')
