@@ -7,7 +7,9 @@
   .item
     = f.label  :url
     = f.text_field :url
-
+  .item
+    = f.label  :interval_in_seconds
+    = f.select(:interval_in_seconds, options_for_select([['12 uur', '43200'],['24 uur', '86400'],['48 uur', '172800'], ['72 uur', '199200']]))
   .item
     = label_tag :file
     = file_field_tag :file

@@ -49,10 +49,12 @@ every(10.seconds, 'Startup Feeds') {
 	end
 }
 
-every(300.seconds, 'parse products'){
+every(60.seconds, 'parse products'){
 	
-	feed = Feed.find(:first, :conditions => {:status => 'active'}, :order => "created_at") 
+	feed = Feed.find(:first, :conditions => {:status => 'active'}, :order => "last_parse") 
 	if feed 
+		feed.last_parse = Time.now
+		feed.save
 		category_key =  DatafeedKey.find(:first, :conditions => {:feed_id => feed.id, :field_id => Field.find_by_name('category')})
 		producthash_key = DatafeedKey.find(:first, :conditions => {:feed_id => feed.id, :field_id => Field.find_by_name('unique hash')})
 
@@ -80,20 +82,34 @@ every(300.seconds, 'parse products'){
 				end
 
 			end	
-
+			products = Array.new
 			doc.xpath(feed.xml_path).each do |product|
 			    records = DatafeedKey.where('field_id <> ?', Field.where('name' => 'dont use').first)
 		       	productdata = Hash.new
 				records.each do |record|
 					if record.field.name == 'category'
-						productdata['category_id'] = ForeignCategory.find_by_name(product.xpath(record.name).text).id
+						productdata[:category_id] = ForeignCategory.find_by_name(product.xpath(record.name).text).id
 					else
-						productdata[record.field.product_column_name] = product.xpath(record.name).text
+						productdata[record.field.product_column_name.to_sym] = product.xpath(record.name).text
 					end
 				end
-				productdata['feed_id'] = feed.id
-				puts productdata
+				productdata[:feed_id] = feed.id
+				products << productdata
 			end
+
+
+			existing_product_hashes = Product.find(:all, :select => "id").map{|p| p.id}
+			
+			products.each do |product|
+				existing_product = Product.find(:last, :conditions => {:unique_hash => product[:unique_hash]})
+				if existing_product
+					existing_product.update_attributes(product)
+					existing_product_hashes.delete(existing_product.id)
+				else
+					Product.create(product).save
+				end
+			end
+			Product.delete_all(:id => existing_product_hashes)
 
 		else
 			feed.status = 'user_fields'

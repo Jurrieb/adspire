@@ -24,19 +24,20 @@ ActiveRecord::Schema.define(:version => 20121205200440) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "field_id"
-    t.integer  "user_id"
     t.integer  "feed_id"
   end
 
   create_table "feeds", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
     t.string   "xml_path"
     t.string   "feed_path"
     t.string   "url"
     t.string   "status"
     t.integer  "user_id"
+    t.integer  "interval_in_seconds"
+    t.datetime "last_parse"
   end
 
   create_table "fields", :force => true do |t|
