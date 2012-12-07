@@ -24,7 +24,6 @@ ActiveRecord::Schema.define(:version => 20121206140508) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "field_id"
-    t.integer  "user_id"
     t.integer  "feed_id"
   end
 
@@ -148,6 +147,12 @@ ActiveRecord::Schema.define(:version => 20121206140508) do
     t.string   "btw"
     t.string   "kvk"
     t.string   "company_name"
+    t.boolean  "notification_lead"
+    t.boolean  "notification_sale"
+    t.boolean  "notification_feed"
+    t.boolean  "notification_result"
+    t.boolean  "notification_status"
+    t.boolean  "notification_merchant"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

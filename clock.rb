@@ -98,7 +98,7 @@ every(60.seconds, 'parse products'){
 			end
 
 
-			existing_product_hashes = Product.find(:all, :select => "id").map{|p| p.id}
+			existing_product_hashes = Product.find(:all, :conditions => {:feed_id => feed.id}, :select => "id").map{|p| p.id}
 			
 			products.each do |product|
 				existing_product = Product.find(:last, :conditions => {:unique_hash => product[:unique_hash]})

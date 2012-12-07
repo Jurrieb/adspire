@@ -98,35 +98,39 @@ class FeedsController < ApplicationController
 
   def filter
     @feed_id = params[:id]
-    if params[:commit]
-      filter = Filter.new
-      filter.save
+    if @feed_id
+      if params[:commit]
+        filter = Filter.new
+        filter.save
 
-      params[:fields].each do |field|
-        option = Filteroption.new 
-        option.name = 'field'
-        option.value = field[0]
-        option.filter_id = filter.id
-        option.save
+        params[:fields].each do |field|
+          option = Filteroption.new 
+          option.name = 'field'
+          option.value = field[0]
+          option.filter_id = filter.id
+          option.save
+        end
+
+        params[:categories].each do |category|
+          option = Filteroption.new 
+          option.name = 'category'
+          option.value = category[0]
+          option.filter_id = filter.id
+          option.save
+        end
+
+        redirect_to :controller => :products, :action => :export, :format => :xml, :id => @feed_id, :filter => filter.id
+      else
+        @categories = Array.new
+        @products = Product.where('feed_id' => @feed_id)
+        @products.each do |product|
+          @categories << product.category.name
+        end
+        @categories = @categories.uniq
+        @fields = Field.all
       end
-
-      params[:categories].each do |category|
-        option = Filteroption.new 
-        option.name = 'category'
-        option.value = category[0]
-        option.filter_id = filter.id
-        option.save
-      end
-
-      redirect_to :controller => :products, :action => :export, :format => :xml, :id => @feed_id, :filter => filter.id
     else
-      @categories = Array.new
-      @products = Product.where('feed_id' => @feed_id)
-      @products.each do |product|
-        @categories << product.category.name
-      end
-      @categories = @categories.uniq
-      @fields = Field.all
+      redirect_to :controller => :feeds, :action => :index
     end
   end
 end
