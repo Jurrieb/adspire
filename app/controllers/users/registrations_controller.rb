@@ -4,6 +4,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     resource = build_resource({})
     respond_with resource
     #resource.sites.build
-    resource.notice.build
   end
+
+  def edit
+	resource.build_notice
+  end
+
 end
+

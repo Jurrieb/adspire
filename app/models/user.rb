@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
 
   before_create :edit_role
 
+  # Relations
   has_and_belongs_to_many :roles, :join_table => :users_roles
   has_many :sites
   has_one :notice
@@ -17,9 +18,24 @@ class User < ActiveRecord::Base
 
   attr_accessible :email, :password, :password_confirmation, :remember_me, :roles, :name, :lastname, :phone, :country, :organisation, :comment, :street, :housenumber, :zip, :place, :btw, :kvk, :company_name, :notification_lead, :notification_sale, :notification_feed, :notification_result, :notification_status, :notification_merchant, :sites_attributes, :notice_attributes
   
-  # Validation rules
+  # Validation rules voor login
   validates :email, :uniqueness => true
-  
+  validates :password, :confirmation => true, :length => { :maximum => 32 }
+  validates :password_confirmation, :presence => true, :length => { :minimum => 32 }  
+
+  # Validation rules for profile
+
+
+  # Validation rules for organisation
+  validates :organisation_name, 
+  validates_format_of :btw, :with => URI::regexp(%w([A-Za-z]{2}d{9}[A-Za-z]d{2}))
+  validates_format_of :kvk, :with => URI::regexp(%w(\b(([\w-]+://?|www[.])[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/)))))
+
+  # Validation rules for sites
+  validates_format_of :url, :with => URI::regexp(%w(\b(([\w-]+://?|www[.])[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/)))))
+
+  # Validation rules for Notifications
+
 
 
   def role?(role) 
