@@ -14,10 +14,10 @@
     .radio 
       = radio_button_tag :type, :use_file 
       = label_tag :type_use_file
-  .textfield
+  .textfield.url
     = f.label  :url
     = f.text_field :url
-  .fieldfield
+  .fieldfield.file.hidden
     = label_tag :file
     = file_field_tag :file
 

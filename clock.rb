@@ -7,7 +7,7 @@ require 'open-uri'
 
 RECORDS = Hash.new
 
-every(18.seconds, 'Startup Feeds') {
+every(48.seconds, 'Startup Feeds') {
 
 	feed = Feed.find(:first, :conditions => {:status => 'created'}, :order => "created_at") 
 
@@ -59,7 +59,7 @@ every(18.seconds, 'Startup Feeds') {
 	end
 }
 
-every(63.seconds, 'parse products'){
+every(123.seconds, 'parse products'){
 	
 	feed = Feed.find(:first, :conditions => {:status => 'active'}, :order => "last_parse") 
 	if feed 
@@ -129,7 +129,8 @@ every(63.seconds, 'parse products'){
 					Product.create(product).save
 				end
 			end
-			Product.delete_all(:id => existing_product_hashes)
+			#Product.delete_all(:id => existing_product_hashes)
+			Product.update_all({:status => 'inactive'}, {:id => existing_product_hashes})
 
 		else
 			feed.status = 'user_fields'

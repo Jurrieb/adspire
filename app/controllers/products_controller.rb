@@ -83,25 +83,34 @@ class ProductsController < ApplicationController
   end
 
   def export
-    @user_hash = 'SAdh93sda812kd'
+    @user_hash = params[:user_id]
     if params[:filter].blank?
-      @fields = Array.new
-      Field.all.each do |field|
-        @fields << field.name
+      if Feed.exists?(params[:id])
+        @fields = Array.new
+        Field.all.each do |field|
+          @fields << field.name
+        end
+        @products = Product.where({:feed_id => params[:id]})
+      else
+        abort('CANNOT FIND FEED')
       end
-      @products = Product.where({:feed_id => params[:id]})
     else
       @fields = Array.new
       category_ids = Array.new
-      filter = Filter.find(params[:filter])
-      filter.filteroptions.each do |option| 
-        if option.name == 'category'
-          category_ids << Category.find_by_name(option.value).id
-        elsif option.name == 'field'
-          @fields << option.value
+      if Filter.exists?(params[:filter])
+        filter = Filter.find(params[:filter])
+        filter.filteroptions.each do |option| 
+          if option.name == 'category'
+            category_ids << Category.find_by_name(option.value).id
+          elsif option.name == 'field'
+            @fields << option.value
+          end
         end
+        @products = Product.where({:feed_id => params[:id],:category_id => category_ids}) 
+      else
+        abort('CANNOT FIND FEED')
       end
-      @products = Product.where({:feed_id => params[:id],:category_id => category_ids}) 
     end
   end
+
 end

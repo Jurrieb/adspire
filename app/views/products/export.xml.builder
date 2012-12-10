@@ -17,7 +17,7 @@ xml.products do
         when 'image'
           xml.image product[:image]
         when 'category'
-          if !product.category.name.blank?
+          if !product.category.blank?
             xml.category product.category.name
           end
         end

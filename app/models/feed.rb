@@ -3,4 +3,7 @@ class Feed < ActiveRecord::Base
   has_many :products, :dependent => :delete_all
   has_many :datafeed_keys, :dependent => :delete_all
   has_many :foreign_categories, :dependent => :delete_all
+
+  validates :name, :presence => true
+  validates :interval_in_seconds, :presence => true
 end

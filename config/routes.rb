@@ -10,11 +10,11 @@ Datafeeds::Application.routes.draw do
 
   resources :feeds do
     collection do
+      match "/own" => 'feeds#index_own'
       match "/fields/:id" => 'feeds#fields'
       match "/categories/:id" => 'feeds#categories'
       post 'update_fields'
-      post 'filter'
-      get 'filter'
+      match '/filter' => 'feeds#filter'
     end
   end 
 
