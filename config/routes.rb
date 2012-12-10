@@ -16,6 +16,7 @@ Datafeeds::Application.routes.draw do
       post 'update_fields'
       match '/filter' => 'feeds#filter'
     end
+    resources :products
   end 
 
   resources :products do

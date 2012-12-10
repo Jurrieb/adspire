@@ -14,7 +14,7 @@
   - @feeds.each do |feed|
     %tr
       %td
-        = feed.name
+        = link_to feed.name, feed_products_path(feed)
       %td
         = link_to 'Downloaden', :controller => 'products', :action => 'export', :id => feed.id, user_id: current_user.id, :format => :xml 
       %td

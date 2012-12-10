@@ -1,9 +1,4 @@
 <h1>Listing products</h1>
-<% if ! @categories.blank? %>
-  <% @categories.each do |c| %>
-    <%= c.name %>
-  <% end %>
- 
 <table>
   <tr>
     <th>Name</th>
@@ -15,15 +10,11 @@
 
 <% @products.each do |product| %>
   <tr>
-    <td><%= product.name %></td>
-    <td><%= product.feed_id %></td>
-    <td><%= link_to 'Show', product %></td>
-    <td><%= link_to 'Edit', edit_product_path(product) %></td>
-    <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to product.name, product %></td>
+    <td><%= product.feed.name %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Product', new_product_path %>
