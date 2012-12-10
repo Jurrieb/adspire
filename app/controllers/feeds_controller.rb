@@ -51,6 +51,22 @@ class FeedsController < ApplicationController
     end
   end
 
+  def categories
+    @feed = Feed.where({:status => 'active', :id => params[:id]}).last   
+    @foreign_categories = ForeignCategory.where(:feed_id => @feed.id)  
+    @categories = Category.all    
+    if params[:commit]
+      params[:categories].each do |key, value|    
+        newkey = ForeignCategory.where({:name => key, :feed_id => @feed.id}).last
+        newkey.category_id = value
+        newkey.save
+      end  
+      redirect_to feeds_path, notice: 'Categories where successfully saved.'    
+      @feed.status = 'active'  
+      @feed.save  
+    end
+  end
+
   def index
     @feeds = Feed.all
 

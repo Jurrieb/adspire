@@ -35,7 +35,9 @@ class User < ActiveRecord::Base
   validates :zip, :presence => true
 
   # Validation rules for organisation
+
   validates :company_name, :presence => true
+
   validates_format_of :btw, :with => URI::regexp(%w([A-Za-z]{2}d{9}[A-Za-z]d{2}))
   validates :kvk, :numericality => { :only_integer => true, :length => { :maximum   => 10 } }
   # Validation rules for sites

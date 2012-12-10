@@ -21,7 +21,8 @@
             = link_to 'Importeren', 'http://www.google.nl'    
         %p#current_user
           ingelogged als
-          = link_to current_user.email, 'http://www.google.nl'
+          -if !current_user.blank?
+            = link_to current_user.email, edit_user_registration_path
       .row.background
         #sidebar
           %ul#menu

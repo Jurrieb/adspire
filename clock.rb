@@ -3,18 +3,28 @@ require './config/environment'
 require 'clockwork'
 include Clockwork
 require 'nokogiri'
+require 'open-uri' 
 
 RECORDS = Hash.new
 
-every(10.seconds, 'Startup Feeds') {
+every(18.seconds, 'Startup Feeds') {
 
 	feed = Feed.find(:first, :conditions => {:status => 'created'}, :order => "created_at") 
 
 	if feed
-
-		f = File.open(feed.feed_path)
-			doc = Nokogiri::XML(f)
-		f.close
+		if feed.feed_path == nil
+			if !feed.url.blank?
+				open_uri_fetched = open(feed.url)
+				doc = Nokogiri::XML(open(open_uri_fetched))
+			else
+				feed.status = 'NoFile'
+				feed.save
+			end
+		else
+			f = File.open(feed.feed_path)
+				doc = Nokogiri::XML(f)
+			f.close
+		end
 
 		product_value = 0
 	    product_path = nil
@@ -49,7 +59,7 @@ every(10.seconds, 'Startup Feeds') {
 	end
 }
 
-every(60.seconds, 'parse products'){
+every(63.seconds, 'parse products'){
 	
 	feed = Feed.find(:first, :conditions => {:status => 'active'}, :order => "last_parse") 
 	if feed 
@@ -59,9 +69,19 @@ every(60.seconds, 'parse products'){
 		producthash_key = DatafeedKey.find(:first, :conditions => {:feed_id => feed.id, :field_id => Field.find_by_name('unique hash')})
 
 		if producthash_key
-			f = File.open(feed.feed_path)
-				doc = Nokogiri::XML(f)
-			f.close
+			if feed.feed_path == nil
+				if !feed.url.blank?
+					open_uri_fetched = open(feed.url)
+					doc = Nokogiri::XML(open(open_uri_fetched))
+				else
+					feed.status = 'NoFile'
+					feed.save
+				end
+			else
+				f = File.open(feed.feed_path)
+					doc = Nokogiri::XML(f)
+				f.close
+			end
 
 			if category_key 
 
