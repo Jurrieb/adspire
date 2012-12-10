@@ -1,19 +1,24 @@
 = form_for @feed, :html => {:multipart => true} do |f|
 
-  .item
+  .textfield
     = f.label :name
     = f.text_field  :name
-
-  .item
-    = f.label  :url
-    = f.text_field :url
-  .item
+  .select
     = f.label  :interval_in_seconds
     = f.select(:interval_in_seconds, options_for_select([['12 uur', '43200'],['24 uur', '86400'],['48 uur', '172800'], ['72 uur', '199200']]))
-  .item
+  .radio-area
+    = label_tag :type_use_file 
+    .radio
+      = radio_button_tag :type, :use_url, true
+      = label_tag :type_use_url 
+    .radio 
+      = radio_button_tag :type, :use_file 
+      = label_tag :type_use_file
+  .textfield
+    = f.label  :url
+    = f.text_field :url
+  .fieldfield
     = label_tag :file
     = file_field_tag :file
 
   = submit_tag "Inlezen"
-
-  = link_to 'Back', feeds_path

@@ -15,12 +15,14 @@ class FeedsController < ApplicationController
 
   def create
     @feed = Feed.new(params[:feed])
-    file = params[:file]
-    directory = "public/uploads/"
-    tmp = params[:file].tempfile
-    file = File.join(directory, params[:file].original_filename)
-    FileUtils.cp tmp.path, file
-    @feed.feed_path = file
+    if params[:file]
+      file = params[:file]
+      directory = "public/uploads/"
+      tmp = params[:file].tempfile
+      file = File.join(directory, params[:file].original_filename)
+      FileUtils.cp tmp.path, file
+      @feed.feed_path = file
+    end
     @feed.status = 'created'
     respond_to do |format|
       if @feed.save

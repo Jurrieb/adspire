@@ -101,7 +101,7 @@ every(60.seconds, 'parse products'){
 			existing_product_hashes = Product.find(:all, :conditions => {:feed_id => feed.id}, :select => "id").map{|p| p.id}
 			
 			products.each do |product|
-				existing_product = Product.find(:last, :conditions => {:unique_hash => product[:unique_hash]})
+				existing_product = Product.find(:last, :conditions => {:feed_id => feed.id, :unique_hash => product[:unique_hash]})
 				if existing_product
 					existing_product.update_attributes(product)
 					existing_product_hashes.delete(existing_product.id)
