@@ -27,7 +27,6 @@ class User < ActiveRecord::Base
 
 
   # Validation rules for organisation
-  validates :organisation_name, 
   validates_format_of :btw, :with => URI::regexp(%w([A-Za-z]{2}d{9}[A-Za-z]d{2}))
   validates_format_of :kvk, :with => URI::regexp(%w(\b(([\w-]+://?|www[.])[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/)))))
 

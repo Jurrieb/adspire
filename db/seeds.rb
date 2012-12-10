@@ -28,10 +28,11 @@ Role.create(name: 'user')
 Role.create(name: 'affiliate')
 Role.create(name: 'merchant')
 
-User.create(
+u = User.new(
 	:email => 'info@adspire.nl', 
 	:password => 'test12', 
 	:password_confirmation => 'test12'
 )
+u.save!(:validate => false)
 
 User.find_by_email('info@adspire.nl').roles << Role.find_by_name('admin')

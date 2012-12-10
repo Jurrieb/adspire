@@ -192,8 +192,8 @@ td{
 
 #notifications{
   float: right;
-  width: 13%;
-  padding: 1%;
+  width: 14%;
+  padding: 1% 1% 1% 0;
 }
 
 #notifications .message{
@@ -202,6 +202,7 @@ td{
   border: 1px dashed #aaa;
   padding: 5%;
   margin-bottom: 5%;
+  cursor: pointer;
 }
 
 
