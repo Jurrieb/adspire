@@ -16,7 +16,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :roles, :name, :lastname, :phone, :country, :organisation, :comment, :street, :housenumber, :zip, :place, :btw, :kvk, :company_name, :notification_lead, :notification_sale, :notification_feed, :notification_result, :notification_status, :notification_merchant, :sites_attributes, :notice_attributes
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :roles, :name, :lastname, :phone, :country, 
+                  :organisation, :comment, :street, :housenumber, :zip, :place, :btw, :kvk, :company_name, 
+                  :sites_attributes, :notice_attributes
   
   # Validation rules voor login
   validates :email, :uniqueness => true
@@ -24,15 +26,20 @@ class User < ActiveRecord::Base
   validates :password_confirmation, :presence => true, :length => { :minimum => 32 }  
 
   # Validation rules for profile
-
+  validates :name, :presence => true, :on => :update
+  validates :lastname, :presence => true, :on => :update
+  validates :phone, :presence => true, :length => { :minimum => 8, :maximum => 13}
+  validates :country, :presence => true, :on => :update
+  validates :street, :presence => true, :on => :update
+  validates :housenumber, :presence => true
+  validates :zip, :presence => true
 
   # Validation rules for organisation
-  validates :organisation_name, 
+  validates :company_name, :presence => true
   validates_format_of :btw, :with => URI::regexp(%w([A-Za-z]{2}d{9}[A-Za-z]d{2}))
-  validates_format_of :kvk, :with => URI::regexp(%w(\b(([\w-]+://?|www[.])[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/)))))
-
+  validates :kvk, :numericality => { :only_integer => true, :length => { :maximum   => 10 } }
   # Validation rules for sites
-  validates_format_of :url, :with => URI::regexp(%w(\b(([\w-]+://?|www[.])[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/)))))
+  validates_format_of :url, :with => /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$/ix
 
   # Validation rules for Notifications
 
