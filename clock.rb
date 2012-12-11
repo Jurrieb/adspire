@@ -114,6 +114,7 @@ every(123.seconds, 'parse products'){
 					end
 				end
 				productdata[:feed_id] = feed.id
+				productdata[:user_id] = feed.user_id
 				products << productdata
 			end
 

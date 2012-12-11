@@ -11,10 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121210125523) do
+ActiveRecord::Schema.define(:version => 20121211105627) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "clicks", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "product_id"
+    t.string   "referer"
+    t.string   "ip_client"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -69,6 +78,15 @@ ActiveRecord::Schema.define(:version => 20121210125523) do
     t.integer  "feed_id"
   end
 
+  create_table "leads", :force => true do |t|
+    t.integer  "click_id"
+    t.integer  "user_id"
+    t.integer  "product_id"
+    t.integer  "status"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "notices", :force => true do |t|
     t.boolean  "lead"
     t.boolean  "sale"
@@ -95,6 +113,7 @@ ActiveRecord::Schema.define(:version => 20121210125523) do
     t.integer  "unique_hash"
     t.integer  "status"
     t.decimal  "price_old"
+    t.integer  "user_id"
   end
 
   create_table "roles", :force => true do |t|

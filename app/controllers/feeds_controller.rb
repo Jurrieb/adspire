@@ -37,7 +37,7 @@ class FeedsController < ApplicationController
   end
 
   def fields
-    @feed = Feed.where({:status => 'user_fields', :id => params[:id]}).last
+    @feed = Feed.where({:status => ['user_fields', 'active'], :id => params[:id]}).last
     if @feed 
       @foreign_fields = DatafeedKey.where(:feed_id => @feed.id)
       @fields = Field.all
