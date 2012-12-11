@@ -3,8 +3,10 @@ Datafeeds::Application.routes.draw do
   root :to => "feeds#index"
 
   devise_for :users, :controllers => { 
-    :registrations => "users/registrations" 
+    :registrations => "users/registrations",
   }
+
+  resources :sites, :only => [:index, :edit, :update]
 
   resources :categories
 
@@ -17,6 +19,7 @@ Datafeeds::Application.routes.draw do
       get 'filter'
     end
   end 
+
 
   resources :products do
     collection do

@@ -50,10 +50,14 @@ nl:
     site: "Website toevoegen"
     url: "Link"
     websitecategory: "Categorie van website"
+    editsite: "Site wijzigen"
+
 
     # Opmerkingen
     comment: "Opmerking" 
     commentsub: "Overige opmerkingen over registratie"
+
+    # 
 
 
   errors:
@@ -115,3 +119,23 @@ nl:
         subject: 'Wachtwoord resetten'
       unlock_instructions:
         subject: 'Unlock instructies'
+
+  # ActiveRecords validations
+  activerecord:
+    errors:
+      models:
+        site:
+          attributes:
+            url:
+              invalid: "geen geldige url"
+        user:
+          attributes:
+            password_confirmation:
+              blank: "moet ingevuld worden"
+            company_name:
+              blank: "mag niet leeg zijn"
+            btw:
+              blank: "mag niet leeg zijn"
+              invalid: "is geen geldig nummer"
+            kvk:
+              not_a_number: "geen geldig nummer"
