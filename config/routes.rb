@@ -1,5 +1,7 @@
 Datafeeds::Application.routes.draw do
 
+  get "clicks/create"
+
   root :to => "feeds#index"
 
   devise_for :users, :controllers => { 
