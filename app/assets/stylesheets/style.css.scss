@@ -1,0 +1,29 @@
+$linkColor: #88BE47;
+@import "bootstrap";
+body {
+	padding-top: 70px;
+	padding-bottom: 40px;
+}
+
+#header {
+	background: #88BE47;
+}
+	#header .navbar-inner {
+		padding: 5px;
+	}
+
+#notifications .nav-list li a {
+	font-size: 0.8em;
+}
+#notifications .nav-list li button.close {
+	visibility: hidden;
+}
+#notifications .nav-list li:hover button.close {
+	visibility: visible;
+}
+
+@media (max-width: 979px) {
+	body {
+		padding-top: 0;
+	}
+}

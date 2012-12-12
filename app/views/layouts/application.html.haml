@@ -6,39 +6,72 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body
-    #container
-      .row#header
-        #logo
-          = link_to 'adspire', 'http://www.adspire.nl'
-        %ul#actions
-          %li
-            = link_to 'Bewerken', 'http://www.google.nl'
-          %li
-            = link_to 'Updaten', 'http://www.google.nl'
-          %li
-            = link_to 'Downloaden', 'http://www.google.nl'
-          %li
-            = link_to 'Importeren', 'http://www.google.nl'    
-        %p#current_user
-          ingelogged als
-          -if !current_user.blank?
-            = link_to current_user.email, edit_user_registration_path
-      .row.background
-        #sidebar
-          %ul#menu
+    %header#header.navbar.navbar-fixed-top
+      .navbar-inner
+        .container-fluid
+          = link_to t(:company), 'http://www.adspire.nl', :class => 'brand'
+          .pull-right
+            .btn-group
+              %button.btn
+                -if !current_user.blank?
+                  = link_to current_user.email, edit_user_registration_path
+                -else
+                  = link_to t(:login), new_user_session_path
+              %button.btn.btn-danger
+                %i.icon-white.icon-off
+    #container.container-fluid
+      #main.row-fluid
+        %nav#nav-container.span2
+          %ul#nav.nav.nav-pills.nav-stacked
             %li
-              = link_to t(:profile), edit_user_registration_path
-            %li 
-              = link_to t(:data_feeds), feeds_path
+              = active_link_to t(:dashboard), root_path, :wrap_tag => :li
             %li
-              = link_to (:sign_out), destroy_user_session_path, :method => :delete
-        #main
-          -if notice     
-            #notice
-              = notice
-          #content      
-            = yield
-        #notifications
-          .message
-      .row#footer
-        = "© Adspire "+t = Time.now.strftime("%Y")
+              = active_link_to t(:feeds), feeds_path, :wrap_tag => :li
+            %li
+              = active_link_to t(:sites), sites_path, :wrap_tag => :li
+            %li
+              = link_to t(:statistics), 'http://www.google.nl'
+            %li
+              = link_to t(:payments), 'http://www.google.nl'
+        %section#content.span8
+          - if notice
+            = notice
+          = yield
+        %aside#notifications.well.span2
+          %ul.nav.nav-list
+            %li.nav-header
+              %button.close
+                %i.icon-cog.pull-right
+              Notificaties
+            %li.divider
+            %li
+              %button.close
+                &times;
+              = link_to('http://www.google.nl') do
+                %span.muted
+                  14:56 &mdash
+                Er is een nieuwe leed gezet
+            %li
+              %button.close
+                &times;
+              = link_to('http://www.google.nl') do
+                %span.muted
+                  14:56 &mdash
+                Er is een nieuwe leed gezet
+            %li
+              %button.close
+                &times;
+              = link_to('http://www.google.nl') do
+                %span.muted
+                  14:56 &mdash
+                Er is een nieuwe leed gezet
+            %li
+              %button.close
+                &times;
+              = link_to('http://www.google.nl') do
+                %span.muted
+                  14:56 &mdash
+                Er is een nieuwe leed gezet
+%footer
+  %p
+    = "© Adspire "+t = Time.now.strftime("%Y")
