@@ -43,3 +43,6 @@ gem 'cancan'
 
 # Cronjob
 gem "clockwork", "~> 0.4.1"
+
+# Add active links to navigation
+gem 'active_link_to'
