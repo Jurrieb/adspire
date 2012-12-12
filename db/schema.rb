@@ -1,4 +1,3 @@
-
 # encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
@@ -12,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121211105627) do
+ActiveRecord::Schema.define(:version => 20121212101753) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -125,7 +124,6 @@ ActiveRecord::Schema.define(:version => 20121211105627) do
 
   create_table "sites", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "name"
     t.text     "url"
     t.text     "description"
     t.integer  "category_id"
@@ -133,6 +131,7 @@ ActiveRecord::Schema.define(:version => 20121211105627) do
     t.integer  "status"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "name"
   end
 
   create_table "uploads", :force => true do |t|
