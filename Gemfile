@@ -26,7 +26,7 @@ gem "nested_form"
 
 # Haml, sass
 gem 'haml-rails'
-
+gem 'bootstrap-sass'
 # Jquery
 gem 'jquery-rails'
 

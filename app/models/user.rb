@@ -52,9 +52,6 @@ class User < ActiveRecord::Base
   end
 
   def check_url
-    puts "XXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-    puts self.sites.url
-    puts "XXXXXXXXXXXXXXXXXXXXXXXXXXXX"
   end
 
   def role?(role) 
