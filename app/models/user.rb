@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 
   before_create :edit_role
-  before_save :check_url
+  before_validation :check_url
 
   # Relations
   has_and_belongs_to_many :roles, :join_table => :users_roles
