@@ -67,20 +67,6 @@
 	%div
 		= f.label :kvk, t('labels.kvk')
 		= f.text_field :kvk
-
-	%h2= t('labels.site')
-
-	= f.fields_for :sites do |s|
-		%div
-			= s.label :name, t('labels.sitename')
-			= s.text_field :name
-			= s.label :url, t('labels.url')
-			= s.text_field :url
-			= s.label :website, t('labels.websitecategory')
-			= collection_select(:sites, :category_id, Category.all, :id, :name)
-			= s.link_to_remove "Site verwijderen"
-
-	=f.link_to_add "Voeg een site toe", :sites
 	
 	%h2= t('labels.notification')
  

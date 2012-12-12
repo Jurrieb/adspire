@@ -1,0 +1,28 @@
+%h2= t('labels.notification')
+
+%div
+	%p= t('labels.notification_explain')
+	= form_for @notice, :url => { :action => "settings_update" } do |n|
+		%div
+			= n.label :lead, t(:notification_lead)
+			= n.check_box :lead
+		%div
+			= n.label :sale, t('labels.notification_sale')
+			= n.check_box :sale
+		%div
+			= n.label :feed, t('labels.notification_feed')
+			= n.check_box :feed
+		%div
+			= n.label :result, t('labels.notification_result')
+			= n.check_box :result
+		%div
+			= n.label :status, t('labels.notification_status')
+			= n.check_box :status
+		%div
+			= n.label :merchant, t('labels.notification_merchant')
+			= n.check_box :merchant
+		%div
+			= n.label :action, t('labels.notification_action')
+			= n.check_box :action
+
+		= n.submit t('labels.notification')

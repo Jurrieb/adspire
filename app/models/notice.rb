@@ -1,5 +1,8 @@
 class Notice < ActiveRecord::Base
-  attr_accessible :lead, :sale, :feed, :result, :status, :merchant, :action
+  
+  belongs_to :user
+
+  attr_accessible :lead, :sale, :feed, :result, :status, :merchant, :action, :user_id
 
   validates :lead, :inclusion => {:in => [true, false]}
   validates :sale, :inclusion => {:in => [true, false]}
@@ -8,5 +11,7 @@ class Notice < ActiveRecord::Base
   validates :status, :inclusion => {:in => [true, false]}
   validates :merchant, :inclusion => {:in => [true, false]}
   validates :action, :inclusion => {:in => [true, false]}
+
+  
 
 end

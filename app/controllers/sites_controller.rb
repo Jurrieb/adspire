@@ -6,15 +6,14 @@ class SitesController < ApplicationController
 	end
 
 	def edit
-		@user = User.find(current_user.id)
-		@sites = @user.sites
+		@site = Site.find_by_user_id(current_user.id)
 	end
 
 	def update
-		@sites = Site.find(params[:id])
+		@site = Site.find(params[:id])
 
 		respond_to do |format|  
-	        if @sites.update_attributes(params[:site])
+	        if @site.update_attributes(params[:site])
 	          format.html { redirect_to :back, notice: 'Site was successfully updated.' }
 	          format.json { head :no_content }
 	        else
@@ -22,5 +21,15 @@ class SitesController < ApplicationController
 	          format.json { render json: @sites.errors, status: :unprocessable_entity }
 	        end
 		end
+    end
+
+    def destroy
+      @site = Site.find(params[:id])
+      @site.destroy
+
+      respond_to do |format|
+        format.html { redirect_to sites_url }
+        format.json { head :no_content }
+      end
     end
 end
