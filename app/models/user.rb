@@ -55,7 +55,7 @@ class User < ActiveRecord::Base
   # Add user notices
   def add_notices
     @notice = Notice.new
-    @notice.user_id = current_user.id
+    @notice.user_id = self.id
     @notice.save
   end
 
