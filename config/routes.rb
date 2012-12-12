@@ -38,4 +38,9 @@ Datafeeds::Application.routes.draw do
       match "/export" => 'products#export'
     end
   end
+
+
+  get "notifications/settings"
+  put "notifications/settings_update"
+
 end
