@@ -1,7 +1,5 @@
 class Site < ActiveRecord::Base
 
-  before_validation :name_check
-  
   belongs_to :user
   before_validation :check_url
 
@@ -9,13 +7,6 @@ class Site < ActiveRecord::Base
 
   validates :name, :presence => true
   validates_format_of :url, :with => URI::regexp
-
-  # 
-  def name_check
-	puts "++++++++++++++++++++++++"
-	puts self.name
-	puts "++++++++++++++++++++++++"
-  end
 
   # Check if url has http or https prefix
   def check_url
