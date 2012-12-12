@@ -12,15 +12,64 @@ body {
 		padding: 5px;
 	}
 
-#notifications .nav-list li a {
-	font-size: 0.8em;
+#notifications {
+	padding: 8px 0;
 }
-#notifications .nav-list li button.close {
-	visibility: hidden;
-}
-#notifications .nav-list li:hover button.close {
-	visibility: visible;
-}
+	#notifications:hover a.settings {
+		visibility: visible !important;
+	}
+	#notifications a.settings:hover,
+	#notifications .open a.settings {
+		visibility: visible !important;
+		opacity: 0.6 !important;
+		filter: alpha(opacity=60) !important;
+	}
+	#notifications a.settings i {
+		margin-top: 3px;
+	}
+	#notifications .dropdown-menu {
+		margin: 16px 0 0;
+	}
+	#notifications .nav-list > li.nav-header,
+	#notifications .nav-list > li > a {
+		padding: 3px 9px;
+	}
+	#notifications .nav-list > li.divider {
+		margin: 9px 1px;
+	}
+
+	#notifications .nav-list li span.muted {
+		font-size: 0.8em;
+	}
+	#notifications .nav-list li a {
+		font-size: 0.9em;
+	}
+	#notifications .nav-list .nav-header .settings,
+	#notifications .nav-list li button.remove {
+		background: transparent;
+		border: 0;
+		color: black;
+		text-shadow: 0 1px 0 white;
+		font-size: 18px;
+		line-height: 20px;
+		font-weight: bold;
+		cursor: pointer;
+		float: right;
+		opacity: 0.2;
+		filter: alpha(opacity=20);
+		margin-top: 1px;
+		padding: 0;
+		visibility: hidden;
+		-webkit-appearance: none;
+	}
+	#notifications .nav-list li:hover button.remove {
+		visibility: visible;
+	}
+	#notifications .nav-list li:hover button.remove:hover {
+		color: #B94A48;
+		opacity: 1;
+		filter: alpha(opacity=100);
+	}
 
 @media (max-width: 979px) {
 	body {
