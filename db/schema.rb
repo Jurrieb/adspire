@@ -11,10 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20121210114901) do
+=======
+ActiveRecord::Schema.define(:version => 20121211105627) do
+>>>>>>> eecdce65f4525593a9bc4f8e44b2079bc5864182
 
   create_table "categories", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "clicks", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "product_id"
+    t.string   "referer"
+    t.string   "ip_client"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -59,7 +72,6 @@ ActiveRecord::Schema.define(:version => 20121210114901) do
   create_table "filters", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.integer  "user_id"
   end
 
   create_table "foreign_categories", :force => true do |t|
@@ -68,6 +80,15 @@ ActiveRecord::Schema.define(:version => 20121210114901) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.integer  "feed_id"
+  end
+
+  create_table "leads", :force => true do |t|
+    t.integer  "click_id"
+    t.integer  "user_id"
+    t.integer  "product_id"
+    t.integer  "status"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "notices", :force => true do |t|
@@ -95,6 +116,8 @@ ActiveRecord::Schema.define(:version => 20121210114901) do
     t.decimal  "price"
     t.integer  "unique_hash"
     t.integer  "status"
+    t.decimal  "price_old"
+    t.integer  "user_id"
   end
 
   create_table "roles", :force => true do |t|

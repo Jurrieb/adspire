@@ -9,7 +9,7 @@ xml.products do
         when 'description'
           xml.description product[:description]
         when 'url'
-          xml.url 'http://adspire.nl/clicks/'+@user_hash+'/'+product.id.to_s
+          xml.url request.env['HTTP_HOST']+url_for(:controller => 'clicks', :action => 'create',:user_id => @user_hash, :product_id => product.id.to_s)
         when 'price'
           xml.price product[:price]
         when 'price_old'
@@ -17,7 +17,7 @@ xml.products do
         when 'image'
           xml.image product[:image]
         when 'category'
-          if !product.category.name.blank?
+          if !product.category.blank?
             xml.category product.category.name
           end
         end

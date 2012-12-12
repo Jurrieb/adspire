@@ -23,10 +23,11 @@ class FeedsController < ApplicationController
       FileUtils.cp tmp.path, file
       @feed.feed_path = file
     end
+    @feed.user_id = current_user.id
     @feed.status = 'created'
     respond_to do |format|
       if @feed.save
-        format.html { redirect_to feeds_path, notice: 'Feed was successfully created.' }
+        format.html { redirect_to own_feeds_path, notice: 'Feed was successfully created.' }
         format.json { render json: @feed, status: :created, location: @feed }
       else
         format.html { render action: "new" }
@@ -36,53 +37,60 @@ class FeedsController < ApplicationController
   end
 
   def fields
-    @feed = Feed.where({:status => 'user_fields', :id => params[:id]}).last
-    @foreign_fields = DatafeedKey.where(:feed_id => @feed.id)
-    @fields = Field.all
-    if params[:commit]
-      params[:keys].each do |key, value|
-        newkey = DatafeedKey.where({:name => key, :feed_id => @feed.id}).last
-        newkey.field_id = value
-        newkey.save
+    @feed = Feed.where({:status => ['user_fields', 'active'], :id => params[:id]}).last
+    if @feed 
+      @foreign_fields = DatafeedKey.where(:feed_id => @feed.id)
+      @fields = Field.all
+      if params[:commit]
+        params[:keys].each do |key, value|
+          newkey = DatafeedKey.where({:name => key, :feed_id => @feed.id}).last
+          newkey.field_id = value
+          newkey.save
+        end
+        @feed.status = 'active'
+        @feed.save
+        redirect_to own_feeds_path, notice: 'Feed was successfully created.' 
       end
-      @feed.status = 'active'
-      @feed.save
-      redirect_to feeds_path, notice: 'Feed was successfully created.' 
+    else
+      redirect_to own_feeds_path, notice: 'Velden kunnen niet worden aangepast.' 
     end
   end
 
   def categories
     @feed = Feed.where({:status => 'active', :id => params[:id]}).last   
-    @foreign_categories = ForeignCategory.where(:feed_id => @feed.id)  
-    @categories = Category.all    
-    if params[:commit]
-      params[:categories].each do |key, value|    
-        newkey = ForeignCategory.where({:name => key, :feed_id => @feed.id}).last
-        newkey.category_id = value
-        newkey.save
-      end  
-      redirect_to feeds_path, notice: 'Categories where successfully saved.'    
-      @feed.status = 'active'  
-      @feed.save  
+    if @feed
+      @foreign_categories = ForeignCategory.where(:feed_id => @feed.id)  
+      @categories = Category.all    
+      if params[:commit]
+        params[:categories].each do |key, value|    
+          newkey = ForeignCategory.where({:name => key, :feed_id => @feed.id}).last
+          newkey.category_id = value
+          newkey.save
+        end  
+        redirect_to own_feeds_path, notice: 'Categories where successfully saved.'    
+        @feed.status = 'active'  
+        @feed.save  
+      end
+    else
+      redirect_to own_feeds_path, notice: 'Categorien kunnen niet worden aangepast.' 
     end
   end
 
   def index
-    @feeds = Feed.all
+    @feeds = Feed.find(:all, :conditions => {:status => 'active'}) 
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @feeds }
     end
   end
-  
-  def show
-    @feed = Feed.find(params[:id])
-    @products = Feed.find(params[:id]).products
+
+  def index_own
+    @feeds = Feed.find(:all, :conditions => {:user_id => current_user.id}) 
 
     respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @feed }
+      format.html # index.html.erb
+      format.json { render json: @feeds }
     end
   end
 
@@ -95,7 +103,7 @@ class FeedsController < ApplicationController
 
     respond_to do |format|
       if @feed.update_attributes(params[:feed])
-        format.html { redirect_to @feed, notice: 'Feed was successfully updated.' }
+        format.html { redirect_to own_feeds_path, notice: 'Feed was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -109,7 +117,7 @@ class FeedsController < ApplicationController
     @feed.destroy
 
     respond_to do |format|
-      format.html { redirect_to feeds_url }
+      format.html { redirect_to own_feeds_path }
       format.json { head :no_content }
     end
   end
@@ -137,12 +145,14 @@ class FeedsController < ApplicationController
           option.save
         end
 
-        redirect_to :controller => :products, :action => :export, :format => :xml, :id => @feed_id, :filter => filter.id
+        redirect_to :controller => :products, :action => :export, :format => :xml, :id => @feed_id,:user_id => current_user.id, :filter => filter.id
       else
         @categories = Array.new
         @products = Product.where('feed_id' => @feed_id)
         @products.each do |product|
-          @categories << product.category.name
+          if !product.category.blank?
+            @categories << product.category.name
+          end
         end
         @categories = @categories.uniq
         @fields = Field.all

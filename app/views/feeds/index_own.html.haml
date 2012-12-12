@@ -1,0 +1,39 @@
+%h1
+  Listing feeds
+ 
+%table
+  %tr
+    %th
+    %th
+    %th
+    %th
+    %th
+    %th
+    %th
+
+  - @feeds.each do |feed|
+    %tr
+      %td
+        = feed.name
+      - if can? :read, @feeds
+        - if feed.status == 'user_fields' || feed.status == 'active'
+          %td
+            = link_to 'Fields', :action => 'fields', :id => feed.id
+        - else
+          %td
+        - if feed.status == 'active'
+          %td
+            = link_to 'Categories', :action => 'categories', :id => feed.id
+          %td
+            = link_to 'Downloaden', :controller => 'products', :action => 'export', :id => feed.id, user_id: current_user.id, :format => :xml 
+          %td
+            = link_to 'Segmenteren', :action => 'filter', :id => feed.id
+        - else
+          %td
+          %td
+          %td
+        %td
+          = link_to 'Edit', edit_feed_path(feed) 
+        %td
+          = link_to 'Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' }
+= link_to 'New Feed', new_feed_path 

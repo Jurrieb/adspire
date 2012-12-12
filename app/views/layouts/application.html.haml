@@ -28,7 +28,10 @@
           %ul#menu
             %li
               = link_to t(:profile), edit_user_registration_path
+            %li 
               = link_to t(:data_feeds), feeds_path
+            %li
+              = link_to (:sign_out), destroy_user_session_path, :method => :delete
         #main
           -if notice     
             #notice
@@ -37,12 +40,5 @@
             = yield
         #notifications
           .message
-            bier is tieten
-          .message
-            bier is tieten
-          .message
-            bier is tieten
-          .message
-            bier is tieten
       .row#footer
         = "© Adspire "+t = Time.now.strftime("%Y")
