@@ -12,12 +12,11 @@
           = link_to t(:company), 'http://www.adspire.nl', :class => 'brand'
           .pull-right
             .btn-group
-              %button.btn
-                -if !current_user.blank?
-                  = link_to current_user.email, edit_user_registration_path
-                -else
-                  = link_to t(:login), new_user_session_path
-              %button.btn.btn-danger
+              -if !current_user.blank?
+                = link_to current_user.email, edit_user_registration_path, :class => 'btn'
+              -else
+                = link_to t(:login), new_user_session_path, :class => 'btn'
+              %a.btn.btn-danger
                 %i.icon-white.icon-off
     #container.container-fluid
       #main.row-fluid
@@ -40,37 +39,45 @@
         %aside#notifications.well.span2
           %ul.nav.nav-list
             %li.nav-header
-              %button.close
-                %i.icon-cog.pull-right
+              .dropdown
+                = link_to '#', :class => 'settings dropdown-toggle', 'data-toggle' => 'dropdown' do
+                  %i.icon-cog
+                %ul.dropdown-menu
+                  %li
+                    = link_to '#' do
+                      Toggle notificaties
+                  %li
+                    = link_to '#' do
+                      Notificatie instellingen
               Notificaties
             %li.divider
             %li
-              %button.close
+              %button.remove
                 &times;
               = link_to('http://www.google.nl') do
                 %span.muted
-                  14:56 &mdash
+                  14:56:
                 Er is een nieuwe leed gezet
             %li
-              %button.close
+              %button.remove
                 &times;
-              = link_to('http://www.google.nl') do
+              = link_to('http://www.google.nl', :class => 'text-info' ) do
                 %span.muted
-                  14:56 &mdash
+                  14:56:
                 Er is een nieuwe leed gezet
             %li
-              %button.close
+              %button.remove
                 &times;
-              = link_to('http://www.google.nl') do
+              = link_to 'http://www.google.nl', :class => 'text-warning' do
                 %span.muted
-                  14:56 &mdash
+                  14:56:
                 Er is een nieuwe leed gezet
             %li
-              %button.close
+              %button.remove
                 &times;
-              = link_to('http://www.google.nl') do
+              = link_to 'http://www.google.nl', :class => 'text-error' do
                 %span.muted
-                  14:56 &mdash
+                  14:56:
                 Er is een nieuwe leed gezet
 %footer
   %p
