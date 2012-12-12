@@ -10,4 +10,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
 	resource.build_notice
   end
 
+  def notification
+
+  end
+
+  def organisation
+
+  end
+
+  def login_credentials
+
+  end
 end

@@ -48,14 +48,10 @@
 		= f.label :phone, t('labels.phone')
 		= f.telephone_field :phone
 
-	%div
-		= f.label :country, t('labels.country')
-		= f.text_field :country
-
 	%h2= t('labels.organisation')
 
 	%div
-		= f.radio_button(:organisation, "person")
+		= f.radio_button(:organisation, "person", :checked => true)
 		= f.label :organisation_person, t('labels.organisation_person')
 		= f.radio_button(:organisation, "business")
 		= f.label :organisation_business, t('labels.organisation_business')
@@ -79,7 +75,7 @@
 			= s.label :name, t('labels.sitename')
 			= s.text_field :name
 			= s.label :url, t('labels.url')
-			= s.url_field :url
+			= s.text_field :url
 			= s.label :website, t('labels.websitecategory')
 			= collection_select(:sites, :category_id, Category.all, :id, :name)
 			= s.link_to_remove "Site verwijderen"
