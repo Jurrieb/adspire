@@ -1,39 +1,45 @@
 %h1
   Listing feeds
  
-%table
-  %tr
-    %th
-    %th
-    %th
-    %th
-    %th
-    %th
-    %th
-
-  - @feeds.each do |feed|
+%table.table.table-hover
+  %thead
     %tr
-      %td
-        = feed.name
-      - if can? :read, @feeds
-        - if feed.status == 'user_fields' || feed.status == 'active'
-          %td
-            = link_to 'Fields', :action => 'fields', :id => feed.id
-        - else
-          %td
-        - if feed.status == 'active'
-          %td
-            = link_to 'Categories', :action => 'categories', :id => feed.id
-          %td
-            = link_to 'Downloaden', :controller => 'products', :action => 'export', :id => feed.id, user_id: current_user.id, :format => :xml 
-          %td
-            = link_to 'Segmenteren', :action => 'filter', :id => feed.id
-        - else
-          %td
-          %td
-          %td
+      %th
+        Name
+      %th
+        Category
+      %th
+      %th
+      %th
+      %th
+      %th
+
+  %tbody
+    - @feeds.each do |feed|
+      %tr
         %td
-          = link_to 'Edit', edit_feed_path(feed) 
-        %td
-          = button_to 'Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' }
+          = feed.name
+        - if can? :read, @feeds
+          - if feed.status == 'user_fields' || feed.status == 'active'
+            %td
+              = link_to 'Fields', :action => 'fields', :id => feed.id
+          - else
+            %td
+          - if feed.status == 'active'
+            %td
+              = link_to 'Categories', :action => 'categories', :id => feed.id
+            %td
+              = link_to 'Downloaden', :controller => 'products', :action => 'export', :id => feed.id, user_id: current_user.id, :format => :xml 
+            %td
+              = link_to 'Segmenteren', :action => 'filter', :id => feed.id
+          - else
+            %td
+            %td
+            %td
+          %td
+          %td
+            = form_tag feed, :method => :delete, :style => 'margin-bottom: 0' do
+              .btn-group
+                = link_to 'Edit', edit_feed_path(feed), :class => 'btn btn-small'
+                = submit_tag 'Delete', :onclick => 'return confirm("Are you sure?")', :class => 'btn btn-danger btn-small'
 = link_to 'New Feed', new_feed_path 

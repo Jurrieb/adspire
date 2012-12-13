@@ -191,5 +191,3 @@ ActiveRecord::Schema.define(:version => 20121213131559) do
     t.integer "user_id"
     t.integer "role_id"
   end
-
-end
