@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(:version => 20121213112808) do
     t.integer  "user_id"
     t.integer  "interval_in_seconds"
     t.datetime "last_parse"
+    t.string   "method_type"
   end
 
   create_table "fields", :force => true do |t|
@@ -85,6 +86,19 @@ ActiveRecord::Schema.define(:version => 20121213112808) do
     t.integer  "status"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "notices", :force => true do |t|
+    t.boolean  "lead"
+    t.boolean  "sale"
+    t.boolean  "feed"
+    t.boolean  "result"
+    t.boolean  "status"
+    t.boolean  "merchant"
+    t.boolean  "action"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "user_id"
   end
 
   create_table "products", :force => true do |t|
@@ -174,5 +188,4 @@ ActiveRecord::Schema.define(:version => 20121213112808) do
     t.integer "user_id"
     t.integer "role_id"
   end
-
 end

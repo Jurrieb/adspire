@@ -1,27 +1,32 @@
-= form_for @feed, :html => {:multipart => true} do |f|
+= form_for @feed, :html => {:multipart => true, :class => 'form-horizontal'} do |f|
 
   %fieldset
     %legend
       Add new feed
-    .textfield
-      = f.label :name
-      = f.text_field  :name
-    .select
-      = f.label  :interval_in_seconds
-      = f.select(:interval_in_seconds, options_for_select([['12 uur', '43200'],['24 uur', '86400'],['48 uur', '172800'], ['72 uur', '199200']]))
-    .radio-area
-      = label_tag :type_use_file 
-    .btn-group{'data-toggle' => 'buttons-radio'}  
-      %button{ :type => 'button', :class => 'btn btn-success' }
-        Url
-      %button{ :type => 'button', :class => 'btn btn-success' }
-        File
-      
-    .textfield.url
-      = f.label  :url
-      = f.text_field :url
-    .fieldfield.file.hidden
-      = label_tag :file
-      = file_field_tag :file
-
-  = submit_tag "Inlezen"
+    .control-group
+      = f.label t(:name), :class => 'control-label'
+      .controls
+        = f.text_field :name
+    .control-group
+      = f.label t(:interval_in_seconds), :class => 'control-label'
+      .controls
+        = f.select(:interval_in_seconds, options_for_select([['12 uur', '43200'],['24 uur', '86400'],['48 uur', '172800'], ['72 uur', '199200']]))
+    .control-group
+      = f.label t(:type_use_file), :class => 'control-label'
+      .controls
+        .btn-group{ 'data-toggle' => 'buttons-radio', 'data-target' => 'method_type' }
+          %button{ :type => 'button', :class => 'btn active', :value => 'use_url' }
+            Url
+          %button{ :type => 'button', :class => 'btn', :value => 'use_file' }
+            File
+        %input{ :type => 'hidden', :id => 'method_type', :name => 'feed[method_type]' }
+    .control-group
+      = f.label t(:url), :class => 'control-label'
+      .controls
+        = f.text_field :url
+    .control-group
+      = f.label t(:file), :class => 'control-label'
+      .controls
+        = file_field_tag :file
+    .form-actions
+      = submit_tag "Inlezen", :class => 'btn btn-success'

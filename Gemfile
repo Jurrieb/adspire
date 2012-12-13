@@ -7,7 +7,6 @@ gem 'rake',  '~> 10.0.2'
 group :development, :test do
   gem 'sqlite3'
 end
-
 group :production do
   # Webservers
   gem 'thin'
