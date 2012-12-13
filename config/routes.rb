@@ -12,6 +12,8 @@ Datafeeds::Application.routes.draw do
 
   match "/clicks" => 'clicks#create'
 
+  post "/notifications/settings_update"
+
 
   devise_for :users, :controllers => { 
     :registrations => "users/registrations",
