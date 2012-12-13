@@ -1,5 +1,7 @@
 Datafeeds::Application.routes.draw do
 
+  resources :controllers
+
   root :to => "pages#dashboard"
 
   get "leads/index"

@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Statistics:
+  = @controller.statistics
+
+= link_to 'Edit', edit_controller_path(@controller)
+\|
+= link_to 'Back', controllers_path
