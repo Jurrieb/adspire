@@ -1,24 +1,27 @@
 = form_for @feed, :html => {:multipart => true} do |f|
 
-  .textfield
-    = f.label :name
-    = f.text_field  :name
-  .select
-    = f.label  :interval_in_seconds
-    = f.select(:interval_in_seconds, options_for_select([['12 uur', '43200'],['24 uur', '86400'],['48 uur', '172800'], ['72 uur', '199200']]))
-  .radio-area
-    = label_tag :type_use_file 
-    .radio
-      = radio_button_tag :type, :use_url, true
-      = label_tag :type_use_url 
-    .radio 
-      = radio_button_tag :type, :use_file 
-      = label_tag :type_use_file
-  .textfield.url
-    = f.label  :url
-    = f.text_field :url
-  .fieldfield.file.hidden
-    = label_tag :file
-    = file_field_tag :file
+  %fieldset
+    %legend
+      Add new feed
+    .textfield
+      = f.label :name
+      = f.text_field  :name
+    .select
+      = f.label  :interval_in_seconds
+      = f.select(:interval_in_seconds, options_for_select([['12 uur', '43200'],['24 uur', '86400'],['48 uur', '172800'], ['72 uur', '199200']]))
+    .radio-area
+      = label_tag :type_use_file 
+    .btn-group{'data-toggle' => 'buttons-radio'}  
+      %button{ :type => 'button', :class => 'btn btn-success' }
+        Url
+      %button{ :type => 'button', :class => 'btn btn-success' }
+        File
+      
+    .textfield.url
+      = f.label  :url
+      = f.text_field :url
+    .fieldfield.file.hidden
+      = label_tag :file
+      = file_field_tag :file
 
   = submit_tag "Inlezen"
