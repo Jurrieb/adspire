@@ -16,6 +16,7 @@ end
 # Rails standard gems
 group :assets do
   gem 'sass-rails'
+  gem 'bootstrap-sass'
   gem 'coffee-rails'
   gem 'uglifier'
 end
@@ -25,7 +26,7 @@ gem "nested_form"
 
 # Haml, sass
 gem 'haml-rails'
-gem 'bootstrap-sass'
+
 # Jquery
 gem 'jquery-rails'
 
@@ -42,6 +43,7 @@ gem 'cancan'
 
 # Cronjob
 gem "clockwork", "~> 0.4.1"
+gem 'delayed_job_active_record'
 
 # Add active links to navigation
 gem 'active_link_to'
