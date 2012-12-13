@@ -51,6 +51,8 @@ nl:
     url: "Link"
     websitecategory: "Categorie van website"
     editsite: "Site wijzigen"
+    newsite: "Site aanmelden"
+    description: "Omschrijving"
 
 
     # Opmerkingen

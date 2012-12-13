@@ -2,7 +2,7 @@
 
 %div
 	%p= t('labels.notification_explain')
-	= form_for @notice, :url => { :action => "settings_update" } do |n|
+	= form_for @usernotice, :url => { :action => "settings_update" } do |n|
 		%div
 			= n.label :lead, t(:notification_lead)
 			= n.check_box :lead

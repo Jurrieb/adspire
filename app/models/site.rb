@@ -3,7 +3,7 @@ class Site < ActiveRecord::Base
   belongs_to :user
   before_validation :check_url
 
-  attr_accessible :name, :url, :description, :category_id, :active, :status
+  attr_accessible :name, :url, :description, :category_id, :active, :status, :user_id
 
   validates :name, :presence => true
   validates_format_of :url, :with => URI::regexp
