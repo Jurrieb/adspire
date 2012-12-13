@@ -7,7 +7,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def edit
-	  resource.build_usernotices
+	  resource.build_usernotice
   end
 
   def notification
