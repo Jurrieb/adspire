@@ -16,22 +16,28 @@
                 = link_to current_user.email, edit_user_registration_path, :class => 'btn'
               -else
                 = link_to t(:login), new_user_session_path, :class => 'btn'
-              = link_to destroy_user_session_path, :method => :delete, :class => 'btn btn-danger' do
+              = link_to destroy_user_session_path, :method => :get, :class => 'btn btn-danger' do
                 %i.icon-white.icon-off
     #container.container-fluid
       #main.row-fluid
         %nav#nav-container.span2
           %ul#nav.nav.nav-pills.nav-stacked
-            %li
-              = active_link_to t(:dashboard), root_path, :wrap_tag => :li
-            %li
-              = active_link_to t(:feeds), feeds_path, :wrap_tag => :li
-            %li
-              = active_link_to t(:sites), sites_path, :wrap_tag => :li
-            %li
-              = link_to t(:statistics), 'http://www.google.nl'
-            %li
-              = link_to t(:payments), 'http://www.google.nl'
+            = active_link_to t(:dashboard), root_path, :wrap_tag => :li
+            = active_link_to t(:profile), edit_user_registration_path, :wrap_tag => :li
+            - if params['controller'] == 'users/registrations'
+              %ul
+                = active_link_to t(:edit_profile), edit_user_registration_path, :wrap_tag => :li
+                = active_link_to t(:notifications), notifications_settings_path, :wrap_tag => :li
+            = active_link_to t(:feeds), feeds_path, :wrap_tag => :li
+            - if params['controller'] == 'feeds'
+              %ul
+                = active_link_to t(:all_feeds), feeds_path, :wrap_tag => :li
+                = active_link_to t(:own_feeds), own_feeds_path, :wrap_tag => :li
+                = active_link_to t(:new_feed), new_feed_path, :wrap_tag => :li
+            = active_link_to t(:sites), sites_path, :wrap_tag => :li
+            - if params['controller'] == 'sites'
+              %ul
+                = active_link_to t(:all_sites), sites_path, :wrap_tag => :li
         %section#content.span8
           - if notice
             = notice
