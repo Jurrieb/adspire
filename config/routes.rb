@@ -19,7 +19,7 @@ Datafeeds::Application.routes.draw do
     :registrations => "users/registrations",
   }
 
-  resources :sites, :only => [:index, :edit, :update]
+  resources :sites
 
   resources :categories
 

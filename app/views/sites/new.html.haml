@@ -1,0 +1,15 @@
+%h2= t('labels.newsite')
+
+= form_for(@site) do |s|
+  %div
+    = s.label :name, t('labels.sitename')
+    = s.text_field :name
+    = s.label :url, t('labels.url')
+    = s.text_field :url
+    = s.label :category_id, t('labels.websitecategory')
+    = s.collection_select :category_id, Category.all, :id, :name
+    = s.label :active, t('labels.active')
+    = s.check_box :active
+    = s.label :description, t('labels.description')
+    = s.text_area :description
+  = s.submit t('labels.editsite')

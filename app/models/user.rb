@@ -6,10 +6,10 @@ class User < ActiveRecord::Base
   # Relations
   has_and_belongs_to_many :roles, :join_table => :users_roles
   has_many :sites
-  has_one :notice
+  has_one :usernotice
 
   accepts_nested_attributes_for :sites, :allow_destroy => true
-  accepts_nested_attributes_for :notice, :allow_destroy => true
+  accepts_nested_attributes_for :usernotice, :allow_destroy => true
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -54,7 +54,7 @@ class User < ActiveRecord::Base
 
   # Add user notices
   def add_notices
-    @notice = Notice.new
+    @notice = Usernotice.new
     @notice.user_id = self.id
     @notice.save
   end

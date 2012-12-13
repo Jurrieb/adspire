@@ -4,3 +4,5 @@
   %div
     = t.name
     = t.url
+    = link_to 'edit'
+    = link_to 'Destroy', @site, method: :delete, data: { confirm: 'Are you sure?' }
