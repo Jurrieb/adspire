@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121213112808) do
+ActiveRecord::Schema.define(:version => 20121213131559) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -35,6 +35,22 @@ ActiveRecord::Schema.define(:version => 20121213112808) do
     t.integer  "field_id"
     t.integer  "feed_id"
   end
+
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0
+    t.integer  "attempts",   :default => 0
+    t.text     "handler"
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
   create_table "feeds", :force => true do |t|
     t.string   "name"
@@ -86,19 +102,6 @@ ActiveRecord::Schema.define(:version => 20121213112808) do
     t.integer  "status"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-  end
-
-  create_table "notices", :force => true do |t|
-    t.boolean  "lead"
-    t.boolean  "sale"
-    t.boolean  "feed"
-    t.boolean  "result"
-    t.boolean  "status"
-    t.boolean  "merchant"
-    t.boolean  "action"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "user_id"
   end
 
   create_table "products", :force => true do |t|
@@ -188,4 +191,5 @@ ActiveRecord::Schema.define(:version => 20121213112808) do
     t.integer "user_id"
     t.integer "role_id"
   end
+
 end
