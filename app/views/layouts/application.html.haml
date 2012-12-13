@@ -11,10 +11,11 @@
         .container-fluid
           = link_to t(:company), 'http://www.adspire.nl', :class => 'brand'
           .pull-right
-            .btn-group
-              -if !current_user.blank?
+            -if !current_user.blank?
+              .btn-group
                 = link_to current_user.email, edit_user_registration_path, :class => 'btn'
-                = button_to 'Destroy', destroy_user_session_path, method: :delete
+                = link_to destroy_user_session_path, :method => :get, :class => 'btn btn-danger' do
+                  %i.icon-white.icon-off
               -else
                 = link_to t(:login), new_user_session_path, :class => 'btn'
     #container.container-fluid
