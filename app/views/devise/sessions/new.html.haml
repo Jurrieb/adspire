@@ -1,14 +1,14 @@
-= form_for resource, :as => resource_name, :url => session_path(resource_name), :form_class => 'form-horizontal' do |f|
+= form_for resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => 'form-horizontal' } do |f|
 
   %fieldset
-    %legend
-      Sign in
+    %legend 
+      = t('devise.sessions.sign_in')
     .control-group
-      = f.label t(:email), :class => 'control-label'
+      = f.label t('devise.sessions.email'), :class => 'control-label'
       .controls
         = f.email_field :email
     .control-group
-      = f.label t(:password), :class => 'control-label'
+      = f.label t('devise.sessions.password'), :class => 'control-label'
       .controls
         = f.password_field :password
     -if devise_mapping.rememberable?
@@ -16,8 +16,8 @@
         .controls
           %label.checkbox
             = f.check_box :remember_me
-            = t(:remember_me)
+            = t('devise.sessions.remember_me')
     .form-actions
-      = submit_tag t(:sign_in), :class => 'btn btn-success'
+      = submit_tag t('devise.sessions.sign_in'), :class => 'btn btn-success'
 
 = render "devise/shared/links"

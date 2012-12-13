@@ -60,7 +60,8 @@ nl:
     comment: "Opmerking" 
     commentsub: "Overige opmerkingen over registratie"
 
-    # 
+    # Devise
+    sign_in: "Inloggen"
 
 
   errors:
@@ -89,6 +90,10 @@ nl:
       timeout: 'Je sessie is verlopen, log a.u.b. opnieuw in.'
       inactive: 'Je account is nog niet geactiveerd.'
     sessions:
+      email: 'E-mailadres'
+      password: 'Wachtwoord'
+      remember_me: 'Onthoud mijn gegevens'
+      sign_in: 'Inloggen'
       signed_in: 'Je bent succesvol ingelogd.'
       signed_out: 'Je bent succesvol uitgelogd.'
     passwords:
