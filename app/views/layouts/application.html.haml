@@ -14,10 +14,9 @@
             .btn-group
               -if !current_user.blank?
                 = link_to current_user.email, edit_user_registration_path, :class => 'btn'
+                = button_to 'Destroy', destroy_user_session_path, method: :delete
               -else
                 = link_to t(:login), new_user_session_path, :class => 'btn'
-              = link_to destroy_user_session_path, :method => :get, :class => 'btn btn-danger' do
-                %i.icon-white.icon-off
     #container.container-fluid
       #main.row-fluid
         %nav#nav-container.span2

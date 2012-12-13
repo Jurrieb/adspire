@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121212101753) do
+ActiveRecord::Schema.define(:version => 20121213110104) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(:version => 20121212101753) do
     t.integer  "user_id"
     t.integer  "interval_in_seconds"
     t.datetime "last_parse"
+    t.string   "method_type"
   end
 
   create_table "fields", :force => true do |t|
