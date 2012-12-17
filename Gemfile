@@ -31,6 +31,9 @@ gem 'haml-rails'
 # Jquery
 gem 'jquery-rails'
 
+# Web graphics
+gem 'raphael-rails'
+
 # JSON
 gem 'json'
 

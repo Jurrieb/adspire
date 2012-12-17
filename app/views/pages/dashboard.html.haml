@@ -1,2 +1,34 @@
 = 'Leads: '+@leads.to_s
 = 'Clicks: '+@clicks.to_s
+
+#graph
+
+%table
+	%thead
+		%tr
+			%th clicks
+			%th Leads
+	%thead
+		%tr
+			%th= @clicks
+			%th= @leads
+
+:javascript
+	$(function() {
+		Morris.Line({
+			element: 'graph',
+			smooth: false,
+
+			data: [
+				- @leads.each do |l|
+					puts l
+				{ y: '2012', lead: 100, click: 110  }
+			],
+			
+			xkey: 'y',
+			ykeys: ['lead', 'click'],
+			labels: ['Leads', 'Clicks'],
+			xLabels: 'month'
+			
+		});
+	});
