@@ -1,92 +1,103 @@
 %h2= t('labels.editprofile')
 
-= nested_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
+= nested_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => 'form-horizontal' }) do |f|
 	= devise_error_messages!
 
-	%h2= t('labels.editlogin')
+	%fieldset
+		%legend= t('labels.editlogin')
 
-	%div
-		= f.label :email, t('labels.email')
-		= f.email_field :email
+		.control-group
+			= f.label :email, t('labels.email'), :class => 'control-label', :class => 'control-label'
+			.controls
+				= f.email_field :email
+		
+		%p.text-info= t('labels.leaveblank')
 
-	%div
-		%p= t('labels.leaveblank')
-		= f.label :password, t('labels.password')
-		= f.password_field :password, :value => ''
+		.control-group
+			= f.label :password, t('labels.password'), :class => 'control-label'
+			.controls
+				= f.password_field :password, :value => ''
 
-	%div
-		= f.label :password_confirmation, t('labels.passwordconfirmation')
-		= f.password_field :password_confirmation
+		.control-group
+			= f.label :password_confirmation, t('labels.passwordconfirmation'), :class => 'control-label'
+			.controls
+				= f.password_field :password_confirmation
 
-	%h2= t('labels.editprofile')
+		%legend= t('labels.editprofile')
 
-	%div
-		= f.label :name, t('labels.forname')
-		= f.text_field :name
+		.control-group
+			= f.label :name, t('labels.forname'), :class => 'control-label'
+			.controls
+				= f.text_field :name
 
-	%div
-		= f.label :lastname, t('labels.lastname')
-		= f.text_field :lastname
+		.control-group
+			= f.label :lastname, t('labels.lastname'), :class => 'control-label'
+			.controls
+				= f.text_field :lastname
 
-	%div
-		= f.label :street, t('labels.street')
-		= f.text_field :street
+		.control-group
+			= f.label :street, t('labels.street'), :class => 'control-label'
+			.controls
+				= f.text_field :street
 
-	%div
-		= f.label :housenumber, t('labels.housenumber')
-		= f.number_field :housenumber
+		.control-group
+			= f.label :housenumber, t('labels.housenumber'), :class => 'control-label'
+			.controls
+				= f.number_field :housenumber
 
-	%div
-		= f.label :zip, t('labels.zip')
-		= f.text_field :zip
+		.control-group
+			= f.label :zip, t('labels.zip'), :class => 'control-label'
+			.controls
+				= f.text_field :zip
 
-	%div
-		= f.label :place, t('labels.place')
-		= f.text_field :place
+		.control-group
+			= f.label :place, t('labels.place'), :class => 'control-label'
+			.controls
+				= f.text_field :place
 
-	%div
-		= f.label :phone, t('labels.phone')
-		= f.telephone_field :phone
+		.control-group
+			= f.label :phone, t('labels.phone'), :class => 'control-label'
+			.controls
+				= f.telephone_field :phone
 
-	%h2= t('labels.organisation')
+		%legend= t('labels.organisation')
 
-	%div
-		= f.radio_button(:organisation, "person", :checked => true)
-		= f.label :organisation_person, t('labels.organisation_person')
-		= f.radio_button(:organisation, "business")
-		= f.label :organisation_business, t('labels.organisation_business')
+		.control-group
+			= f.label t(:organisation_type), :class => 'control-label'
+			.controls
+				.btn-group{ 'data-toggle' => 'buttons-radio', 'data-target' => 'organisation_type' }
+					%button{ :type => 'button', :class => 'btn active', :value => 'person'}
+						= t('labels.organisation_person')
+					%button{ :type => 'button', :class => 'btn', :value => 'business' }
+						= t('labels.organisation_business')
+				%input{ :type => 'hidden', :id => 'organisation_type', name: 'user[organisation]' }
 
-	%div
-		= f.label :company_name, t('labels.company_name')
-		= f.text_field :company_name
+		.control-group
+			= f.label :company_name, t('labels.company_name'), :class => 'control-label'
+			.controls
+				= f.text_field :company_name
 
-	%div
-		= f.label :btw, t('labels.btw')
-		= f.text_field :btw
+		.control-group
+			= f.label :btw, t('labels.btw'), :class => 'control-label'
+			.controls
+				= f.text_field :btw
 
-	%div
-		= f.label :kvk, t('labels.kvk')
-		= f.text_field :kvk
-	
-	%div
-		%p= t('labels.permission')
-		= f.label :current_password, t('labels.passwordconfirmation')
-		= f.password_field :current_password
+		.control-group
+			= f.label :kvk, t('labels.kvk'), :class => 'control-label'
+			.controls
+				= f.text_field :kvk
+		
+		%p.text-info= t('labels.permission')
+		
+		.control-group
+			= f.label :current_password, t('labels.passwordconfirmation'), :class => 'control-label'
+			.controls
+				= f.password_field :current_password
 
-	%div
-		= f.submit t('labels.editprofile')
+		.form-actions
+			= f.submit t('labels.editprofile'), :class => 'btn btn-success'
 
+		%legend= t('labels.cancel')
 
-
-
-
-%h3= t('labels.cancel')
-
-%p= t('labels.terminate')
-= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete
-
-%br
-%br
-
-%div
-	= link_to t('common.back'), :back
+		%p.text-error= t('labels.terminate')
+		= link_to t('labels.terminate_button'), registration_path(resource_name), :onclick => 'return confirm("Are you sure?")', :class => 'btn btn-danger'

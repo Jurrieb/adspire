@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %title Adspire
+    %title AdSpire
     = stylesheet_link_tag "application"  
     = javascript_include_tag "application"
     = csrf_meta_tags
@@ -42,8 +42,8 @@
           - if notice
             = notice
           = yield
-        %aside#notifications.well.span2
-          %ul.nav.nav-list
+        %aside#notifications.span2
+          %ul.nav.nav-list.well
             %li.nav-header
               .dropdown
                 = link_to '#', :class => 'settings dropdown-toggle', 'data-toggle' => 'dropdown' do
