@@ -4,5 +4,8 @@
   %div
     = t.name
     = t.url
-    = link_to 'edit'
-    = link_to 'Destroy', @site, method: :delete, data: { confirm: 'Are you sure?' }
+    .btn-group
+      = link_to 'Edit', edit_site_path(t), :class => 'btn btn-small'
+
+      = form_tag t, :method => :delete, :style => 'margin-bottom: 0' do
+        = submit_tag 'Delete', :onclick => 'return confirm("Are you sure?")', :class => 'btn btn-danger btn-small'

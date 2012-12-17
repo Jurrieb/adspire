@@ -14,8 +14,7 @@
             -if !current_user.blank?
               .btn-group
                 = link_to current_user.email, edit_user_registration_path, :class => 'btn'
-                = link_to destroy_user_session_path, :method => :get, :class => 'btn btn-danger' do
-                  %i.icon-white.icon-off
+                = button_to '', destroy_user_session_path, :method  => :delete, :confirm => 'return confirm("Are you sure?")', :class => 'btn btn-danger btn-small'
               -else
                 = link_to t(:login), new_user_session_path, :class => 'btn'
     #container.container-fluid
@@ -38,6 +37,7 @@
             - if params['controller'] == 'sites'
               %ul
                 = active_link_to t(:all_sites), sites_path, :wrap_tag => :li
+                = active_link_to t(:new_site), new_site_path, :wrap_tag => :li
         %section#content.span8
           - if notice
             = notice
