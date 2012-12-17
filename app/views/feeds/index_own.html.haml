@@ -42,4 +42,4 @@
               .btn-group
                 = link_to 'Edit', edit_feed_path(feed), :class => 'btn btn-small'
                 = submit_tag 'Delete', :onclick => 'return confirm("Are you sure?")', :class => 'btn btn-danger btn-small'
-= link_to 'New Feed', new_feed_path 
+= link_to 'New Feed', new_feed_path, :class => 'btn btn-success'
