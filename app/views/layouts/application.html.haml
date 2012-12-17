@@ -57,34 +57,14 @@
                       Notificatie instellingen
               Notificaties
             %li.divider
-            %li
-              %button.remove
-                &times;
-              = link_to('http://www.google.nl') do
-                %span.muted
-                  14:56:
-                Er is een nieuwe leed gezet
-            %li
-              %button.remove
-                &times;
-              = link_to('http://www.google.nl', :class => 'text-info' ) do
-                %span.muted
-                  14:56:
-                Er is een nieuwe leed gezet
-            %li
-              %button.remove
-                &times;
-              = link_to 'http://www.google.nl', :class => 'text-warning' do
-                %span.muted
-                  14:56:
-                Er is een nieuwe leed gezet
-            %li
-              %button.remove
-                &times;
-              = link_to 'http://www.google.nl', :class => 'text-error' do
-                %span.muted
-                  14:56:
-                Er is een nieuwe leed gezet
+            - @notifications.each do |n|
+              %li
+                %button.remove
+                  &times;
+                = link_to('http://www.google.nl') do
+                  = n.message  
+                  %div.muted
+                    = time_ago_in_words(n.created_at)
 %footer
   %p
     = "© Adspire "+t = Time.now.strftime("%Y")
