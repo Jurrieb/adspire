@@ -47,3 +47,9 @@ gem 'delayed_job_active_record'
 
 # Add active links to navigation
 gem 'active_link_to'
+
+# Testing
+gem "capybara"
+group :test, :development do
+  gem "rspec-rails", "~> 2.0"
+end
