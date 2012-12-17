@@ -2,7 +2,6 @@ class FeedsController < ApplicationController
 
   require 'rubygems'
   require 'nokogiri'
-
   # Authorisation
   load_and_authorize_resource
 
@@ -27,6 +26,7 @@ class FeedsController < ApplicationController
     @feed.status = 'created'
     respond_to do |format|
       if @feed.save
+        @feed.delay.map_feed
         format.html { redirect_to own_feeds_path, notice: 'Feed was successfully created.' }
         format.json { render json: @feed, status: :created, location: @feed }
       else

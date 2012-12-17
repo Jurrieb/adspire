@@ -1,12 +1,13 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.8'
-gem 'rake',  '~> 10.0.2'
+gem 'rake',  '~> 10.0.3'
 
 # Databases
 group :development, :test do
   gem 'sqlite3'
 end
+
 group :production do
   # Webservers
   gem 'thin'
