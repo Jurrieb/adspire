@@ -38,8 +38,9 @@
             %td
           %td
           %td
+          .btn-group
+            = link_to 'Edit', edit_feed_path(feed), :class => 'btn btn-small'
+
             = form_tag feed, :method => :delete, :style => 'margin-bottom: 0' do
-              .btn-group
-                = link_to 'Edit', edit_feed_path(feed), :class => 'btn btn-small'
-                = submit_tag 'Delete', :onclick => 'return confirm("Are you sure?")', :class => 'btn btn-danger btn-small'
+              = submit_tag 'Delete', :onclick => 'return confirm("Are you sure?")', :class => 'btn btn-danger btn-small'
 = link_to 'New Feed', new_feed_path 

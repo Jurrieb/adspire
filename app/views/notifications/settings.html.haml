@@ -1,28 +1,72 @@
-%h2= t('labels.notification')
+= form_for @usernotice, :url => { :action => "settings_update" }, :html => { :class => 'form-horizontal', :data => :usernotice } do |n|
+	%fieldset
+		%legend= t('labels.notification')
 
-%div
-	%p= t('labels.notification_explain')
-	= form_for @usernotice, :url => { :action => "settings_update" } do |n|
-		%div
-			= n.label :lead, t(:notification_lead)
-			= n.check_box :lead
-		%div
-			= n.label :sale, t('labels.notification_sale')
-			= n.check_box :sale
-		%div
-			= n.label :feed, t('labels.notification_feed')
-			= n.check_box :feed
-		%div
-			= n.label :result, t('labels.notification_result')
-			= n.check_box :result
-		%div
-			= n.label :status, t('labels.notification_status')
-			= n.check_box :status
-		%div
-			= n.label :merchant, t('labels.notification_merchant')
-			= n.check_box :merchant
-		%div
-			= n.label :action, t('labels.notification_action')
-			= n.check_box :action
+		%p.text-info= t('labels.notification_explain')
+		
+		.control-group
+			= n.label :lead, t(:notification_lead), :class => 'control-label'
+			.controls
+				.btn-group{ 'data-toggle' => 'buttons-radio', 'data-target' => :lead }
+					%button{ :type => 'button', :class => 'btn btn-mini', :value => 1 }
+						= t(:on)
+					%button{ :type => 'button', :class => 'btn btn-mini', :value => 0 }
+						= t(:off)
+				= n.hidden_field :lead
+		.control-group
+			= n.label :sale, t('labels.notification_sale'), :class => 'control-label'
+			.controls
+				.btn-group{ 'data-toggle' => 'buttons-radio', 'data-target' => :sale }
+					%button{ :type => 'button', :class => 'btn btn-mini', :value => 1 }
+						= t(:on)
+					%button{ :type => 'button', :class => 'btn btn-mini', :value => 0 }
+						= t(:off)
+				= n.hidden_field :sale
+		.control-group
+			= n.label :feed, t('labels.notification_feed'), :class => 'control-label'
+			.controls
+				.btn-group{ 'data-toggle' => 'buttons-radio', 'data-target' => :feed }
+					%button{ :type => 'button', :class => 'btn btn-mini', :value => 1 }
+						= t(:on)
+					%button{ :type => 'button', :class => 'btn btn-mini', :value => 0 }
+						= t(:off)
+				= n.hidden_field :feed
+		.control-group
+			= n.label :result, t('labels.notification_result'), :class => 'control-label'
+			.controls
+				.btn-group{ 'data-toggle' => 'buttons-radio', 'data-target' => :result }
+					%button{ :type => 'button', :class => 'btn btn-mini', :value => 1 }
+						= t(:on)
+					%button{ :type => 'button', :class => 'btn btn-mini', :value => 0 }
+						= t(:off)
+				= n.hidden_field :result
+		.control-group
+			= n.label :status, t('labels.notification_status'), :class => 'control-label'
+			.controls
+				.btn-group{ 'data-toggle' => 'buttons-radio', 'data-target' => :status }
+					%button{ :type => 'button', :class => 'btn btn-mini', :value => 1 }
+						= t(:on)
+					%button{ :type => 'button', :class => 'btn btn-mini', :value => 0 }
+						= t(:off)
+				= n.hidden_field :status
+		.control-group
+			= n.label :merchant, t('labels.notification_merchant'), :class => 'control-label'
+			.controls
+				.btn-group{ 'data-toggle' => 'buttons-radio', 'data-target' => :merchant }
+					%button{ :type => 'button', :class => 'btn btn-mini', :value => 1 }
+						= t(:on)
+					%button{ :type => 'button', :class => 'btn btn-mini', :value => 0 }
+						= t(:off)
+				= n.hidden_field :merchant
+		.control-group
+			= n.label :action, t('labels.notification_action'), :class => 'control-label'
+			.controls
+				.btn-group{ 'data-toggle' => 'buttons-radio', 'data-target' => :action }
+					%button{ :type => 'button', :class => 'btn btn-mini', :value => 1 }
+						= t(:on)
+					%button{ :type => 'button', :class => 'btn btn-mini', :value => 0 }
+						= t(:off)
+				= n.hidden_field :action
 
-		= n.submit t('labels.notification')
+		.form-actions
+			= n.submit t('labels.notification'), :class => 'btn btn-success'

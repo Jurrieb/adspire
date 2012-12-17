@@ -1,4 +1,8 @@
 nl:
+  datetime:
+    distance_in_words:
+      x_minutes: "%{count} minuten geleden"
+      less_than_x_minutes: "%{count} minuut geleden"
   company: "Adspire"
   common:
     back: "Terug"

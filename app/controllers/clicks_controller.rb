@@ -8,6 +8,14 @@ class ClicksController < ApplicationController
   	 	click.ip_client		= request.remote_ip
   	 	click.referer		= request.referer
   	 	click.save
+
+      notification = Notification.new
+      notification.user_id = params[:user_id]
+      notification.message = "U heeft een nieuwe click ontvangen."
+      notification.url = nil
+      notification.deleted = false
+      notification.save
+
   	 	redirect_to product.url, :overwrite_params => { :parm => 'foo' }
   	 else
   	 end

@@ -9,6 +9,11 @@ class FeedsController < ApplicationController
   before_filter :authenticate_user!
 
   def new
+         notification = Notification.new
+      notification.user_id = params[:user_id]
+      notification.message = "U heeft een nieuwe click ontvangen."
+      notification.url = nil
+      notification.save
     @feed = Feed.new
   end
 

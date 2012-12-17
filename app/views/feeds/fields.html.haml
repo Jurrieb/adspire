@@ -1,6 +1,11 @@
-= form_tag do
+= form_tag nil, :class => 'form-horizontal' do
   - @foreign_fields.each do |feed_key| 
-    .item
-      = label_tag feed_key.name
-      = select_tag('keys['+feed_key.name+']', options_from_collection_for_select(@fields, "id", "name"))
-  = submit_tag "submit"
+    .control-group
+      = label_tag feed_key.name, nil, :class => 'control-label'
+      .controls
+        %span.hide.options= select_tag('keys['+feed_key.name+']', options_from_collection_for_select(@fields, "id", "name"))
+        %a.btn.btn-small{ :onclick => 'toggleField(this)' }
+          %i.icon-plus
+          %span= t('feeds.fields.use_field')
+  .form-actions
+    = submit_tag "submit", :class => 'btn btn-success'

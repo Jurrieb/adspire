@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %title Adspire
+    %title AdSpire
     = stylesheet_link_tag "application"  
     = javascript_include_tag "application"
     = csrf_meta_tags
@@ -12,12 +12,13 @@
           = link_to t(:company), 'http://www.adspire.nl', :class => 'brand'
           .pull-right
             -if !current_user.blank?
-              .btn-group
-                = link_to current_user.email, edit_user_registration_path, :class => 'btn'
-                = link_to destroy_user_session_path, :method => :get, :class => 'btn btn-danger' do
-                  %i.icon-white.icon-off
-              -else
-                = link_to t(:login), new_user_session_path, :class => 'btn'
+              = form_tag destroy_user_session_path, :method => :delete do
+                .btn-group
+                  = link_to current_user.email, edit_user_registration_path, :class => 'btn'
+                  %button{ :type => 'submit', :class => 'btn btn-danger' }
+                    %i.icon-white.icon-off
+            -else
+              = link_to t(:login), new_user_session_path, :class => 'btn'
     #container.container-fluid
       #main.row-fluid
         %nav#nav-container.span2
@@ -38,12 +39,13 @@
             - if params['controller'] == 'sites'
               %ul
                 = active_link_to t(:all_sites), sites_path, :wrap_tag => :li
+                = active_link_to t(:new_site), new_site_path, :wrap_tag => :li
         %section#content.span8
           - if notice
             = notice
           = yield
-        %aside#notifications.well.span2
-          %ul.nav.nav-list
+        %aside#notifications.span2
+          %ul.nav.nav-list.well
             %li.nav-header
               .dropdown
                 = link_to '#', :class => 'settings dropdown-toggle', 'data-toggle' => 'dropdown' do
@@ -57,34 +59,14 @@
                       Notificatie instellingen
               Notificaties
             %li.divider
-            %li
-              %button.remove
-                &times;
-              = link_to('http://www.google.nl') do
-                %span.muted
-                  14:56:
-                Er is een nieuwe leed gezet
-            %li
-              %button.remove
-                &times;
-              = link_to('http://www.google.nl', :class => 'text-info' ) do
-                %span.muted
-                  14:56:
-                Er is een nieuwe leed gezet
-            %li
-              %button.remove
-                &times;
-              = link_to 'http://www.google.nl', :class => 'text-warning' do
-                %span.muted
-                  14:56:
-                Er is een nieuwe leed gezet
-            %li
-              %button.remove
-                &times;
-              = link_to 'http://www.google.nl', :class => 'text-error' do
-                %span.muted
-                  14:56:
-                Er is een nieuwe leed gezet
+            - @notifications.each do |n|
+              %li
+                %button.remove
+                  &times;
+                = link_to('http://www.google.nl') do
+                  = n.message  
+                  %div.muted
+                    = time_ago_in_words(n.created_at)
 %footer
   %p
     = "© Adspire "+t = Time.now.strftime("%Y")
