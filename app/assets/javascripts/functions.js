@@ -15,7 +15,7 @@ $(function() {
 		var target = $(this).attr('data-target');
 		var value = $(this).parent().find('input[type="hidden"]').val();
 		console.log(value);
-		var toggle = value == 't' || value == 'f' || value == true || value == false;
+		var toggle = value == 't' || value == 'f';
 
 		if(toggle) {
 			value = value == 't' ? 1 : 0;
