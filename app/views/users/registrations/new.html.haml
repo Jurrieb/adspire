@@ -16,7 +16,6 @@
     = f.label :phone, t('labels.phone')
     = f.telephone_field :phone
 
-  %h2= t('labels.profile')
 
   %div
     = f.label :email, t('labels.email')
@@ -29,15 +28,13 @@
     = f.label :password_confirmation, t('labels.passwordconfirmation')
     = f.password_field :password_confirmation
 
-  %h2= t('labels.organisation')
 
   %div
-    = f.radio_button(:organisation, "person")
+    = f.radio_button(:organisation, "person", :checked => true)
     = f.label :organisation_person, t('labels.organisation_person')
     = f.radio_button(:organisation, "business")
     = f.label :organisation_business, t('labels.organisation_business')
 
-  %h2= t('labels.site')
 
   = f.fields_for :sites do |s|
     %div
@@ -48,15 +45,13 @@
       = s.label :website, t('labels.websitecategory')
       = collection_select(:sites, :category_id, Category.all, :id, :name)
       = s.link_to_remove "Site verwijderen"
-
+  %h3 Voeg uw website toe
   =f.link_to_add "Voeg een site toe", :sites
-
-  %h2= t('labels.comment')
 
   %div
     = f.label :comment, t('labels.commentsub')
     %br
-    = f.text_area :comment, :size => "60x10"
+    = f.text_area :comment, :size => "120x5"
 
 
   %div
