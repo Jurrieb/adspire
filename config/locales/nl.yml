@@ -1,8 +1,12 @@
 nl:
   datetime:
     distance_in_words:
-      x_minutes: "%{count} minuten geleden"
-      less_than_x_minutes: "%{count} minuut geleden"
+      x_minutes: 
+        one: "%{count} minuut geleden"
+        other: "%{count} minuten geleden"
+      less_than_x_minutes: 
+        one: "%{count} minuut geleden"
+        other: "%{count} minuut geleden"
   company: "Adspire"
   common:
     back: "Terug"
