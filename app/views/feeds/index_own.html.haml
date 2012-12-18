@@ -1,13 +1,13 @@
-%h1
-  Listing feeds
+%h2= t('feeds.index_own.title')
+
+%fieldset
+  %legend= t('feeds.index_own.list_feeds')
  
 %table.table.table-hover
   %thead
     %tr
-      %th
-        Name
-      %th
-        Category
+      %th= t('feeds.index_own.name')
+      %th= t('feeds.index_own.category')
       %th
       %th
       %th
@@ -22,25 +22,27 @@
         - if can? :read, @feeds
           - if feed.status == 'user_fields' || feed.status == 'active'
             %td
-              = link_to 'Fields', :action => 'fields', :id => feed.id
+              = link_to t('feeds.index_own.fields'), :action => 'fields', :id => feed.id
           - else
             %td
           - if feed.status == 'active'
             %td
-              = link_to 'Categories', :action => 'categories', :id => feed.id
+              = link_to t('feeds.index_own.categories'), :action => 'categories', :id => feed.id
             %td
-              = link_to 'Downloaden', :controller => 'products', :action => 'export', :id => feed.id, user_id: current_user.id, :format => :xml 
+              = link_to t('feeds.index_own.download'), :controller => 'products', :action => 'export', :id => feed.id, user_id: current_user.id, :format => :xml 
             %td
-              = link_to 'Segmenteren', :action => 'filter', :id => feed.id
+              = link_to t('feeds.index_own.segment'), :action => 'filter', :id => feed.id
           - else
             %td
             %td
             %td
           %td
           %td
-          .btn-group
-            = link_to 'Edit', edit_feed_path(feed), :class => 'btn btn-small'
-
             = form_tag feed, :method => :delete, :style => 'margin-bottom: 0' do
-              = submit_tag 'Delete', :onclick => 'return confirm("Are you sure?")', :class => 'btn btn-danger btn-small'
-= link_to 'New Feed', new_feed_path 
+              .btn-group
+                = link_to t('feeds.index_own.edit'), edit_feed_path(feed), :class => 'btn btn-small'
+                = submit_tag t('feeds.index_own.delete'), :onclick => "return confirm('#{t('feeds.index_own.delete_confirm')}')", :class => 'btn btn-danger btn-small'
+
+= link_to new_feed_path, :class => 'btn btn-success' do
+  %i.icon-white.icon-plus
+  = t('feeds.index_own.add_feed')

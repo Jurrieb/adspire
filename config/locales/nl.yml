@@ -71,6 +71,37 @@ nl:
     # Devise
     sign_in: "Inloggen"
 
+  # Feeds
+  feeds:
+    # Nav
+    nav: "Feeds"
+
+    # Index
+
+    # Index own
+    index_own:
+      add_feed: "Voeg feed toe"
+      category: "Categorie"
+      categories: "Categorieën"
+      delete: "Verwijderen"
+      delete_confirm: "Weet u dit zeker?"
+      download: "Downloaden"
+      edit: "Bewerken"
+      fields: "Selecteer"
+      list_feeds: "Overzicht feeds"
+      name: "Naam"
+      segment: "Segmenteren"
+      title: "Mijn feeds"
+
+    # New feed
+    new:
+      file: "Bestand"
+      interval_in_seconds: "Vernieuwings interval"
+      name: "Naam"
+      submit: "Inlezen"
+      title: "Voeg een feed toe"
+      type_use_file: "Methode"
+      url: "URL"
 
   errors:
     messages:

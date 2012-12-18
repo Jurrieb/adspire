@@ -29,7 +29,7 @@
               %ul
                 = active_link_to t(:edit_profile), edit_user_registration_path, :wrap_tag => :li
                 = active_link_to t(:notifications), notifications_settings_path, :wrap_tag => :li
-            = active_link_to t(:feeds), feeds_path, :wrap_tag => :li
+            = active_link_to t('feeds.nav'), feeds_path, :wrap_tag => :li
             - if params['controller'] == 'feeds'
               %ul
                 = active_link_to t(:all_feeds), feeds_path, :wrap_tag => :li
