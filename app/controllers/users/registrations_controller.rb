@@ -7,7 +7,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def edit
-	  resource.build_usernotice
+	  # resource.build_usernotice // Needs to be removed, resetting user notices
   end
 
   def notification

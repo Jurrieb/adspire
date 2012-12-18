@@ -3,17 +3,20 @@ class NotificationsController < ApplicationController
 	def settings
 		@usernotice = Usernotice.find_by_user_id(current_user.id)
 
+		puts @usernotice.to_yaml
+		puts @usernotice.blank?
+
 		if @usernotice.blank?
 			@usernotice = Usernotice.new
 			# Standard values
 			@usernotice.user_id = current_user.id
-			@usernotice.lead = true
-			@usernotice.sale = true
-			@usernotice.feed = false
-			@usernotice.result = true
-			@usernotice.status = false
-			@usernotice.merchant = false
-			@usernotice.action = true
+			@usernotice.lead = 't'
+			@usernotice.sale = 't'
+			@usernotice.feed = 'f'
+			@usernotice.result = 't'
+			@usernotice.status = 'f'
+			@usernotice.merchant = 'f'
+			@usernotice.action = 't'
 			@usernotice.save!
 		end
 	end

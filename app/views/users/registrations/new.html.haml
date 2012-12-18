@@ -1,60 +1,84 @@
--# Moet verwezen worden naar de hoofdcategorieen van Adspire
+%h2= t('users.signup.title')
 
-%h2= t('labels.signup')
+= nested_form_for resource, :as => resource_name, :url => registration_path(resource_name), :html => { :class => 'form-horizontal', :data => 'user' } do |f|
+  %fieldset
+    = devise_error_messages!
 
-= nested_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
-  = devise_error_messages!
+    %legend= t('users.signup.login_details')
 
-  %div
-    = f.label :name, t('labels.forname')
-    = f.text_field :name
+    .control-group
+      = f.label :email, t('users.signup.email'), :class => 'control-label'
+      .controls
+        = f.email_field :email, :class => 'input-xlarge'
 
-    = f.label :lastname, t('labels.lastname')
-    = f.text_field :lastname
+    .control-group
+      = f.label :password, t('users.signup.password'), :class => 'control-label'
+      .controls
+        = f.password_field :password, :value => '', :class =>' input-xlarge'
 
-  %div
-    = f.label :phone, t('labels.phone')
-    = f.telephone_field :phone
+    .control-group
+      = f.label :password_confirmation, t('users.signup.password_confirmation'), :class => 'control-label'
+      .controls
+        = f.password_field :password_confirmation, :class => 'input-xlarge'
 
+    %legend= t('users.signup.profile_details')
+    
+    .control-group
+      = f.label :name, t('users.signup.name'), :class => 'control-label', :class => 'control-label'
+      .controls
+        = f.text_field :name, :class => 'input-xlarge'
+    
+    .control-group
+      = f.label :lastname, t('users.signup.surname'), :class => 'control-label', :class => 'control-label'
+      .controls
+        = f.text_field :lastname, :class => 'input-xlarge'
 
-  %div
-    = f.label :email, t('labels.email')
-    = f.email_field :email
+    .control-group
+      = f.label :phone, t('users.signup.phone'), :class => 'control-label', :class => 'control-label'
+      .controls
+        = f.telephone_field :phone, :class => 'input-xlarge'
 
-  %div
-    = f.label :password, t('labels.password')
-    = f.password_field :password, :value => ''
+    %legend= t('users.signup.organisation_details')
 
-    = f.label :password_confirmation, t('labels.passwordconfirmation')
-    = f.password_field :password_confirmation
+    .control-group
+      = f.label t('users.signup.organisation_type'), :class => 'control-label'
+      .controls
+        .btn-group{ 'data-toggle' => 'buttons-radio', 'data-target' => 'organisation' }
+          %button{ :type => 'button', :class => 'btn active', :value => 'person' }
+            = t('users.signup.organisation_person')
+          %button{ :type => 'button', :class => 'btn', :value => 'business' }
+            = t('users.signup.organisation_business')
+        %input{ :type => 'hidden', :id => 'user_organisation', :name => 'user[organisation]' }
 
+    %legend= t('users.signup.site_details')
 
-  %div
-    = f.radio_button(:organisation, "person", :checked => true)
-    = f.label :organisation_person, t('labels.organisation_person')
-    = f.radio_button(:organisation, "business")
-    = f.label :organisation_business, t('labels.organisation_business')
+    = f.fields_for :sites do |s|
+      .control-group
+        = s.label :name, t('users.signup.site_name'), :class => 'control-label'
+        .controls
+          = s.text_field :name, :class => 'input-xlarge'
 
+      .control-group
+        = s.label :url, t('users.signup.site_url'), :class => 'control-label'
+        .controls
+          = s.url_field :url, :class => 'input-xlarge'
 
-  = f.fields_for :sites do |s|
-    %div
-      = s.label :name, t('labels.sitename')
-      = s.text_field :name
-      = s.label :url, t('labels.url')
-      = s.url_field :url
-      = s.label :website, t('labels.websitecategory')
-      = collection_select(:sites, :category_id, Category.all, :id, :name)
-      = s.link_to_remove "Site verwijderen"
-  %h3 Voeg uw website toe
-  =f.link_to_add "Voeg een site toe", :sites
+      .control-group
+        = s.label :website, t('users.signup.site_category'), :class => 'control-label'
+        .controls
+          = collection_select(:sites, :category_id, Category.all, :id, :name)
+          = s.link_to_remove t('users.signup.remove_site')
 
-  %div
-    = f.label :comment, t('labels.commentsub')
-    %br
-    = f.text_area :comment, :size => "120x5"
+    = f.link_to_add :sites, :class => 'btn pull-right' do
+      %i.icon-plus
+      = t('users.signup.add_site')
 
+    %legend= t('users.signup.comments')
 
-  %div
-    = f.submit t('labels.signup')
+    .control-group
+      = f.text_area :comment, :class => 'span12'
+
+    .form-actions
+      = f.submit t('users.signup.submit'), :class => 'btn btn-success'
 
 = render "devise/shared/links"

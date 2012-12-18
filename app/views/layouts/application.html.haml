@@ -6,7 +6,7 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body
-    %header#header.navbar.navbar-fixed-top
+    %header#header.navbar
       .navbar-inner
         .container-fluid
           = link_to t(:company), 'http://www.adspire.nl', :class => 'brand'
@@ -24,12 +24,12 @@
         %nav#nav-container.span2
           %ul#nav.nav.nav-pills.nav-stacked
             = active_link_to t(:dashboard), root_path, :wrap_tag => :li
-            = active_link_to t(:profile), edit_user_registration_path, :wrap_tag => :li
+            = active_link_to t('users.nav'), edit_user_registration_path, :wrap_tag => :li
             - if params['controller'] == 'users/registrations'
               %ul
                 = active_link_to t(:edit_profile), edit_user_registration_path, :wrap_tag => :li
                 = active_link_to t(:notifications), notifications_settings_path, :wrap_tag => :li
-            = active_link_to t(:feeds), feeds_path, :wrap_tag => :li
+            = active_link_to t('feeds.nav'), feeds_path, :wrap_tag => :li
             - if params['controller'] == 'feeds'
               %ul
                 = active_link_to t(:own_feeds), own_feeds_path, :wrap_tag => :li
@@ -41,8 +41,9 @@
                 = active_link_to t(:all_sites), sites_path, :wrap_tag => :li
                 = active_link_to t(:new_site), new_site_path, :wrap_tag => :li
         %section#content.span8
-          - if notice
-            = notice
+          - flash.each do |k, v|
+            %div{ :id => k, :class => 'alert' }
+              = v
           = yield
         %aside#notifications.span2
           %ul.nav.nav-list.well
