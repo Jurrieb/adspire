@@ -24,7 +24,7 @@
         %nav#nav-container.span2
           %ul#nav.nav.nav-pills.nav-stacked
             = active_link_to t(:dashboard), root_path, :wrap_tag => :li
-            = active_link_to t(:profile), edit_user_registration_path, :wrap_tag => :li
+            = active_link_to t('users.nav'), edit_user_registration_path, :wrap_tag => :li
             - if params['controller'] == 'users/registrations'
               %ul
                 = active_link_to t(:edit_profile), edit_user_registration_path, :wrap_tag => :li

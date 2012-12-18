@@ -7,7 +7,7 @@ nl:
       less_than_x_minutes: 
         one: "%{count} minuut geleden"
         other: "%{count} minuut geleden"
-  company: "Adspire"
+  company: "AdSpire"
   common:
     back: "Terug"
   # Labels
@@ -102,6 +102,41 @@ nl:
       title: "Voeg een feed toe"
       type_use_file: "Methode"
       url: "URL"
+
+  # Users
+  users:
+    # Nav
+    nav: "Profiel"
+
+    # Edit
+    edit:
+      email: "E-mailadres"
+      login_details: "Login gegevens wijzigen"
+      password: "Wachtwoord"
+      password_confirmation: "Wachtwoord herhalen"
+      password_leave_blank: "Laat wachtwoordveld leeg wanneer u deze niet wilt veranderen"
+      title: "Profiel wijzigen"
+      profile_details: "Profiel gegevens wijzigen"
+      name: "Voornaam"
+      surname: "Achternaam"
+      street: "Straat"
+      housenumber: "Huisnummer"
+      zip: "Postcode"
+      place: "Plaats"
+      phone: "Telefoon"
+      organisation_details: "Organisatie gegevens wijzigen"
+      organisation_type: "Type organisatie"
+      organisation_name: "Organisatie naam"
+      organisation_person: "Persoon"
+      organisation_business: "Bedrijf"
+      organisation_btw: "BTW"
+      organisation_kvk: "KvK"
+      confirm_changes: "Vul uw wachtwoord ter controle om uw wijzigingen op te slaan"
+      submit: "Wijzigingen opslaan"
+      cancel_account: "Account opzeggen"
+      cancel_text: "Weet je zeker dat je wilt opzeggen? Klik dan op onderstaande knop:"
+      cancel_submit: "Verwijder account"
+      cancel_confirm: "Weet u dit zeker?"
 
   errors:
     messages:
