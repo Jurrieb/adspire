@@ -41,8 +41,9 @@
                 = active_link_to t(:all_sites), sites_path, :wrap_tag => :li
                 = active_link_to t(:new_site), new_site_path, :wrap_tag => :li
         %section#content.span8
-          - if notice
-            = notice
+          - flash.each do |k, v|
+            %div{ :id => k, :class => 'alert' }
+              = v
           = yield
         %aside#notifications.span2
           %ul.nav.nav-list.well
