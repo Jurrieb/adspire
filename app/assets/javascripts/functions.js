@@ -14,7 +14,8 @@ $(function() {
 		var form_data = $(this).parents('form').attr('data');
 		var target = $(this).attr('data-target');
 		var value = $(this).parent().find('input[type="hidden"]').val();
-		var toggle = value == 't' || value == 'f';
+		console.log(value);
+		var toggle = value == 't' || value == 'f' || value == true || value == false;
 
 		if(toggle) {
 			value = value == 't' ? 1 : 0;
