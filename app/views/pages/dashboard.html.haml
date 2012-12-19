@@ -3,7 +3,7 @@
 #graph
 
 :javascript
-	var json_data = ""; 
+	var json_data; 
 	$(document).ready(function() {
 		$.getJSON('statistics.json?&variable=json_data', { 
 			filter: json_data 
@@ -13,21 +13,14 @@
 					alert('no data');
 				} else {
 					$(function() {
+						
 						Morris.Line({
 							element: 'graph',
 							smooth: false,
-							data: [
-								{y: '2012', a: 100},
-								{y: '2011', a: 75},
-								{y: '2010', a: 0},
-								{y: '2009', a: 75},
-								{y: '2008', a: 50},
-								{y: '2007', a: 75},
-								{y: '2006', a: 100}
-							],
+							data: json_data,
 							xkey: 'y',
-							ykeys: ['a'],
-							labels: ['a'],	
+							ykeys: ['click'],
+							labels: ['Click'],	
 						});
 					});
 				}
