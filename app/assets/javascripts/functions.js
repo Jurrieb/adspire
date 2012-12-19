@@ -14,7 +14,6 @@ $(function() {
 		var form_data = $(this).parents('form').attr('data');
 		var target = $(this).attr('data-target');
 		var value = $(this).parent().find('input[type="hidden"]').val();
-		console.log(value);
 		var toggle = value == 't' || value == 'f';
 
 		if(toggle) {
@@ -38,7 +37,17 @@ $(function() {
 	});
 
 
-	// Feed fields, open when value is selected
+	// Feeds
+	// New feed
+	$('.btn-group[data-target="method_type"] > button').click(function() {
+		if(!$(this).hasClass('active')) {
+			$(this).parents('form').find('div.'+$(this).val()).toggle();
+			$(this).parents('form').find('div.'+$(this).prev().val()).hide();
+			$(this).parents('form').find('div.'+$(this).next().val()).hide();
+		}
+	});
+
+	// Feeds fields, open when value is selected
 	$('form[id^="edit_feed"] > fieldset > div.control-group').each(function() {
 		var open = false;
 		$(this).find('select > option[selected]').each(function() {
