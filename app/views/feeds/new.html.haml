@@ -17,7 +17,7 @@
         .btn-group{ 'data-toggle' => 'buttons-radio', 'data-target' => 'feed_method_type' }
           %button{ :type => 'button', :class => 'btn active', :value => 'use_url' }
             = t('feeds.new.url')
-          %button{ :type => 'button', :class => 'btn', :value => 'use_file' }
+          %button{ :type => 'button', :class => 'btn btn-small', :value => 'use_file' }
             = t('feeds.new.file')
           = f.hidden_field :method_type
     .control-group

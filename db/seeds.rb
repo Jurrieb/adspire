@@ -38,8 +38,9 @@ u.save!(:validate => false)
 User.find_by_email('info@adspire.nl').roles << Role.find_by_name('admin')
 
 100.times do
-	Click.create(:user_id => '1', :product_id => 1234, :referer => "test", :ip_client => "127.0.0.1", :created_at => DateTime.now - rand(1...31))
+	Click.create(:user_id => '1', :product_id => 1234, :referer => "test", :ip_client => "127.0.0.1", :created_at => DateTime.now - rand(1...31).days)
 end
 
-
-
+100.times do
+	Lead.create(:user_id => '1', :click_id => rand(1...100), :status => rand(1...3), :created_at => DateTime.now - rand(1...31).days)
+end

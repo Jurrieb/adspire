@@ -66,9 +66,9 @@
 			= f.label t('users.edit.organisation_type'), :class => 'control-label'
 			.controls
 				.btn-group{ 'data-toggle' => 'buttons-radio', 'data-target' => 'organisation_type' }
-					%button{ :type => 'button', :class => 'btn active', :value => 'person'}
+					%button{ :type => 'button', :class => 'btn btn-small active', :value => 'person'}
 						= t('users.edit.organisation_person')
-					%button{ :type => 'button', :class => 'btn', :value => 'business' }
+					%button{ :type => 'button', :class => 'btn btn-small', :value => 'business' }
 						= t('users.edit.organisation_business')
 				%input{ :type => 'hidden', :id => 'organisation_type', name: 'user[organisation]' }
 
