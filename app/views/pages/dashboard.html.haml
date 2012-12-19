@@ -2,6 +2,8 @@
 
 #graph
 
+=debug(@combined_results)
+
 :javascript
 	var json_data; 
 	$(document).ready(function() {
@@ -16,11 +18,11 @@
 						
 						Morris.Line({
 							element: 'graph',
-							smooth: false,
+							smooth: true,
 							data: json_data,
 							xkey: 'y',
-							ykeys: ['click'],
-							labels: ['Click'],	
+							ykeys: ['click', 'lead'],
+							labels: ['Click', 'lead'],	
 						});
 					});
 				}
