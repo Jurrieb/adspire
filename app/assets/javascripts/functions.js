@@ -59,7 +59,7 @@ $(function() {
 
 		if(open) {
 			$(this).find('a').toggleClass('btn-success btn-danger').find('i').toggleClass('icon-plus icon-minus');
-			$(this).find('a > span').text('Remove Field');
+			$(this).find('a > span').text('');
 		}
 	});
 
@@ -71,5 +71,5 @@ function toggleField(el) {
 	$(el).toggleClass('btn-success btn-danger');
 	$(el).find('i').toggleClass('icon-plus icon-minus');
 	$(el).prev().toggle().find('option').attr('selected',false).first().attr('selected',true);
-	$(el).find('span').text($(el).find('i').hasClass('icon-plus')?'Use Field':'Remove Field');
+	$(el).find('span').text($(el).find('i').hasClass('icon-plus')?'Use Field':'');
 }

@@ -15,12 +15,11 @@ body {
 	}
 
 #notifications {
-	position: relative;
+
 }
 	#notifications > ul {
 		padding-top: 8px;
 		padding-bottom: 8px;
-		position: fixed;
 	}
 	#notifications:hover a.settings {
 		visibility: visible !important;
