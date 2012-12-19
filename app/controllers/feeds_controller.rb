@@ -29,10 +29,10 @@ class FeedsController < ApplicationController
     end
     @feed.user_id = current_user.id
     @feed.status = 'created'
+    @feed.delay.map_feed
     respond_to do |format|
       if @feed.save
-        @feed.delay.map_feed
-        format.html { redirect_to feeds_path, notice: 'Feed was successfully created.' }
+        format.html { redirect_to own_feeds_path, notice: 'Feed was successfully created.' }
         format.json { render json: @feed, status: :created, location: @feed }
       else
         format.html { render action: "new" }
@@ -48,9 +48,12 @@ class FeedsController < ApplicationController
 
   def update_fields
     @feed = Feed.find(params[:id])
+    @fields = Field.all
+    @feed.status = 'active'
+    @feed.delay.parse_feed
     respond_to do |format|
       if @feed.update_attributes(params[:feed])
-        format.html { redirect_to own_feeds_path, notice: 'Feed was successfully updated.' }
+        format.html { redirect_to :action => 'fields', :id => @feed.id}
         format.json { head :no_content }
       else
         format.html { render action: "fields" }
@@ -69,10 +72,9 @@ class FeedsController < ApplicationController
           newkey = ForeignCategory.where({:name => key, :feed_id => @feed.id}).last
           newkey.category_id = value
           newkey.save
-        end  
-        redirect_to own_feeds_path, notice: 'Categories where successfully saved.'    
-        @feed.status = 'active'  
-        @feed.save  
+        end   
+        @feed.delay.parse_feed
+        redirect_to own_feeds_path, notice: 'Categories where successfully saved.'   
       end
     else
       redirect_to own_feeds_path, notice: 'Categorien kunnen niet worden aangepast.' 

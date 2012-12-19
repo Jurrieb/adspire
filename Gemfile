@@ -48,7 +48,7 @@ gem 'cancan'
 # Cronjob
 gem "clockwork", "~> 0.4.1"
 gem 'delayed_job_active_record'
-gem "daemons-rails", "~> 1.1.0"
+gem "daemons"
 
 # Add active links to navigation
 gem 'active_link_to'
