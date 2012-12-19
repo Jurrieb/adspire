@@ -23,12 +23,11 @@ Datafeeds::Application.routes.draw do
 
   resources :sites
 
-  resources :categories
-
   resources :feeds do
     collection do
-      match "/own" => 'feeds#index_own'
-      match "/fields/:id" => 'feeds#fields'
+      match "/own" => 'feeds#own_feeds'
+      get "/fields/:id" => 'feeds#fields'
+      put "/fields/:id" => 'feeds#update_fields'
       match "/categories/:id" => 'feeds#categories'
       post 'update_fields'
       match '/filter' => 'feeds#filter'
@@ -46,5 +45,9 @@ Datafeeds::Application.routes.draw do
 
   get "notifications/settings"
   put "notifications/settings_update"
+
+  namespace :admin do
+      resources :users
+  end
 
 end

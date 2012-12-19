@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 
   def fetch_notifications
   	if !current_user.blank?
-  		@notifications = Notification.where({:deleted => false, :user_id => current_user.id}) 
+  		@notifications = Notification.where({:deleted => false, :user_id => current_user.id}).order('created_at DESC').limit(8)
   	else
   		@notifications = Array.new
   	end

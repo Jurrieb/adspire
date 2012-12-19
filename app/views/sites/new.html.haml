@@ -1,15 +1,22 @@
-%h2= t('labels.newsite')
+= form_for @site, :html => { :class => 'form-horizontal' } do |s|
+  %fieldset
+    %legend= t('labels.newsite')
 
-= form_for(@site) do |s|
-  %div
-    = s.label :name, t('labels.sitename')
-    = s.text_field :name
-    = s.label :url, t('labels.url')
-    = s.text_field :url
-    = s.label :category_id, t('labels.websitecategory')
-    = s.collection_select :category_id, Category.all, :id, :name
-    = s.label :active, t('labels.active')
-    = s.check_box :active
-    = s.label :description, t('labels.description')
-    = s.text_area :description
-  = s.submit t('labels.editsite')
+    .control-group
+      = s.label :name, t('labels.sitename'), :class => 'control-label'
+      .controls
+        = s.text_field :name, :class => 'input-xlarge'
+    .control-group
+      = s.label :url, t('labels.url'), :class => 'control-label'
+      .controls
+        = s.text_field :url, :class => 'input-xlarge'
+    .control-group
+      = s.label :category_id, t('labels.websitecategory'), :class => 'control-label'
+      .controls
+        = s.collection_select :category_id, Category.all, :id, :name
+    .control-group
+      = s.label :description, t('labels.description'), :class => 'control-label'
+      .controls
+        = s.text_area :description, :class => 'input-xxlarge'
+    .form-actions
+      = s.submit t('labels.editsite'), :class => 'btn btn-success'

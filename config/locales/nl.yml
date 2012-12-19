@@ -1,9 +1,13 @@
 nl:
   datetime:
     distance_in_words:
-      x_minutes: "%{count} minuten geleden"
-      less_than_x_minutes: "%{count} minuut geleden"
-  company: "Adspire"
+      x_minutes: 
+        one: "%{count} minuut geleden"
+        other: "%{count} minuten geleden"
+      less_than_x_minutes: 
+        one: "%{count} minuut geleden"
+        other: "%{count} minuut geleden"
+  company: "AdSpire"
   common:
     back: "Terug"
   # Labels
@@ -67,6 +71,95 @@ nl:
     # Devise
     sign_in: "Inloggen"
 
+  # Feeds
+  feeds:
+    # Nav
+    nav: "Feeds"
+
+    # Index
+
+    # Index own
+    index_own:
+      add_feed: "Voeg feed toe"
+      categories: "Categorieën"
+      category: "Categorie"
+      delete: "Verwijderen"
+      delete_confirm: "Weet u dit zeker?"
+      download: "Downloaden"
+      edit: "Bewerken"
+      fields: "Selecteer"
+      list_feeds: "Overzicht feeds"
+      name: "Naam"
+      segment: "Segmenteren"
+      title: "Mijn feeds"
+
+    # New feed
+    new:
+      file: "Bestand"
+      interval_in_seconds: "Vernieuwings interval"
+      name: "Naam"
+      submit: "Inlezen"
+      title: "Voeg een feed toe"
+      type_use_file: "Methode"
+      url: "URL"
+
+  # Users
+  users:
+    # Nav
+    nav: "Profiel"
+
+    # Signup
+    signup: 
+      add_site: "Site toevoegen"
+      comments: "Overige opmerkingen"
+      email: "E-mailadres"
+      login_details: "Login gegevens"
+      name: "Voornaam"
+      organisation_business: "Bedrijf"
+      organisation_details: "Organisatie gegevens"
+      organisation_person: "Persoon"
+      organisation_type: "Organisatie type"
+      password: "Wachtwoord"
+      password_confirmation: "Wachtwoord herhalen"
+      phone: "Telefoon"
+      profile_details: "Profiel gegevens"
+      remove_site: "Site verwijderen"
+      site_category: "Categorie"
+      site_details: "Website gegevens"
+      site_url: "URL"
+      submit: "Registreren"
+      surname: "Achternaam"
+      title: "Registreren"
+
+    # Edit
+    edit:
+      cancel_account: "Account opzeggen"
+      cancel_confirm: "Weet u dit zeker?"
+      cancel_submit: "Verwijder account"
+      cancel_text: "Weet je zeker dat je wilt opzeggen? Klik dan op onderstaande knop:"
+      confirm_changes: "Vul uw wachtwoord ter controle om uw wijzigingen op te slaan"
+      email: "E-mailadres"
+      housenumber: "Huisnummer"
+      login_details: "Login gegevens wijzigen"
+      name: "Voornaam"
+      organisation_btw: "BTW"
+      organisation_business: "Bedrijf"
+      organisation_details: "Organisatie gegevens wijzigen"
+      organisation_kvk: "KvK"
+      organisation_name: "Organisatie naam"
+      organisation_person: "Persoon"
+      organisation_type: "Type organisatie"
+      password: "Wachtwoord"
+      password_confirmation: "Wachtwoord herhalen"
+      password_leave_blank: "Laat wachtwoordveld leeg wanneer u deze niet wilt veranderen"
+      phone: "Telefoon"
+      place: "Plaats"
+      profile_details: "Profiel gegevens wijzigen"
+      street: "Straat"
+      submit: "Wijzigingen opslaan"
+      surname: "Achternaam"
+      title: "Profiel wijzigen"
+      zip: "Postcode"
 
   errors:
     messages:

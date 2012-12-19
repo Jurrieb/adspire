@@ -3,10 +3,12 @@ class Feed < ActiveRecord::Base
 	require 'nokogiri'
 	require 'open-uri' 
 
-	attr_accessible :name, :url, :xml_path, :feed_path, :interval_in_seconds, :last_parse, :method_type
 	has_many :products
-	has_many :datafeed_keys, :dependent => :delete_all
+	has_many :feednodes, :autosave => true
 	has_many :foreign_categories, :dependent => :delete_all
+
+	attr_accessible :name, :url, :xml_path, :feed_path, :interval_in_seconds, :last_parse, :method_type, :feednodes_attributes
+	accepts_nested_attributes_for :feednodes, :allow_destroy => true
 
 	validates :name, :presence => true
 	validates :interval_in_seconds, :presence => true
@@ -46,8 +48,8 @@ class Feed < ActiveRecord::Base
 		end
 
 		foreign_keys.uniq.each do |key|
-			if !DatafeedKey.find(:first, :conditions => {:feed_id => self.id,:name => key})
-				newkey = DatafeedKey.new
+			if !Feednode.find(:first, :conditions => {:feed_id => self.id,:name => key})
+				newkey = Feednode.new
 				newkey.feed_id = self.id
 				newkey.name = key
 				newkey.save

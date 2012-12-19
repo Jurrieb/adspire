@@ -16,7 +16,7 @@ end
 
 while($running) do
   
-	feed = Feed.find(:first, :conditions => {:status => 'active'}, :order => "last_parse") 
+	feed = Feed.find(:first, :conditions => {:status => 'active'}).order('last_parse ASC')
 	if feed 
 		feed.last_parse = Time.now
 		feed.save

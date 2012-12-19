@@ -2,31 +2,31 @@
 
   %fieldset
     %legend
-      = t(:new_feed)
+      = t('feeds.new.title')
     .control-group
-      = f.label t(:name), :class => 'control-label'
+      = f.label t('feeds.new.name'), :class => 'control-label'
       .controls
         = f.text_field :name
     .control-group
-      = f.label t(:interval_in_seconds), :class => 'control-label'
+      = f.label t('feeds.new.interval_in_seconds'), :class => 'control-label'
       .controls
         = f.select(:interval_in_seconds, options_for_select([['12 uur', '43200'],['24 uur', '86400'],['48 uur', '172800'], ['72 uur', '199200']]))
     .control-group
-      = f.label t(:type_use_file), :class => 'control-label'
+      = f.label t('feeds.new.type_use_file'), :class => 'control-label'
       .controls
         .btn-group{ 'data-toggle' => 'buttons-radio', 'data-target' => 'method_type' }
           %button{ :type => 'button', :class => 'btn active', :value => 'use_url' }
-            Url
+            = t('feeds.new.url')
           %button{ :type => 'button', :class => 'btn', :value => 'use_file' }
-            File
+            = t('feeds.new.file')
         %input{ :type => 'hidden', :id => 'method_type', :name => 'feed[method_type]' }
     .control-group
-      = f.label t(:url), :class => 'control-label'
+      = f.label t('feeds.new.url'), :class => 'control-label'
       .controls
         = f.text_field :url
     .control-group
-      = f.label t(:file), :class => 'control-label'
+      = f.label t('feeds.new.file'), :class => 'control-label'
       .controls
         = file_field_tag :file
     .form-actions
-      = submit_tag "Inlezen", :class => 'btn btn-success'
+      = submit_tag t('feeds.new.submit'), :class => 'btn btn-success'

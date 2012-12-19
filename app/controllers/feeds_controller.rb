@@ -32,7 +32,7 @@ class FeedsController < ApplicationController
     respond_to do |format|
       if @feed.save
         @feed.delay.map_feed
-        format.html { redirect_to own_feeds_path, notice: 'Feed was successfully created.' }
+        format.html { redirect_to feeds_path, notice: 'Feed was successfully created.' }
         format.json { render json: @feed, status: :created, location: @feed }
       else
         format.html { render action: "new" }
@@ -42,22 +42,20 @@ class FeedsController < ApplicationController
   end
 
   def fields
-    @feed = Feed.where({:status => ['user_fields', 'active'], :id => params[:id]}).last
-    if @feed 
-      @foreign_fields = DatafeedKey.where(:feed_id => @feed.id)
-      @fields = Field.all
-      if params[:commit]
-        params[:keys].each do |key, value|
-          newkey = DatafeedKey.where({:name => key, :feed_id => @feed.id}).last
-          newkey.field_id = value
-          newkey.save
-        end
-        @feed.status = 'active'
-        @feed.save
-        redirect_to own_feeds_path, notice: 'Feed was successfully created.' 
+   @feed = Feed.where({:status => ['user_fields', 'active'], :id => params[:id]}).last
+   @fields = Field.all
+  end
+
+  def update_fields
+    @feed = Feed.find(params[:id])
+    respond_to do |format|
+      if @feed.update_attributes(params[:feed])
+        format.html { redirect_to own_feeds_path, notice: 'Feed was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "fields" }
+        format.json { render json: @feed.errors, status: :unprocessable_entity }
       end
-    else
-      redirect_to own_feeds_path, notice: 'Velden kunnen niet worden aangepast.' 
     end
   end
 
@@ -82,19 +80,17 @@ class FeedsController < ApplicationController
   end
 
   def index
-    @feeds = Feed.find(:all, :conditions => {:status => 'active'}) 
-
+      @feeds = Feed.find(:all, :conditions => {:status => 'active'}) 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @feeds }
     end
   end
 
-  def index_own
+  def own_feeds
     @feeds = Feed.find(:all, :conditions => {:user_id => current_user.id}) 
-
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render action: "index"}
       format.json { render json: @feeds }
     end
   end
