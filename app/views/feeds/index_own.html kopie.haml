@@ -3,7 +3,7 @@
 %fieldset
   %legend= t('feeds.index_own.list_feeds')
  
-%table.table.table-hover.table-striped
+%table.table.table-hover
   %thead
     %tr
       %th= t('feeds.index_own.name')
@@ -37,16 +37,12 @@
             %td
             %td
           %td
-          %td{ :style => 'padding:4px' }
-            = form_tag feed, :method => :delete, :style => 'margin: 0' do
-              .btn-group.pull-right
-                = link_to edit_feed_path(feed), :class => 'btn btn-small' do
-                  %i.icon-pencil
-                %button{ :onclick => "return confirm('#{t('feeds.index_own.delete_confirm')}')", :class => 'btn btn-danger btn-small' }
-                  %i.icon-white.icon-trash
-  %tfoot
-    %tr
-      %td{ :colspan => 7 }
-        = link_to new_feed_path, :class => 'btn btn-small btn-success' do
-          %i.icon-white.icon-plus
-          = t('feeds.index_own.add_feed')
+          %td
+            = form_tag feed, :method => :delete, :style => 'margin-bottom: 0' do
+              .btn-group
+
+                = submit_tag t('feeds.index_own.delete'), :onclick => "return confirm('#{t('feeds.index_own.delete_confirm')}')", :class => 'btn btn-danger btn-small'
+
+= link_to new_feed_path, :class => 'btn btn-success' do
+  %i.icon-white.icon-plus
+  = t('feeds.index_own.add_feed')
