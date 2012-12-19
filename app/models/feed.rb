@@ -13,9 +13,6 @@ class Feed < ActiveRecord::Base
 	validates :name, :presence => true
 	validates :interval_in_seconds, :presence => true
 
-	validates_presence_of :url, :unless => :file?
-	validates_presence_of :file, :unless => :url?
-
 	RECORDS = Hash.new
 
 	def map_feed
