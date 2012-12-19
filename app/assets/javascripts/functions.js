@@ -37,13 +37,29 @@ $(function() {
 		});
 	});
 
+
+	// Feed fields, open when value is selected
+	$('form[id^="edit_feed"] > div.control-group').each(function() {
+		var open = false;
+		$(this).find('select > option[selected]').each(function() {
+			if($(this).text() != 'dont use') {
+				$(this).parents('span').show();
+				open = true;
+			}
+		});
+
+		if(open) {
+			$(this).find('a > i').toggleClass('icon-plus icon-minus');
+			$(this).find('a > span').text('Remove Field');
+		}
+	});
+
 });
 
 // Feeds
 // Fields
 function toggleField(el) {
-	$(el).prev().find('select > option:first-child').toggle();
 	$(el).find('i').toggleClass('icon-plus icon-minus');
-	$(el).prev().toggle();
+	$(el).prev().toggle().find('option').attr('selected',false).first().attr('selected',true);
 	$(el).find('span').text($(el).find('i').hasClass('icon-plus')?'Use Field':'Remove Field');
 }
