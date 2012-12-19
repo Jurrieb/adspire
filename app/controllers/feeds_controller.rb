@@ -32,7 +32,7 @@ class FeedsController < ApplicationController
     respond_to do |format|
       if @feed.save
         @feed.delay.map_feed
-        format.html { redirect_to feeds_path, notice: 'Feed was successfully created.' }
+        format.html { redirect_to own_feeds_path, notice: 'Feed was successfully created.' }
         format.json { render json: @feed, status: :created, location: @feed }
       else
         format.html { render action: "new" }
@@ -48,9 +48,11 @@ class FeedsController < ApplicationController
 
   def update_fields
     @feed = Feed.find(params[:id])
+    @fields = Field.all
+    @feed.delay.parse_feed
     respond_to do |format|
       if @feed.update_attributes(params[:feed])
-        format.html { redirect_to own_feeds_path, notice: 'Feed was successfully updated.' }
+        format.html { redirect_to :action => 'fields', :id => @feed.id}
         format.json { head :no_content }
       else
         format.html { render action: "fields" }

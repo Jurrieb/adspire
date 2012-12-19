@@ -14,12 +14,12 @@
     .control-group
       = f.label t('feeds.new.type_use_file'), :class => 'control-label'
       .controls
-        .btn-group{ 'data-toggle' => 'buttons-radio', 'data-target' => 'method_type' }
+        .btn-group{ 'data-toggle' => 'buttons-radio', 'data-target' => 'feed_method_type' }
           %button{ :type => 'button', :class => 'btn active', :value => 'use_url' }
             = t('feeds.new.url')
           %button{ :type => 'button', :class => 'btn', :value => 'use_file' }
             = t('feeds.new.file')
-        %input{ :type => 'hidden', :id => 'method_type', :name => 'feed[method_type]' }
+          = f.hidden_field :method_type
     .control-group
       = f.label t('feeds.new.url'), :class => 'control-label'
       .controls

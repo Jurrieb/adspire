@@ -15,11 +15,17 @@ class Feed < ActiveRecord::Base
 
 	RECORDS = Hash.new
 
+	def parse_feed
+		d = DelayedJob.first
+		d.queue = '2'
+		d.save
+	end
+
 	def map_feed
 		if self.feed_path == nil
 			if !self.url.blank?
-				open_uri_fetched = open(self.url)
-				doc = Nokogiri::XML(open(open_uri_fetched))
+				open_uri_fetched = open(self.url).read
+				doc = Nokogiri::XML(open_uri_fetched)
 			end
 		else
 			f = File.open(self.feed_path)

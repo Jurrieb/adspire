@@ -5,11 +5,11 @@
     .control-group
       = s.label :name, t('labels.sitename'), :class => 'control-label'
       .controls
-        = s.text_field :name, :class => 'input-xlarge'
+        = s.text_field :name, :class => 'input-large'
     .control-group
       = s.label :url, t('labels.url'), :class => 'control-label'
       .controls
-        = s.text_field :url, :class => 'input-xlarge'
+        = s.text_field :url, :class => 'input-large'
     .control-group
       = s.label :category_id, t('labels.websitecategory'), :class => 'control-label'
       .controls
@@ -17,6 +17,6 @@
     .control-group
       = s.label :description, t('labels.description'), :class => 'control-label'
       .controls
-        = s.text_area :description, :class => 'input-xxlarge'
+        = s.text_area :description, :cols => "40", :rows => "6", :class => 'input-xxlarge'
     .form-actions
       = s.submit t('labels.editsite'), :class => 'btn btn-success'

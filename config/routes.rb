@@ -26,10 +26,9 @@ Datafeeds::Application.routes.draw do
   resources :feeds do
     collection do
       match "/own" => 'feeds#own_feeds'
-      get "/fields/:id" => 'feeds#fields'
-      put "/fields/:id" => 'feeds#update_fields'
       match "/categories/:id" => 'feeds#categories'
-      post 'update_fields'
+      put 'update_fields'
+      get 'fields/:id' => 'feeds#fields'
       match '/filter' => 'feeds#filter'
     end
     resources :products
