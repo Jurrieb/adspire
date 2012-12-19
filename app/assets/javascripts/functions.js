@@ -32,14 +32,14 @@ $(function() {
 			
 			if(toggle) {
 				$(this).parent().find('button').removeClass('btn-success btn-danger');
-				$(this).addClass($(this).val()==1?'btn-success':'btn-danger')
+				$(this).addClass($(this).val()==1?'btn-success':'btn-danger');
 			}
 		});
 	});
 
 
 	// Feed fields, open when value is selected
-	$('form[id^="edit_feed"] > div.control-group').each(function() {
+	$('form[id^="edit_feed"] > fieldset > div.control-group').each(function() {
 		var open = false;
 		$(this).find('select > option[selected]').each(function() {
 			if($(this).text() != 'dont use') {
@@ -49,7 +49,7 @@ $(function() {
 		});
 
 		if(open) {
-			$(this).find('a > i').toggleClass('icon-plus icon-minus');
+			$(this).find('a').toggleClass('btn-success btn-danger').find('i').toggleClass('icon-plus icon-minus');
 			$(this).find('a > span').text('Remove Field');
 		}
 	});
@@ -59,6 +59,7 @@ $(function() {
 // Feeds
 // Fields
 function toggleField(el) {
+	$(el).toggleClass('btn-success btn-danger');
 	$(el).find('i').toggleClass('icon-plus icon-minus');
 	$(el).prev().toggle().find('option').attr('selected',false).first().attr('selected',true);
 	$(el).find('span').text($(el).find('i').hasClass('icon-plus')?'Use Field':'Remove Field');
