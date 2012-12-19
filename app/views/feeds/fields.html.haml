@@ -1,12 +1,13 @@
-
-= form_for @feed, :url => {:action => :update_fields, :id => @feed.id} do |f|
-  = f.fields_for :feednodes do |d|
-    .control-group
-      = label_tag d.object.name, nil, :class => 'control-label'
-      .controls
-        %span.hide.options= d.select(:field_id, options_from_collection_for_select(@fields, "id", "name", d.object.field_id))
-        %a.btn.btn-small{ :onclick => 'toggleField(this)' }
-          %i.icon-plus
-          %span= t('feeds.fields.use_field')
-  .form-actions
-    = f.submit t(:add_fields), :class => 'btn btn-success' 
+= form_for @feed, :url => {:action => :update_fields, :id => @feed.id}, :html => { :class => 'form-horizontal' } do |f|
+  %fieldset
+    %legend Feed velden
+    = f.fields_for :feednodes do |d|
+      .control-group
+        = label_tag d.object.name, nil, :class => 'control-label'
+        .controls
+          %span.hide.options= d.select(:field_id, options_from_collection_for_select(@fields, "id", "name", d.object.field_id))
+          %a.btn.btn-small.btn-success{ :onclick => 'toggleField(this)' }
+            %i.icon-white.icon-plus
+            %span= t('feeds.fields.use_field')
+    .form-actions
+      = f.submit t(:add_fields), :class => 'btn btn-success'
