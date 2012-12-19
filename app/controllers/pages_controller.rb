@@ -6,31 +6,22 @@ class PagesController < ApplicationController
 
   def dashboard
 
-	KEUZE TUSSEN PG EN SQL
-		
-	# Postgresql
-	#@clicks = Click.select("count(*) as c, date_part('year', created_at) as y, date_part('month', created_at) as m").
-    #            group("y", "m").
-    #            where({:user_id => current_user.id})
-
-    #SQL
-
-    #@clicks = Click.select("count(distinct(id)) as id, date_trunc('month', created_at) as date")
-    # .group('date')
-
-            
-
-
-
-	#@clicks = Click.where({:user_id => current_user.id}).count(:group => "strftime('%m',date")
-	# @leads = Lead.where({:user_id => current_user.id}).count(:group => "strftime('%m',date")
-
-	#@leads += 999
-	#@clicks += 234
-
-	puts @clicks
-	#puts @leads
-
   end
 
+  def sendData 
+	# All clicks for current user
+	@clicks = Click.where(:user_id => current_user.id).order('created_at ASC')
+	# Group all clicks by month
+	@clicks_part = @clicks.group_by { |t| t.created_at.beginning_of_month }
+	# New array for graph
+	@graph = Array.new
+	# Add hash to Array with name and count
+	@clicks_part.sort.each do |month, counts|
+		@graph << { y: month.strftime('%B'), click: counts.count }
+	end
+	# Respond to JSON
+	respond_to do |format|
+		format.json { render json: @graph }
+	end
+  end
 end

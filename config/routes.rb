@@ -10,6 +10,8 @@ Datafeeds::Application.routes.draw do
 
   get "leads/update"
 
+  match "/statistics" => 'pages#sendData'
+
   match "/clicks" => 'clicks#create'
 
   post "/notifications/settings_update"

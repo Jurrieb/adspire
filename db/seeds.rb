@@ -38,5 +38,14 @@ u.save!(:validate => false)
 User.find_by_email('info@adspire.nl').roles << Role.find_by_name('admin')
 
 50.times do
-	Click.create(:user_id => '1', :product_id => 1234, :referer => "test", :ip_client => "127.0.0.1")
+	Click.create(:user_id => '1', :product_id => 1234, :referer => "test", :ip_client => "127.0.0.1", :created_at => DateTime.now - 1.month)
 end
+
+50.times do
+	Click.create(:user_id => '1', :product_id => 123456, :referer => "test", :ip_client => "127.0.0.1", :created_at => DateTime.now)
+end
+
+50.times do
+	Click.create(:user_id => '1', :product_id => 12345678, :referer => "test", :ip_client => "127.0.0.1", :created_at => DateTime.now - 2.month)
+end
+
