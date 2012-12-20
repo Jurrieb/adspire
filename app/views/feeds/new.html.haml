@@ -27,6 +27,6 @@
     .control-group.hide.use_file
       = f.label t('feeds.new.file'), :class => 'control-label'
       .controls
-        = file_field_tag :file
+        = file_field(:feed, :filename)
     .form-actions
       = submit_tag t('feeds.new.submit'), :class => 'btn btn-success'

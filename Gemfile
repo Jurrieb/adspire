@@ -22,6 +22,9 @@ group :assets do
   gem 'uglifier'
 end
 
+# Upload & image processing
+gem 'paperclip'
+
 # Nested form
 gem "nested_form"
 

@@ -9,29 +9,30 @@ class FeedsController < ApplicationController
   before_filter :authenticate_user!
 
   def new
-         notification = Notification.new
-      notification.user_id = params[:user_id]
-      notification.message = "U heeft een nieuwe click ontvangen."
-      notification.url = nil
-      notification.save
+    notification = Notification.new
+    notification.user_id = params[:user_id]
+    notification.message = "U heeft een nieuwe click ontvangen."
+    notification.url = nil
+    notification.save
     @feed = Feed.new
   end
 
   def create
     @feed = Feed.new(params[:feed])
-    if params[:file]
-      file = params[:file]
+    
+    if params[:feed][:filename]
+      file = params[:feed][:filename]
       directory = "public/uploads/"
-      tmp = params[:file].tempfile
-      file = File.join(directory, params[:file].original_filename)
+      tmp = params[:feed][:filename].tempfile
+      file = File.join(directory, params[:feed][:filename].original_filename)
       FileUtils.cp tmp.path, file
       @feed.feed_path = file
     end
     @feed.user_id = current_user.id
-    @feed.status = 'created'
-    @feed.delay.map_feed
+    @feed.status = 'created'  
     respond_to do |format|
       if @feed.save
+        @feed.delay.map_feed
         format.html { redirect_to own_feeds_path, notice: 'Feed was successfully created.' }
         format.json { render json: @feed, status: :created, location: @feed }
       else

@@ -7,14 +7,21 @@ class Feed < ActiveRecord::Base
 	has_many :feednodes, :autosave => true
 	has_many :foreign_categories, :dependent => :delete_all
 
-	attr_accessible :name, :url, :xml_path, :feed_path, :interval_in_seconds, :last_parse, :method_type, :feednodes_attributes
+	attr_accessible :name, :url, :xml_path, :feed_path, :interval_in_seconds, :last_parse, :method_type, :filename, :feednodes_attributes
 	accepts_nested_attributes_for :feednodes, :allow_destroy => true
+	has_attached_file :filename
 
 	validates :name, :presence => true
 	validates :interval_in_seconds, :presence => true
 
+	# File validations
+	validates_attachment_presence :filename, :unless => :url
+	validates_attachment_content_type :filename, :content_type => 'text/xml', :message => 'Moet een XML bestand zijn'
+	validates_attachment_size :filename, :less_than => 100.megabytes, :message => 'Moet kleiner zijn dan 100 MB'
+
 	RECORDS = Hash.new
 
+	
 	def parse_feed
 		self.last_parse = Time.now
 		self.save
@@ -148,5 +155,7 @@ class Feed < ActiveRecord::Base
 		end
 		sub_nodes.map { |n| self.fetch_node_name(n, depth+1) } if sub_nodes.length > 0
 	end
+
+
 
 end
