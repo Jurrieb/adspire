@@ -1,11 +1,30 @@
-%h2 Overzicht van websites
+%h2 Sites
 
-- @sites.each do |t|
-  %div
-    = t.name
-    = t.url
-    .btn-group
-      = link_to 'Edit', edit_site_path(t), :class => 'btn btn-small'
+%fieldset
+  %legend Overzicht sites
 
-      = form_tag t, :method => :delete, :style => 'margin-bottom: 0' do
-        = submit_tag 'Delete', :onclick => 'return confirm("Are you sure?")', :class => 'btn btn-danger btn-small'
+  %table.table.table-hover.table-striped
+    %thead
+      %tr
+        %th Naam
+        %th URL
+        %th
+    %tbody
+      - @sites.each do |t|
+        %tr
+          %td= t.name
+          %td
+            = link_to t.url, t.url
+          %td{ :style => 'padding:4px' }
+            = form_tag t, :method => :delete, :style => 'margin: 0' do
+              .btn-group.pull-right
+                = link_to edit_site_path(t), :class => 'btn btn-small' do
+                  %i.icon-pencil
+                %button{ :onclick => 'return confirm("Are you sure?")', :class => 'btn btn-danger btn-small' }
+                  %i.icon-white.icon-trash
+    %tfoot
+      %tr
+        %td{ :colspan => 3 }
+          = link_to new_site_path, :class => 'btn btn-small btn-primary' do
+            %i.icon-white.icon-plus
+            Add Site

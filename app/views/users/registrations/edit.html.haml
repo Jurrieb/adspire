@@ -1,103 +1,104 @@
 %h2= t('users.edit.title')
 
-= nested_form_for resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => 'form-horizontal' } do |f|
-	= devise_error_messages!
+= nested_form_for resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => 'form-horizontal', :data => 'user' } do |f|
+  = devise_error_messages!
 
-	%fieldset
-		%legend= t('users.edit.login_details')
+  %fieldset
+    %legend= t('users.edit.login_details')
 
-		.control-group
-			= f.label :email, t('users.edit.email'), :class => 'control-label', :class => 'control-label'
-			.controls
-				= f.email_field :email
-		
-		%p.text-info= t('users.edit.password_leave_blank')
+    .control-group
+      = f.label :email, t('users.edit.email'), :class => 'control-label', :class => 'control-label'
+      .controls
+        = f.email_field :email
+    
+    %p.text-info= t('users.edit.password_leave_blank')
 
-		.control-group
-			= f.label :password, t('users.edit.password'), :class => 'control-label'
-			.controls
-				= f.password_field :password, :value => ''
+    .control-group
+      = f.label :password, t('users.edit.password'), :class => 'control-label'
+      .controls
+        = f.password_field :password, :value => ''
 
-		.control-group
-			= f.label :password_confirmation, t('users.edit.password_confirmation'), :class => 'control-label'
-			.controls
-				= f.password_field :password_confirmation
+    .control-group
+      = f.label :password_confirmation, t('users.edit.password_confirmation'), :class => 'control-label'
+      .controls
+        = f.password_field :password_confirmation
 
-		%legend= t('users.edit.profile_details')
+    %legend= t('users.edit.profile_details')
 
-		.control-group
-			= f.label :name, t('users.edit.name'), :class => 'control-label'
-			.controls
-				= f.text_field :name
+    .control-group
+      = f.label :name, t('users.edit.name'), :class => 'control-label'
+      .controls
+        = f.text_field :name
 
-		.control-group
-			= f.label :lastname, t('users.edit.surname'), :class => 'control-label'
-			.controls
-				= f.text_field :lastname
+    .control-group
+      = f.label :lastname, t('users.edit.surname'), :class => 'control-label'
+      .controls
+        = f.text_field :lastname
 
-		.control-group
-			= f.label :street, t('users.edit.street'), :class => 'control-label'
-			.controls
-				= f.text_field :street
+    .control-group
+      = f.label :street, t('users.edit.street'), :class => 'control-label'
+      .controls
+        = f.text_field :street
 
-		.control-group
-			= f.label :housenumber, t('users.edit.housenumber'), :class => 'control-label'
-			.controls
-				= f.number_field :housenumber
+    .control-group
+      = f.label :housenumber, t('users.edit.housenumber'), :class => 'control-label'
+      .controls
+        = f.number_field :housenumber
 
-		.control-group
-			= f.label :zip, t('users.edit.zip'), :class => 'control-label'
-			.controls
-				= f.text_field :zip
+    .control-group
+      = f.label :zip, t('users.edit.zip'), :class => 'control-label'
+      .controls
+        = f.text_field :zip
 
-		.control-group
-			= f.label :place, t('users.edit.place'), :class => 'control-label'
-			.controls
-				= f.text_field :place
+    .control-group
+      = f.label :place, t('users.edit.place'), :class => 'control-label'
+      .controls
+        = f.text_field :place
 
-		.control-group
-			= f.label :phone, t('users.edit.phone'), :class => 'control-label'
-			.controls
-				= f.telephone_field :phone
+    .control-group
+      = f.label :phone, t('users.edit.phone'), :class => 'control-label'
+      .controls
+        = f.telephone_field :phone
 
-		%legend= t('users.edit.organisation_details')
+    %legend= t('users.edit.organisation_details')
 
-		.control-group
-			= f.label t('users.edit.organisation_type'), :class => 'control-label'
-			.controls
-				.btn-group{ 'data-toggle' => 'buttons-radio', 'data-target' => 'organisation_type' }
-					%button{ :type => 'button', :class => 'btn btn-small active', :value => 'person'}
-						= t('users.edit.organisation_person')
-					%button{ :type => 'button', :class => 'btn btn-small', :value => 'business' }
-						= t('users.edit.organisation_business')
-				%input{ :type => 'hidden', :id => 'organisation_type', name: 'user[organisation]' }
+    .control-group
+      = f.label t('users.edit.organisation_type'), :class => 'control-label'
+      .controls
+        .btn-group{ 'data-toggle' => 'buttons-radio', 'data-target' => 'organisation' }
+          %button{ :type => 'button', :class => 'btn btn-small', :value => 'person'}
+            = t('users.edit.organisation_person')
+          %button{ :type => 'button', :class => 'btn btn-small', :value => 'business' }
+            = t('users.edit.organisation_business')
+        = f.hidden_field :organisation
+        - #{ :type => 'hidden', :id => 'organisation_type', name: 'user[organisation]' }
 
-		.control-group
-			= f.label :company_name, t('users.edit.organisation_name'), :class => 'control-label'
-			.controls
-				= f.text_field :company_name
+    .control-group
+      = f.label :company_name, t('users.edit.organisation_name'), :class => 'control-label'
+      .controls
+        = f.text_field :company_name
 
-		.control-group
-			= f.label :btw, t('users.edit.organisation_btw'), :class => 'control-label'
-			.controls
-				= f.text_field :btw
+    .control-group
+      = f.label :btw, t('users.edit.organisation_btw'), :class => 'control-label'
+      .controls
+        = f.text_field :btw
 
-		.control-group
-			= f.label :kvk, t('users.edit.organisation_kvk'), :class => 'control-label'
-			.controls
-				= f.text_field :kvk
-		
-		%p.text-info= t('users.edit.confirm_changes')
-		
-		.control-group
-			= f.label :current_password, t('users.edit.password_confirmation'), :class => 'control-label'
-			.controls
-				= f.password_field :current_password
+    .control-group
+      = f.label :kvk, t('users.edit.organisation_kvk'), :class => 'control-label'
+      .controls
+        = f.text_field :kvk
+    
+    %p.text-info= t('users.edit.confirm_changes')
+    
+    .control-group
+      = f.label :current_password, t('users.edit.password_confirmation'), :class => 'control-label'
+      .controls
+        = f.password_field :current_password
 
-		.form-actions
-			= f.submit t('users.edit.submit'), :class => 'btn btn-success'
+    .form-actions
+      = f.submit t('users.edit.submit'), :class => 'btn btn-primary'
 
-		%legend= t('users.edit.cancel_account')
+    %legend= t('users.edit.cancel_account')
 
-		%p.text-error= t('users.edit.cancel_text')
-		= link_to t('users.edit.cancel_submit'), registration_path(resource_name), :onclick => "return confirm('#{t('users.edit.cancel_confirm')}')", :class => 'btn btn-danger'
+    %p.text-error= t('users.edit.cancel_text')
+    = link_to t('users.edit.cancel_submit'), registration_path(resource_name), :onclick => "return confirm('#{t('users.edit.cancel_confirm')}')", :class => 'btn btn-danger'

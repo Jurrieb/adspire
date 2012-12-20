@@ -14,16 +14,10 @@ $(function() {
 		var form_data = $(this).parents('form').attr('data');
 		var target = $(this).attr('data-target');
 		var value = $(this).parent().find('input[type="hidden"]').val();
-		var toggle = value == 't' || value == 'f';
-
-		if(toggle) {
-			value = value == 't' ? 1 : 0;
-		}
-
-		$('#'+form_data+'_'+target).val(value);
+		var toggle = $(this).attr('data-type') == 'boolean';
 		
 		if(toggle) {
-			$(this).find('button[value="'+value+'"]').addClass('active '+(value?'btn-success':'btn-danger'));
+			$(this).find('button[value="'+(value=='t'?1:0)+'"]').addClass('active '+(value=='t'?'btn-success':'btn-danger'));
 		}
 
 		$(this).find('button').click(function() {

@@ -6,8 +6,8 @@
         = label_tag d.object.name, nil, :class => 'control-label'
         .controls
           %span.hide.options= d.select(:field_id, options_from_collection_for_select(@fields, "id", "name", d.object.field_id))
-          %a.btn.btn-small.btn-success{ :onclick => 'toggleField(this)' }
+          %a.btn.btn-small.btn-primary{ :onclick => 'toggleField(this)' }
             %i.icon-white.icon-plus
             %span= t('feeds.fields.use_field')
     .form-actions
-      = f.submit t(:add_fields), :class => 'btn btn-success'
+      = f.submit t(:add_fields), :class => 'btn btn-primary'
