@@ -58,12 +58,14 @@ class Feed < ActiveRecord::Base
 			end	
 
 			products = Array.new
+			product_categories = ForeignCategory.find(:all, :conditions => {:feed_id => self.id})
+			records = Feednode.where('field_id <> ?', Field.where('name' => 'dont use').first)
 			doc.xpath(self.xml_path).each do |product|
-			    records = Feednode.where('field_id <> ?', Field.where('name' => 'dont use').first)
 		       	productdata = Hash.new
 				records.each do |record|
-					if record.field.name == 'category'
-						productdata[:category_id] = ForeignCategory.find_by_name(product.xpath(record.name).text).id
+					if record.field.name == 'category'	
+						category = product_categories.find { |key| key[:name] == product.xpath(record.name).text}
+						productdata[:category_id] = category[:id]
 					else
 						productdata[record.field.product_column_name.to_sym] = product.xpath(record.name).text
 					end
@@ -77,13 +79,9 @@ class Feed < ActiveRecord::Base
 			existing_product_hashes = Product.find(:all, :conditions => {:feed_id => self.id}, :select => "id").map{|p| p.id}
 			
 			products.each do |product|
-				existing_product = Product.find(:last, :conditions => {:feed_id => self.id, :unique_hash => product[:unique_hash]})
-				if existing_product
-					existing_product.update_attributes(product)
-					existing_product_hashes.delete(existing_product.id)
-				else
-					Product.create(product).save
-				end
+				existing_product = Product.find_or_create_by_feed_id_and_unique_hash(self.id, product[:unique_hash])
+				existing_product.update_attributes(product)
+				existing_product_hashes.delete(existing_product.id)
 			end
 			Product.update_all({:status => 'inactive'}, {:id => existing_product_hashes})
 		end	

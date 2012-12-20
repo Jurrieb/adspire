@@ -2,6 +2,8 @@ Datafeeds::Application.routes.draw do
 
   root :to => "pages#dashboard"
 
+  match "/help" => 'pages#help'
+
   get "leads/index"
 
   get "leads/show"

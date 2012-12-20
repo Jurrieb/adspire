@@ -29,9 +29,9 @@ class FeedsController < ApplicationController
     end
     @feed.user_id = current_user.id
     @feed.status = 'created'
-    @feed.delay.map_feed
     respond_to do |format|
       if @feed.save
+        @feed.delay.map_feed
         format.html { redirect_to own_feeds_path, notice: 'Feed was successfully created.' }
         format.json { render json: @feed, status: :created, location: @feed }
       else
@@ -53,7 +53,7 @@ class FeedsController < ApplicationController
     @feed.delay.parse_feed
     respond_to do |format|
       if @feed.update_attributes(params[:feed])
-        format.html { redirect_to :action => 'fields', :id => @feed.id}
+        format.html { redirect_to own_feeds_path, :id => @feed.id}
         format.json { head :no_content }
       else
         format.html { render action: "fields" }
@@ -73,7 +73,11 @@ class FeedsController < ApplicationController
           newkey.category_id = value
           newkey.save
         end   
+        #XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        #XXXXX DELETE IN PRODUCTION XXXXX
+        #XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
         @feed.delay.parse_feed
+        #XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
         redirect_to own_feeds_path, notice: 'Categories where successfully saved.'   
       end
     else

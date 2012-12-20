@@ -12,7 +12,6 @@ class SitesController < ApplicationController
 	end
 
 	def create
-		puts current_user
 		params[:site][:user_id] = current_user.id
 		@site = Site.new(params[:site])
 
