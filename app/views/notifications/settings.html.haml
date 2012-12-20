@@ -7,7 +7,7 @@
 		.control-group
 			= n.label :lead, t(:notification_lead), :class => 'control-label'
 			.controls
-				.btn-group{ 'data-toggle' => 'buttons-radio', 'data-target' => :lead }
+				.btn-group{ 'data-toggle' => 'buttons-radio', 'data-target' => :lead, 'data-type' => 'boolean' }
 					%button{ :type => 'button', :class => 'btn btn-mini', :value => 1 }
 						= t(:on)
 					%button{ :type => 'button', :class => 'btn btn-mini', :value => 0 }
@@ -16,7 +16,7 @@
 		.control-group
 			= n.label :sale, t('labels.notification_sale'), :class => 'control-label'
 			.controls
-				.btn-group{ 'data-toggle' => 'buttons-radio', 'data-target' => :sale }
+				.btn-group{ 'data-toggle' => 'buttons-radio', 'data-target' => :sale, 'data-type' => 'boolean' }
 					%button{ :type => 'button', :class => 'btn btn-mini', :value => 1 }
 						= t(:on)
 					%button{ :type => 'button', :class => 'btn btn-mini', :value => 0 }
@@ -25,7 +25,7 @@
 		.control-group
 			= n.label :feed, t('labels.notification_feed'), :class => 'control-label'
 			.controls
-				.btn-group{ 'data-toggle' => 'buttons-radio', 'data-target' => :feed }
+				.btn-group{ 'data-toggle' => 'buttons-radio', 'data-target' => :feed, 'data-type' => 'boolean' }
 					%button{ :type => 'button', :class => 'btn btn-mini', :value => 1 }
 						= t(:on)
 					%button{ :type => 'button', :class => 'btn btn-mini', :value => 0 }
@@ -34,7 +34,7 @@
 		.control-group
 			= n.label :result, t('labels.notification_result'), :class => 'control-label'
 			.controls
-				.btn-group{ 'data-toggle' => 'buttons-radio', 'data-target' => :result }
+				.btn-group{ 'data-toggle' => 'buttons-radio', 'data-target' => :result, 'data-type' => 'boolean' }
 					%button{ :type => 'button', :class => 'btn btn-mini', :value => 1 }
 						= t(:on)
 					%button{ :type => 'button', :class => 'btn btn-mini', :value => 0 }
@@ -43,7 +43,7 @@
 		.control-group
 			= n.label :status, t('labels.notification_status'), :class => 'control-label'
 			.controls
-				.btn-group{ 'data-toggle' => 'buttons-radio', 'data-target' => :status }
+				.btn-group{ 'data-toggle' => 'buttons-radio', 'data-target' => :status, 'data-type' => 'boolean' }
 					%button{ :type => 'button', :class => 'btn btn-mini', :value => 1 }
 						= t(:on)
 					%button{ :type => 'button', :class => 'btn btn-mini', :value => 0 }
@@ -52,7 +52,7 @@
 		.control-group
 			= n.label :merchant, t('labels.notification_merchant'), :class => 'control-label'
 			.controls
-				.btn-group{ 'data-toggle' => 'buttons-radio', 'data-target' => :merchant }
+				.btn-group{ 'data-toggle' => 'buttons-radio', 'data-target' => :merchant, 'data-type' => 'boolean' }
 					%button{ :type => 'button', :class => 'btn btn-mini', :value => 1 }
 						= t(:on)
 					%button{ :type => 'button', :class => 'btn btn-mini', :value => 0 }
@@ -61,7 +61,7 @@
 		.control-group
 			= n.label :action, t('labels.notification_action'), :class => 'control-label'
 			.controls
-				.btn-group{ 'data-toggle' => 'buttons-radio', 'data-target' => :action }
+				.btn-group{ 'data-toggle' => 'buttons-radio', 'data-target' => :action, 'data-type' => 'boolean' }
 					%button{ :type => 'button', :class => 'btn btn-mini', :value => 1 }
 						= t(:on)
 					%button{ :type => 'button', :class => 'btn btn-mini', :value => 0 }
