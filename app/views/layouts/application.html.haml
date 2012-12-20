@@ -15,6 +15,9 @@
               = form_tag destroy_user_session_path, :method => :delete do
                 .btn-group
                   = link_to current_user.email, edit_user_registration_path, :class => 'btn'
+                  = link_to help_path, :class => 'btn btn-info' do
+                    %i.icon-white.icon-info-sign
+                    Help
                   %button{ :type => 'submit', :class => 'btn btn-danger' }
                     %i.icon-white.icon-off
             -else

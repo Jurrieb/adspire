@@ -8,6 +8,10 @@ class PagesController < ApplicationController
 
   end
 
+  def help
+  	
+  end
+
   def sendData
 	# All clicks for current user
 	@clicks = Click.where(:user_id => current_user.id).in_days.order('created_at ASC')
