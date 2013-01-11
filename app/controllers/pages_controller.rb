@@ -5,7 +5,10 @@ class PagesController < ApplicationController
   before_filter :authenticate_user!
 
   def dashboard
-
+	@last_30days_clicks = Click.where(:created_at => 30.days.ago...Time.now, :user_id => current_user.id).in_days
+	@last_30days_clicks.each do |day|
+		@day2 = day
+	end
   end
 
   def help
@@ -13,8 +16,10 @@ class PagesController < ApplicationController
   end
 
   def sendData
+
 	# All clicks for current user
 	@clicks = Click.where(:user_id => current_user.id).in_days.order('created_at ASC')
+
 	# Leads for clicks
 	@leads_from_clicks = Lead.where(:status => 1, :user_id => current_user.id).in_days.order('created_at ASC')
 	
