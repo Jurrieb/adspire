@@ -5,6 +5,8 @@ gem 'rake',  '~> 10.0.3'
 
 # Databases
 group :development, :test do
+  # rails-erd -> UML
+  gem 'rails-erd'
   gem 'sqlite3'
 end
 
