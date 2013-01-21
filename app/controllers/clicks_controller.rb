@@ -1,4 +1,5 @@
 class ClicksController < ApplicationController
+  # Set a click for product, if done make a new notification
   def create
   	 if Product.exists?(params[:product_id])
   	 	product = Product.find(params[:product_id])
@@ -16,8 +17,8 @@ class ClicksController < ApplicationController
       notification.deleted = false
       notification.save
 
-  	 	redirect_to product.url, :overwrite_params => { :parm => 'foo' }
-  	 else
-  	 end
+		  redirect_to product.url
+	 else
+	 end
   end
 end

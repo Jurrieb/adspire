@@ -217,12 +217,12 @@
 
         <div class="method-description">
           
-          
+          <p>Set a click for product, if done make a new notification</p>
           
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/clicks_controller.rb, line 2</span>
+            <pre><span class="ruby-comment"># File app/controllers/clicks_controller.rb, line 3</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
        <span class="ruby-keyword">if</span> <span class="ruby-constant">Product</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:product_id</span>])
            <span class="ruby-identifier">product</span> = <span class="ruby-constant">Product</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:product_id</span>])
@@ -240,7 +240,7 @@
     <span class="ruby-identifier">notification</span>.<span class="ruby-identifier">deleted</span> = <span class="ruby-keyword">false</span>
     <span class="ruby-identifier">notification</span>.<span class="ruby-identifier">save</span>
 
-           <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">url</span>, <span class="ruby-value">:overwrite_params</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:parm</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'foo'</span> }
+                <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">url</span>
        <span class="ruby-keyword">else</span>
        <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>

@@ -1,46 +1,53 @@
 class PagesController < ApplicationController
-  
+  # User must have access
   load_and_authorize_resource
-
   before_filter :authenticate_user!
 
-  def dashboard
-	@last_30days_clicks = Click.where(:created_at => 30.days.ago...Time.now, :user_id => current_user.id).in_days
-	@last_30days_clicks.each do |day|
-		@day2 = day
-	end
+  # Show statistics in dashboard
+  def dashboard 
+	# List of all days
+	list_of_days = (1.month.ago.to_date...Date.today).to_a
+
+	@clicks = Click.where(:created_at => 1.month.ago.to_date...Date.today, :user_id => current_user.id).count
+	@leads = Lead.where(:created_at => 1.month.ago.to_date...Date.today, :user_id => current_user.id).count
+
+
+	# # List of all days
+	# @list_of_days = (2.month.ago.to_date...Date.today).to_a
+	# # New Hash of days
+	# @datelist = Hash.new
+	# # Set all dates to zero
+	# @list_of_days.each do |k|
+	#	# Convert to useable date
+	#	date = k.to_date
+	#	# Count all clicks per day
+	#	@clicks = Click.complete_day(date).count
+	#	# Add to array per day with clicks
+	#	@datelist[date] = @clicks
+	# end
   end
 
   def help
-  	
+	
   end
 
+  # All data is being fetched for display in graphical presentation
   def sendData
-
-	# All clicks for current user
-	@clicks = Click.where(:user_id => current_user.id).in_days.order('created_at ASC')
-
-	# Leads for clicks
-	@leads_from_clicks = Lead.where(:status => 1, :user_id => current_user.id).in_days.order('created_at ASC')
-	
-	# Group by day
-	@clicks_by_date = @clicks.group_by { |t| t.created_at.beginning_of_day }
-	@leads_by_date = @leads_from_clicks.group_by { |t| t.created_at.beginning_of_day }
-
-	# New array for graph
+	# List of all days
+	@list_of_days = (1.month.ago.to_date...Date.today).to_a
+	# New Array for graph
 	@graph = Array.new
-	
-	# Add hash to Array with name and count
-	@clicks_by_date.sort.each do |day, counts|
-		@graph << { y: day.strftime("%Y-%m-%d"), click: counts.count }
+	# Set all dates to zero
+	@list_of_days.each do |k|
+		# Convert to useable date
+		date = k.to_date
+		# Count all clicks/leads per day, per user
+		@clicks = Click.complete_day(date).where(:user_id => current_user.id).count
+		@leads = Lead.complete_day(date).where(:user_id => current_user.id).count
+		# Add to array per day with clicks
+		@graph << { y: date.strftime("%Y-%m-%d"), click: @clicks, lead: @leads}
 	end
-
-	# Add hash to Array with name and count
-	@leads_by_date.sort.each do |day, counts|
-		@graph << { y: day.strftime("%Y-%m-%d"), lead: counts.count }
-	end
-
-	# Respond to JSON
+	#Respond to JSON
 	respond_to do |format|
 		format.json { render json: @graph }
 	end

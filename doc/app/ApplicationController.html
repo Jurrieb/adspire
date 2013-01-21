@@ -217,18 +217,18 @@
 
         <div class="method-description">
           
-          
+          <p>Show notifications if there is any left</p>
           
 
           
           <div class="method-source-code" id="fetch_notifications-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 10</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 12</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">fetch_notifications</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">blank?</span>
-              <span class="ruby-ivar">@notifications</span> = <span class="ruby-constant">Notification</span>.<span class="ruby-identifier">where</span>({<span class="ruby-value">:deleted</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span>, <span class="ruby-value">:user_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span>}).<span class="ruby-identifier">order</span>(<span class="ruby-string">'created_at DESC'</span>).<span class="ruby-identifier">limit</span>(<span class="ruby-value">8</span>)
-      <span class="ruby-keyword">else</span>
-              <span class="ruby-ivar">@notifications</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
-      <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">blank?</span>
+                <span class="ruby-ivar">@notifications</span> = <span class="ruby-constant">Notification</span>.<span class="ruby-identifier">where</span>({<span class="ruby-value">:deleted</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span>, <span class="ruby-value">:user_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span>}).<span class="ruby-identifier">order</span>(<span class="ruby-string">'created_at DESC'</span>).<span class="ruby-identifier">limit</span>(<span class="ruby-value">8</span>)
+        <span class="ruby-keyword">else</span>
+                <span class="ruby-ivar">@notifications</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- fetch_notifications-source -->
           
